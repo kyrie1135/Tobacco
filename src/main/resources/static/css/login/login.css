@@ -1,0 +1,106 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#mainBody {
+    width: 100%;
+    height: 100%;
+    padding: 80px;
+    background: url("../../img/logoback.png");
+    background-size: cover;
+}
+
+#mainBody h1 {
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 45px;
+    color: #fff;
+}
+
+#content {
+    width: 60%;
+    margin: 0 auto 0 auto;
+    min-height: 416px;
+    position: relative;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#content-left {
+    float: left;
+    width: 40%;
+    background: rgba(1, 10, 19, 0.69);
+    padding: 3em 3em 0;
+    height: 368px;
+}
+
+.pay_form h2 {
+    color: #fdb515;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.pay_form input {
+    width: 85%;
+    padding: 0.7em 2.7em 0.7em 0.7em;
+    font-size: 14px;
+    border: none;
+    border-bottom: 2px solid #e6e6e6;
+    outline: none;
+    color: #ccc;
+    margin-bottom: 40px;
+    border-radius: 10px;
+}
+
+.pay_form .userName {
+    background: url("../../img/logo.png") no-repeat 97% center #fff;
+    background-size: 4.5% !important;
+}
+
+.pay_form .password {
+    background: url("../../img/key.png") no-repeat 97% center #fff;
+    background-size: 4.5% !important;
+}
+
+input[type=button] {
+    background: #fdb515;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 0;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    width: 37%;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-bottom: 30px;
+}
+
+#content-left a {
+    text-decoration: none;
+    color: #fdb515;
+    font-size: 14px;
+}
+
+.a-forgetPassword {
+    float: right;
+}
+
+#content-right {
+    float: left;
+    text-align: center;
+    padding: 3em 3em 0;
+    width: 35%;
+}
+
+#content-right h3 {
+    color: #fdb515;
+    font-size: 28px;
+    margin-top: 70px;
+}
+
+#content-right h3 span {
+    display: block;
+    margin-top: 8px;
+}
