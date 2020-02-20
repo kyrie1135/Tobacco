@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Lph.admin.subscript.dao.SubscriptDao">
+  <resultMap id="BaseResultMap" type="com.Lph.admin.subscript.model.SubscriptModel">
+    <id column="BICKID" jdbcType="VARCHAR" property="bickid" />
+    <result column="TARGET_SORT" jdbcType="VARCHAR" property="targetSort" />
+    <result column="EVALUATE_ITEM" jdbcType="VARCHAR" property="evaluateItem" />
+    <result column="EVALUATE_TARGET" jdbcType="VARCHAR" property="evaluateTarget" />
+    <result column="IS_USE" jdbcType="INTEGER" property="isUse" />
+    <result column="EVALUATE_CYC" jdbcType="VARCHAR" property="evaluateCyc" />
+    <result column="PROPORTION" jdbcType="DECIMAL" property="proportion" />
+    <result column="EMP_ROLE" jdbcType="VARCHAR" property="empRole" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BICKID, TARGET_SORT, EVALUATE_ITEM, EVALUATE_TARGET, IS_USE, EVALUATE_CYC, PROPORTION, 
+    EMP_ROLE
+  </sql>
+  <select id="selectByExample" parameterType="com.Lph.admin.subscript.model.SubscriptModelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_c_c_clientsatisfy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_c_clientsatisfy
+    where BICKID = #{bickid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_c_c_clientsatisfy
+    where BICKID = #{bickid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Lph.admin.subscript.model.SubscriptModelExample">
+    delete from t_c_c_clientsatisfy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.subscript.model.SubscriptModel" useGeneratedKeys="true">
+    insert into t_c_c_clientsatisfy (TARGET_SORT, EVALUATE_ITEM, EVALUATE_TARGET, 
+      IS_USE, EVALUATE_CYC, PROPORTION, 
+      EMP_ROLE)
+    values (#{targetSort,jdbcType=VARCHAR}, #{evaluateItem,jdbcType=VARCHAR}, #{evaluateTarget,jdbcType=VARCHAR}, 
+      #{isUse,jdbcType=INTEGER}, #{evaluateCyc,jdbcType=VARCHAR}, #{proportion,jdbcType=DECIMAL}, 
+      #{empRole,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.subscript.model.SubscriptModel" useGeneratedKeys="true">
+    insert into t_c_c_clientsatisfy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="targetSort != null">
+        TARGET_SORT,
+      </if>
+      <if test="evaluateItem != null">
+        EVALUATE_ITEM,
+      </if>
+      <if test="evaluateTarget != null">
+        EVALUATE_TARGET,
+      </if>
+      <if test="isUse != null">
+        IS_USE,
+      </if>
+      <if test="evaluateCyc != null">
+        EVALUATE_CYC,
+      </if>
+      <if test="proportion != null">
+        PROPORTION,
+      </if>
+      <if test="empRole != null">
+        EMP_ROLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="targetSort != null">
+        #{targetSort,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateItem != null">
+        #{evaluateItem,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTarget != null">
+        #{evaluateTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="isUse != null">
+        #{isUse,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateCyc != null">
+        #{evaluateCyc,jdbcType=VARCHAR},
+      </if>
+      <if test="proportion != null">
+        #{proportion,jdbcType=DECIMAL},
+      </if>
+      <if test="empRole != null">
+        #{empRole,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Lph.admin.subscript.model.SubscriptModelExample" resultType="java.lang.Long">
+    select count(*) from t_c_c_clientsatisfy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_c_c_clientsatisfy
+    <set>
+      <if test="record.bickid != null">
+        BICKID = #{record.bickid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetSort != null">
+        TARGET_SORT = #{record.targetSort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluateItem != null">
+        EVALUATE_ITEM = #{record.evaluateItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluateTarget != null">
+        EVALUATE_TARGET = #{record.evaluateTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isUse != null">
+        IS_USE = #{record.isUse,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaluateCyc != null">
+        EVALUATE_CYC = #{record.evaluateCyc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proportion != null">
+        PROPORTION = #{record.proportion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.empRole != null">
+        EMP_ROLE = #{record.empRole,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_c_c_clientsatisfy
+    set BICKID = #{record.bickid,jdbcType=VARCHAR},
+      TARGET_SORT = #{record.targetSort,jdbcType=VARCHAR},
+      EVALUATE_ITEM = #{record.evaluateItem,jdbcType=VARCHAR},
+      EVALUATE_TARGET = #{record.evaluateTarget,jdbcType=VARCHAR},
+      IS_USE = #{record.isUse,jdbcType=INTEGER},
+      EVALUATE_CYC = #{record.evaluateCyc,jdbcType=VARCHAR},
+      PROPORTION = #{record.proportion,jdbcType=DECIMAL},
+      EMP_ROLE = #{record.empRole,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.admin.subscript.model.SubscriptModel">
+    update t_c_c_clientsatisfy
+    <set>
+      <if test="targetSort != null">
+        TARGET_SORT = #{targetSort,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateItem != null">
+        EVALUATE_ITEM = #{evaluateItem,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTarget != null">
+        EVALUATE_TARGET = #{evaluateTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="isUse != null">
+        IS_USE = #{isUse,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateCyc != null">
+        EVALUATE_CYC = #{evaluateCyc,jdbcType=VARCHAR},
+      </if>
+      <if test="proportion != null">
+        PROPORTION = #{proportion,jdbcType=DECIMAL},
+      </if>
+      <if test="empRole != null">
+        EMP_ROLE = #{empRole,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BICKID = #{bickid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Lph.admin.subscript.model.SubscriptModel">
+    update t_c_c_clientsatisfy
+    set TARGET_SORT = #{targetSort,jdbcType=VARCHAR},
+      EVALUATE_ITEM = #{evaluateItem,jdbcType=VARCHAR},
+      EVALUATE_TARGET = #{evaluateTarget,jdbcType=VARCHAR},
+      IS_USE = #{isUse,jdbcType=INTEGER},
+      EVALUATE_CYC = #{evaluateCyc,jdbcType=VARCHAR},
+      PROPORTION = #{proportion,jdbcType=DECIMAL},
+      EMP_ROLE = #{empRole,jdbcType=VARCHAR}
+    where BICKID = #{bickid,jdbcType=VARCHAR}
+  </update>
+</mapper>
