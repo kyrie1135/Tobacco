@@ -1,17 +1,45 @@
 package com.Lph.admin.Utils;
 
-public class Node {
-    String id;
-    String pid;
-    String text;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
-    public Node() {
+import java.io.Serializable;
+
+public class Node implements Serializable {
+    private String id;
+    private String parentId;
+    private String text;
+
+    private Integer orderIndex;
+    private boolean lazyLoad=true;
+
+    public Node(String id, String parentId, String text) {
+        this.id = id;
+        this.parentId = parentId;
+        this.text = text;
     }
 
-    public Node(String id, String pid, String text) {
-        this.id = id;
-        this.pid = pid;
-        this.text = text;
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public Integer getOrderIndex() {
+        return orderIndex;
+    }
+
+    public void setOrderIndex(Integer orderIndex) {
+        this.orderIndex = orderIndex;
+    }
+
+    public boolean isLazyLoad() {
+        return lazyLoad;
+    }
+
+    public void setLazyLoad(boolean lazyLoad) {
+        this.lazyLoad = lazyLoad;
     }
 
     public String getId() {
@@ -22,12 +50,12 @@ public class Node {
         this.id = id;
     }
 
-    public String getPid() {
-        return pid;
+    public String getParentid() {
+        return parentId;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setParentid(String parentid) {
+        this.parentId = parentid;
     }
 
     public String getText() {

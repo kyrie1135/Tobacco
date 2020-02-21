@@ -6,17 +6,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="static/bootstrap/css/bootstrapValidator.min.css">
-    <link rel="stylesheet" href="static/bootstrap/css/bootstrap-select.css">
-    <link rel="stylesheet" href="static/bootstrap/css/treeview.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-select.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/treeview.css">
 
-    <link rel="stylesheet" href="static/css/admin/subscript/subscriptAdd.css">
+    <link rel="stylesheet" href="../static/css/admin/subscript/subscriptAdd.css">
 
     <title>指标维护</title>
 </head>
 <body>
-
+<div id="atree"></div>
 <div class="container">
     <form class="form-horizontal" id="formAdd" action="#" method="post">
 
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"><span style="color: red;font-weight: bold">＊</span>指标归类</label>
                     <div class="col-sm-4" style="width: 305px">
-                        <input type="text" class="form-control" name="targetSort" style="float: left" placeholder="指标归类">
+                        <input type="text" readonly class="form-control" name="targetSort" style="float: left;" placeholder="指标归类">
                     </div>
                     <button id="targetSortBtn" type="button" class="btn btn-info" data-target="#myModal" data-toggle="modal">选 择</button>
                 </div>
@@ -116,19 +116,22 @@
                 <div id="tree"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">确定</button>
+                <button id="btn_targetSort_cancel" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="btn_targetSort_ok" type="button" class="btn btn-primary">确定</button>
             </div>
         </div>
     </div>
 </div>
 
-<script src="../../../static/bootstrap/js/jquery-3.3.1.min.js"></script>
-<script src="../../../static/bootstrap/js/bootstrap.js"></script>
-<script src="../../../static/bootstrap/js/bootstrapValidator.min.js"></script>
-<script src="../../../static/bootstrap/js/bootstrap-select.js"></script>
-<script src="../../../static/bootstrap/js/i18n/defaults-zh_CN.js"></script>
-<script src="../../../static/js/admin/subscript/subscriptAdd.js"></script>
+<script src="../static/bootstrap/js/jquery-3.3.1.js"></script>
+<script src="../static/bootstrap/js/bootstrap.js"></script>
+<script src="../static/bootstrap/js/bootstrapValidator.min.js"></script>
+<script src="../static/bootstrap/js/bootstrap-select.js"></script>
+<script src="../static/bootstrap/js/i18n/defaults-zh_CN.js"></script>
+<script src="../static/bootstrap/js/treeview.js"></script>
+
+<script src="../static/js/admin/subscript/subscriptAdd.js"></script>
+
 
 </body>
 </html>
