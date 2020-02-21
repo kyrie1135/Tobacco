@@ -1,14 +1,14 @@
 
-var targetSort = "";
+var empRole = "";
 
 $(function () {
-    $("#targetSortBtn").click(function () {
+    $("#empRoleBtn").click(function () {
         initTargetSortTree();
     });
     //指标归类-》选择-》确定
-    $("#btn_targetSort_ok").click(function () {
-        $('input[name = "targetSort"]').val(targetSort);
-        $("#btn_targetSort_cancel").trigger('click');
+    $("#btn_empRole_ok").click(function () {
+        $('input[name = "empRole"]').val(empRole);
+        $("#btn_empRole_cancel").trigger('click');
     });
 })
 
@@ -27,10 +27,10 @@ function initTargetSortTree() {
                 loadingIcon:"fa fa-hourglass",//懒加载过程中显示的沙漏字符图标
                 lazyLoad:loadNode,
                 onNodeSelected:function (event,node) {
-                    targetSort = node.text;
+                    empRole = node.text;
                 },
                 onNodeUnselected:function () {
-                    targetSort = "";
+                    empRole = "";
                 }
             });
         }
