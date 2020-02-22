@@ -31,11 +31,6 @@ public class SubscriptController {
         return subscriptService.getRoleTree(id);
     }
 
-    @RequestMapping("/main")
-    public String main(){
-        return "/include/Navigation.html";
-    }
-
     @RequestMapping("/subscriptAdd")
     public String subscriptAdd(){
         return "/admin/subscript/subscriptAdd.html";

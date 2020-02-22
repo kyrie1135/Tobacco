@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Lph.admin.appandmod.dao.ModuleDAO">
+  <resultMap id="BaseResultMap" type="com.Lph.admin.appandmod.model.Module">
+    <id column="module_code" jdbcType="VARCHAR" property="moduleCode" />
+    <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+    <result column="module_appId" jdbcType="VARCHAR" property="moduleAppid" />
+    <result column="module_url" jdbcType="VARCHAR" property="moduleUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    module_code, module_name, module_appId, module_url
+  </sql>
+  <select id="selectByExample" parameterType="com.Lph.admin.appandmod.model.ModuleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from module
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from module
+    where module_code = #{moduleCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from module
+    where module_code = #{moduleCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Lph.admin.appandmod.model.ModuleExample">
+    delete from module
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="module_code" keyProperty="moduleCode" parameterType="com.Lph.admin.appandmod.model.Module" useGeneratedKeys="true">
+    insert into module (module_name, module_appId, module_url
+      )
+    values (#{moduleName,jdbcType=VARCHAR}, #{moduleAppid,jdbcType=VARCHAR}, #{moduleUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="module_code" keyProperty="moduleCode" parameterType="com.Lph.admin.appandmod.model.Module" useGeneratedKeys="true">
+    insert into module
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="moduleName != null">
+        module_name,
+      </if>
+      <if test="moduleAppid != null">
+        module_appId,
+      </if>
+      <if test="moduleUrl != null">
+        module_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="moduleName != null">
+        #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleAppid != null">
+        #{moduleAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleUrl != null">
+        #{moduleUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Lph.admin.appandmod.model.ModuleExample" resultType="java.lang.Long">
+    select count(*) from module
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update module
+    <set>
+      <if test="record.moduleCode != null">
+        module_code = #{record.moduleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleName != null">
+        module_name = #{record.moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleAppid != null">
+        module_appId = #{record.moduleAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleUrl != null">
+        module_url = #{record.moduleUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update module
+    set module_code = #{record.moduleCode,jdbcType=VARCHAR},
+      module_name = #{record.moduleName,jdbcType=VARCHAR},
+      module_appId = #{record.moduleAppid,jdbcType=VARCHAR},
+      module_url = #{record.moduleUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.admin.appandmod.model.Module">
+    update module
+    <set>
+      <if test="moduleName != null">
+        module_name = #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleAppid != null">
+        module_appId = #{moduleAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleUrl != null">
+        module_url = #{moduleUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where module_code = #{moduleCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Lph.admin.appandmod.model.Module">
+    update module
+    set module_name = #{moduleName,jdbcType=VARCHAR},
+      module_appId = #{moduleAppid,jdbcType=VARCHAR},
+      module_url = #{moduleUrl,jdbcType=VARCHAR}
+    where module_code = #{moduleCode,jdbcType=VARCHAR}
+  </update>
+</mapper>
