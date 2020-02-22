@@ -12,3 +12,7 @@ $(function () {
         $('#container').load(url);
     });
 });
+
+function moveToSubscriptAdd() {
+    $("#mainIframe").attr("src", "/admin/subscriptAdd");
+}

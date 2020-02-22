@@ -16,7 +16,7 @@ $(function () {
 function initTargetSortTree() {
     $.ajax({
         type: "Get",
-        url: '/admin/targetSortTree/0',
+        url: '/admin/orgTree/0000',
         data: 0,
         dataType: "json",
         success: function (result) {
@@ -40,7 +40,7 @@ function initTargetSortTree() {
 function loadNode(node,func) {
     $.ajax({
         type:"get",
-        url:'/admin/targetSortTree/'+node.id,
+        url:'/admin/roleTree/'+node.id,
         success:function(data){
             func(data);
         }
