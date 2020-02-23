@@ -3,8 +3,11 @@ package com.Lph.admin.satisfysurveytarget.dao;
 import com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget;
 import com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytargetExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TCCSatisfysurveytargetDAO {
     long countByExample(TCCSatisfysurveytargetExample example);
 
