@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * module
+ * 主要功能： 为主页面左侧菜单栏提供子菜单
  * @author 
  */
 public class Module implements Serializable {

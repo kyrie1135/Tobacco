@@ -1,7 +1,7 @@
-package com.Lph.admin.role.dao;
+package com.Lph.admin.organdrole.dao;
 
-import com.Lph.admin.role.model.Role;
-import com.Lph.admin.role.model.RoleExample;
+import com.Lph.admin.organdrole.model.Role;
+import com.Lph.admin.organdrole.model.RoleExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;

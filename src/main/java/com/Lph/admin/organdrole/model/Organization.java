@@ -1,9 +1,10 @@
-package com.Lph.admin.organization.model;
+package com.Lph.admin.organdrole.model;
 
 import java.io.Serializable;
 
 /**
- * organization
+ * organdrole
+ * 主要功能： 提供选择岗位功能
  * @author 
  */
 public class Organization implements Serializable {

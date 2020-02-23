@@ -4,6 +4,9 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.io.Serializable;
 
+/**
+ * bootstrap treeview所需Node类
+ */
 public class Node implements Serializable {
     private String id;
     private String parentId;

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * application
+ * 主要功能： 为主页面左侧菜单栏提供父级菜单
  * @author 
  */
 public class Application implements Serializable {

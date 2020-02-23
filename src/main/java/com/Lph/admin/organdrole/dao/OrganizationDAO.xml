@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.Lph.admin.role.dao.RoleDAO">
-  <resultMap id="BaseResultMap" type="com.Lph.admin.role.model.Role">
+<mapper namespace="com.Lph.admin.organdrole.dao.OrganizationDAO">
+  <resultMap id="BaseResultMap" type="com.Lph.admin.organdrole.model.Organization">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="orgid" jdbcType="VARCHAR" property="orgid" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -65,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, orgid, `name`
+    id, pid, `name`
   </sql>
-  <select id="selectByExample" parameterType="com.Lph.admin.role.model.RoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.Lph.admin.organdrole.model.OrganizationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from role
+    from organization
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,56 +92,56 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from role
+    from organization
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from role
+    delete from organization
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.Lph.admin.role.model.RoleExample">
-    delete from role
+  <delete id="deleteByExample" parameterType="com.Lph.admin.organdrole.model.OrganizationExample">
+    delete from organization
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.Lph.admin.role.model.Role" useGeneratedKeys="true">
-    insert into role (orgid, `name`)
-    values (#{orgid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.Lph.admin.organdrole.model.Organization" useGeneratedKeys="true">
+    insert into organization (pid, `name`)
+    values (#{pid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.Lph.admin.role.model.Role" useGeneratedKeys="true">
-    insert into role
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.Lph.admin.organdrole.model.Organization" useGeneratedKeys="true">
+    insert into organization
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orgid != null">
-        orgid,
+      <if test="pid != null">
+        pid,
       </if>
       <if test="name != null">
         `name`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orgid != null">
-        #{orgid,jdbcType=VARCHAR},
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.Lph.admin.role.model.RoleExample" resultType="java.lang.Long">
-    select count(*) from role
+  <select id="countByExample" parameterType="com.Lph.admin.organdrole.model.OrganizationExample" resultType="java.lang.Long">
+    select count(*) from organization
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update role
+    update organization
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.orgid != null">
-        orgid = #{record.orgid,jdbcType=VARCHAR},
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null">
         `name` = #{record.name,jdbcType=VARCHAR},
@@ -152,19 +152,19 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update role
+    update organization
     set id = #{record.id,jdbcType=VARCHAR},
-      orgid = #{record.orgid,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=VARCHAR},
       `name` = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.admin.role.model.Role">
-    update role
+  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.admin.organdrole.model.Organization">
+    update organization
     <set>
-      <if test="orgid != null">
-        orgid = #{orgid,jdbcType=VARCHAR},
+      <if test="pid != null">
+        pid = #{pid,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         `name` = #{name,jdbcType=VARCHAR},
@@ -172,9 +172,9 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.Lph.admin.role.model.Role">
-    update role
-    set orgid = #{orgid,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.Lph.admin.organdrole.model.Organization">
+    update organization
+    set pid = #{pid,jdbcType=VARCHAR},
       `name` = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

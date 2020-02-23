@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 /**
  * t_c_c_clientsatisfy
+ * 主要功能： 评测指标维护
  * @author 
  */
 public class SubscriptModel implements Serializable {

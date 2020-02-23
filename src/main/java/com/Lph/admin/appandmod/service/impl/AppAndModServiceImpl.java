@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 功能和模块
+ * 主要功能： 为主页面左侧菜单栏填充内容
+ */
 @Service
 public class AppAndModServiceImpl implements AppAndModService {
 
@@ -20,12 +24,20 @@ public class AppAndModServiceImpl implements AppAndModService {
     @Autowired
     private ModuleDAO moduleDAO;
 
+    /**
+     * 获得所有父级菜单  App
+     * @return
+     */
     @Override
     public List<Application> getMenuApp() {
         ApplicationExample example = new ApplicationExample();
         return applicationDAO.selectByExample(example);
     }
 
+    /**
+     * 获得所有子菜单  Mod
+     * @return
+     */
     @Override
     public List<Module> getMenuMod() {
         ModuleExample example = new ModuleExample();

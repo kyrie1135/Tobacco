@@ -1,12 +1,12 @@
 package com.Lph.admin.subscript.service.impl;
 
 import com.Lph.admin.Utils.Node;
-import com.Lph.admin.organization.dao.OrganizationDAO;
-import com.Lph.admin.organization.model.Organization;
-import com.Lph.admin.organization.model.OrganizationExample;
-import com.Lph.admin.role.dao.RoleDAO;
-import com.Lph.admin.role.model.Role;
-import com.Lph.admin.role.model.RoleExample;
+import com.Lph.admin.organdrole.dao.OrganizationDAO;
+import com.Lph.admin.organdrole.model.Organization;
+import com.Lph.admin.organdrole.model.OrganizationExample;
+import com.Lph.admin.organdrole.dao.RoleDAO;
+import com.Lph.admin.organdrole.model.Role;
+import com.Lph.admin.organdrole.model.RoleExample;
 import com.Lph.admin.subscript.service.SubscriptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,11 @@ public class SubscriptServiceImpl implements SubscriptService {
     @Autowired
     private RoleDAO roleDAO;
 
+    /**
+     * 选择调查人员功能， 展示岗位树
+     * @param id
+     * @return
+     */
     @Override
     public List<Node> getOrgTree(String id) {
         List<Organization> orgs = new ArrayList<>();
@@ -36,6 +41,11 @@ public class SubscriptServiceImpl implements SubscriptService {
         return nodes;
     }
 
+    /**
+     * 选择调查人员功能， 展示角色树
+     * @param id
+     * @return
+     */
     @Override
     public List<Node> getRoleTree(String id) {
         List<Role> roles = new ArrayList<>();

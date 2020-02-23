@@ -1,9 +1,10 @@
-package com.Lph.admin.role.model;
+package com.Lph.admin.organdrole.model;
 
 import java.io.Serializable;
 
 /**
  * role
+ * 主要功能： 提供选择角色功能
  * @author 
  */
 public class Role implements Serializable {

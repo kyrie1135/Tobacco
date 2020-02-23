@@ -1,7 +1,7 @@
-package com.Lph.admin.organization.dao;
+package com.Lph.admin.organdrole.dao;
 
-import com.Lph.admin.organization.model.Organization;
-import com.Lph.admin.organization.model.OrganizationExample;
+import com.Lph.admin.organdrole.model.Organization;
+import com.Lph.admin.organdrole.model.OrganizationExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;

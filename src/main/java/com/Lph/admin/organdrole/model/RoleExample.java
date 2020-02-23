@@ -1,4 +1,4 @@
-package com.Lph.admin.role.model;
+package com.Lph.admin.organdrole.model;
 
 import java.util.ArrayList;
 import java.util.List;
