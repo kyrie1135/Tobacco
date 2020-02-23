@@ -24,7 +24,6 @@ public class SatisfysurveytargetServiceimpl implements SatisfysurveytargetServic
         TCCSatisfysurveytargetExample example = new TCCSatisfysurveytargetExample();
         List<TCCSatisfysurveytarget> list= new ArrayList<>();
         list = tccSatisfysurveytargetDAO.selectByExample(example);
-        System.out.println(list);
         return list;
     }
 }

@@ -13,8 +13,7 @@
 
         <div class="divBorder">
             <h4 class="panel panel-heading h4font">
-                指标维护
-                <small>（＊星号是必填项）</small>
+                评分标准维护
             </h4>
 
             <div class="panel-body">
@@ -24,18 +23,129 @@
         <br>
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-1">
-                <button type="button" class="btn btn-primary">保 存</button>
+                <button id="mainBtnAdd" type="button" class="btn btn-primary" data-target="#mainModalAdd" data-toggle="modal">添 加</button>
             </div>
 
             <div class="col-sm-1">
-                <a href="#" class="btn btn-primary">返 回</a>
+                <button id="mainBtnEdit" type="button" class="btn btn-primary">修 改</button>
+            </div>
+
+            <div class="col-sm-1">
+                <button id="mainBtnDel" type="button" class="btn btn-primary">删 除</button>
             </div>
         </div>
     </form>
 </div>
 
+<!-- 添加 -->
+<div class="modal fade" id="mainModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    添加评分标准
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel-body">
+                    <!-- 评分标准 -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">评分标准</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="standard" placeholder="评分标准">
+                        </div>
+                    </div>
+                    <!-- 分值 -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">分值</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="target" placeholder="分值">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_add_cancel" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="btn_add_ok" type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 修改 -->
+<div class="modal fade" id="mainModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    添加评分标准
+                </h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button id="btn_edit_cancel" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="btn_edit_ok" type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 确定删除 -->
+<div class="modal fade" id="mainModalDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                确定删除此项吗？
+            </div>
+            <div class="modal-footer">
+                <button id="btn_del_cancel" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="btn_del_ok" type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 未选中提示框 -->
+<div class="modal fade" id="noChoice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                请选中一项。
+            </div>
+            <div class="modal-footer">
+                <button id="btn_no_choice" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="../static/bootstrap/js/jquery-3.3.1.js"></script>
 <script src="../static/bootstrap/js/bootstrap-table.js"></script>
+<script src="../static/bootstrap/js/bootstrap.js"></script>
+<script src="../static/js/admin/satisfysurveytarget/satisfysurveytarget.js"></script>
 
 </body>
 </html>

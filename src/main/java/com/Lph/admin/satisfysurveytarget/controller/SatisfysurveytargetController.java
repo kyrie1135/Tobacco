@@ -20,6 +20,11 @@ public class SatisfysurveytargetController {
     @Autowired
     private SatisfysurveytargetService satisfysurveytargetService;
 
+    @RequestMapping("/satisfysurveytargetList")
+    public String getSatisfysurveytargetList(){
+        return "/admin/satisfysurveytarget/satisfysurveytargetTable.html";
+    }
+
     @RequestMapping("/satisfysurveytargetTable")
     @ResponseBody
     public List<TCCSatisfysurveytarget> getTable(){

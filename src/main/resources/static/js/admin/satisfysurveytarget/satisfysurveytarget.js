@@ -1,42 +1,52 @@
 $(function () {
+    initTable();
 
+    //修改按钮
+    $("#mainBtnEdit").click(function () {
+        if ($("#list").bootstrapTable('getSelections').length == 0){
+            $('#noChoice').modal('show');
+        } else {
+            $('#mainModalEdit').modal('show');
+        }
+    });
+    //删除按钮
+    $("#mainBtnDel").click(function () {
+        if ($("#list").bootstrapTable('getSelections').length == 0){
+            $('#noChoice').modal('show');
+        } else {
+            $('#mainModalDel').modal('show');
+        }
+    });
 });
 
 //初始化评测标准列表
-function initPerTable() {
-    $('#perList').bootstrapTable({
+function initTable() {
+    $('#list').bootstrapTable({
         url:'/admin/satisfysurveytargetTable',
         type:"GET",
-        uniqueId:"userId",
+        uniqueId:"bickid",
         singleSelect:true,
         columns:[
             {
-                field:'userId',
+                checkbox: true
+            },
+            {
+                field:'bickid',
                 title:'#',
                 align:'center',
                 width:1
             },{
-                field:'userName',
-                title:'人员名称',
+                field:'evaluateStandard',
+                title:'评分标准',
                 align:'center',
                 width:100
             },{
-                field:'userSex',
-                title:'人员性别',
+                field:'evaluateTarget',
+                title:'分值',
                 align:'center',
                 width:60
-            },{
-                field:'userTel',
-                title:'人员电话',
-                align:'center',
-                width:150
-            },{
-                field:'userEmail',
-                title:'人员邮箱',
-                align:'center',
-                width:150
             }
         ]
     });
-    $('#perList').bootstrapTable('hideColumn','userId');
+    $('#list').bootstrapTable('hideColumn','bickid');
 }

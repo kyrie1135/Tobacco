@@ -20,13 +20,7 @@ $(function () {
 
     //获取App
     getMenuMApp();
-    //为App添加Mod
-    getMenuMod();
 });
-
-function moveToSubscriptAdd() {
-    $("#mainIframe").attr("src", "/admin/subscriptAdd");
-}
 
 function getMenuMApp() {
     $.ajax({
@@ -43,6 +37,8 @@ function getMenuMApp() {
                     "<ul id=" + result[i].appCode + " class=\"treeview-menu\"></ul>\n" +
                     "</li>")
             }
+            //为App添加Mod
+            getMenuMod();
         }
     });
 }
@@ -55,8 +51,13 @@ function getMenuMod() {
         dataType: "json",
         success: function (result) {
             for (var i = 0; i< result.length; i++){
-                $("#" + result[i].moduleAppid + "").append("<li><a href=\"javascript:void(0)\" onclick=\"getMenuMApp()\" class=\"myLeftMenu\" data=\"add.html\">" + result[i].moduleName + "</a></li>");
+                $("#" + result[i].moduleAppid + "").append("<li><a href=\"javascript:void(0)\" onclick=\"getModuleUrl(this)\" class=\"myLeftMenu\" data="+result[i].moduleUrl+">" + result[i].moduleName + "</a></li>");
             }
         }
     });
+}
+
+//功能模块跳转
+function getModuleUrl(obj) {
+    $("#mainIframe").attr('src', $(obj).attr("data"));
 }
