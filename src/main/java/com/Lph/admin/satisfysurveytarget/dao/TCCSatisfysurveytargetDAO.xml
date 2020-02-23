@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Lph.admin.satisfysurveytarget.dao.TCCSatisfysurveytargetDAO">
+  <resultMap id="BaseResultMap" type="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget">
+    <id column="BICKID" jdbcType="VARCHAR" property="bickid" />
+    <result column="EVALUATE_TARGET" jdbcType="DOUBLE" property="evaluateTarget" />
+    <result column="EVALUATE_STANDARD" jdbcType="VARCHAR" property="evaluateStandard" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BICKID, EVALUATE_TARGET, EVALUATE_STANDARD
+  </sql>
+  <select id="selectByExample" parameterType="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytargetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_c_c_satisfysurveytarget
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_c_satisfysurveytarget
+    where BICKID = #{bickid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_c_c_satisfysurveytarget
+    where BICKID = #{bickid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytargetExample">
+    delete from t_c_c_satisfysurveytarget
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget" useGeneratedKeys="true">
+    insert into t_c_c_satisfysurveytarget (EVALUATE_TARGET, EVALUATE_STANDARD)
+    values (#{evaluateTarget,jdbcType=DOUBLE}, #{evaluateStandard,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget" useGeneratedKeys="true">
+    insert into t_c_c_satisfysurveytarget
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="evaluateTarget != null">
+        EVALUATE_TARGET,
+      </if>
+      <if test="evaluateStandard != null">
+        EVALUATE_STANDARD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="evaluateTarget != null">
+        #{evaluateTarget,jdbcType=DOUBLE},
+      </if>
+      <if test="evaluateStandard != null">
+        #{evaluateStandard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytargetExample" resultType="java.lang.Long">
+    select count(*) from t_c_c_satisfysurveytarget
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_c_c_satisfysurveytarget
+    <set>
+      <if test="record.bickid != null">
+        BICKID = #{record.bickid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluateTarget != null">
+        EVALUATE_TARGET = #{record.evaluateTarget,jdbcType=DOUBLE},
+      </if>
+      <if test="record.evaluateStandard != null">
+        EVALUATE_STANDARD = #{record.evaluateStandard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_c_c_satisfysurveytarget
+    set BICKID = #{record.bickid,jdbcType=VARCHAR},
+      EVALUATE_TARGET = #{record.evaluateTarget,jdbcType=DOUBLE},
+      EVALUATE_STANDARD = #{record.evaluateStandard,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget">
+    update t_c_c_satisfysurveytarget
+    <set>
+      <if test="evaluateTarget != null">
+        EVALUATE_TARGET = #{evaluateTarget,jdbcType=DOUBLE},
+      </if>
+      <if test="evaluateStandard != null">
+        EVALUATE_STANDARD = #{evaluateStandard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BICKID = #{bickid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget">
+    update t_c_c_satisfysurveytarget
+    set EVALUATE_TARGET = #{evaluateTarget,jdbcType=DOUBLE},
+      EVALUATE_STANDARD = #{evaluateStandard,jdbcType=VARCHAR}
+    where BICKID = #{bickid,jdbcType=VARCHAR}
+  </update>
+</mapper>
