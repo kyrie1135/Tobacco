@@ -1,5 +1,8 @@
 package com.Lph.admin.satisfysurveytarget.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -8,10 +11,11 @@ import java.io.Serializable;
  * @author 
  */
 public class TCCSatisfysurveytarget implements Serializable {
+
     private String bickid;
-
+    @NotNull(message = "评测指标分值不能为空")
     private Double evaluateTarget;
-
+    @NotBlank(message = "评测指标不能为空")
     private String evaluateStandard;
 
     private static final long serialVersionUID = 1L;

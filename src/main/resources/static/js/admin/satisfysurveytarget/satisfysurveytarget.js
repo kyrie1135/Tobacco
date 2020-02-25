@@ -7,6 +7,8 @@ $(function () {
             $('#noChoice').modal('show');
         } else {
             $('#mainModalEdit').modal('show');
+            $("#standard_edit").val($("#list").bootstrapTable('getSelections')[0].evaluateStandard);
+            $("#score_edit").val($("#list").bootstrapTable('getSelections')[0].evaluateTarget);
         }
     });
     //删除按钮
@@ -17,12 +19,84 @@ $(function () {
             $('#mainModalDel').modal('show');
         }
     });
+
+    //评分标准维护-》添加弹窗-》确定
+    $("#btn_add_ok").click(function () {
+        if (!isNotBlank($("#standard_add").val())){
+            alert("评分标准不能为空");
+        }
+        if (!isNotBlank($("#score_add").val())){
+            alert("评分标准分值不能为空");
+        }
+        $.ajax({
+            url: '/admin/standard',
+            type: 'POST',
+            data: JSON.stringify({
+                "evaluateTarget" : $("#score_add").val(),
+                "evaluateStandard" : $("#standard_add").val()
+            }),
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success:function (result) {
+                if (result == "200"){
+                    alert("添加成功");
+                    $('#mainModalAdd').modal('hide');
+                    $('#list').bootstrapTable('refresh',{url:'/admin/standard'});
+                }else {
+                    alert(result);
+                }
+            },error: function () {
+                alert("请求失败， 请稍后再试");
+            }
+        });
+    });
+
+    //评分标准维护-》确认删除弹窗-》确定
+    $("#mainModalDel").click(function () {
+        $.ajax({
+            url: '/admin/standard/',
+            type: 'DELETE',
+            data: JSON.stringify({
+                "bickid" : $("#list").bootstrapTable('getSelections')[0].bickid
+            }),
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success: function (result) {
+                if (result == "200"){
+                    alert("删除成功");
+                    $('#mainModalDel').modal('hide');
+                    $('#list').bootstrapTable('refresh',{url:'/admin/standard'});
+                }
+            }
+        });
+    });
+
+    //评分标准维护-》修改弹窗-》确定
+    $("#mainModalEdit").click(function () {
+        // $.ajax({
+        //     url: '/admin/standard/',
+        //     type: 'DELETE',
+        //     data: JSON.stringify({
+        //         "bickid" : $("#list").bootstrapTable('getSelections')[0].bickid
+        //     }),
+        //     contentType:"application/json;charset=UTF-8",
+        //     dataType:"json",
+        //     success: function (result) {
+        //         if (result == "200"){
+        //             alert("删除成功");
+        //             $('#mainModalDel').modal('hide');
+        //             $('#list').bootstrapTable('refresh',{url:'/admin/standard'});
+        //         }
+        //     }
+        // });
+    });
+
 });
 
 //初始化评测标准列表
 function initTable() {
     $('#list').bootstrapTable({
-        url:'/admin/satisfysurveytargetTable',
+        url:'/admin/standard',
         type:"GET",
         uniqueId:"bickid",
         singleSelect:true,
@@ -49,4 +123,12 @@ function initTable() {
         ]
     });
     $('#list').bootstrapTable('hideColumn','bickid');
+}
+
+function isNotBlank(text) {
+    if (text != null && text.trim() != ""){
+        return true;
+    }else {
+        return false;
+    }
 }

@@ -106,8 +106,8 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget" useGeneratedKeys="true">
-    insert into t_c_c_satisfysurveytarget (EVALUATE_TARGET, EVALUATE_STANDARD)
-    values (#{evaluateTarget,jdbcType=DOUBLE}, #{evaluateStandard,jdbcType=VARCHAR})
+    insert into t_c_c_satisfysurveytarget (BICKID, EVALUATE_TARGET, EVALUATE_STANDARD)
+    values (#{bickid,jdbcType=VARCHAR}, #{evaluateTarget,jdbcType=DOUBLE}, #{evaluateStandard,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget" useGeneratedKeys="true">
     insert into t_c_c_satisfysurveytarget

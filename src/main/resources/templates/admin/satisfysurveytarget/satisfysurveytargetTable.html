@@ -51,20 +51,18 @@
             </div>
             <div class="modal-body">
                 <div class="panel-body">
-                    <!-- 评分标准 -->
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">评分标准</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" name="standard" placeholder="评分标准">
-                        </div>
-                    </div>
-                    <!-- 分值 -->
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">分值</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" name="target" placeholder="分值">
-                        </div>
-                    </div>
+                    <form class="bs-example bs-example-form" role="form">
+                        <!-- 评分标准 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">评分标准</span>
+                            <input id="standard_add" type="text" class="form-control" placeholder="评分标准">
+                        </div><br>
+                        <!-- 分值 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">分值(%)</span>
+                            <input id="score_add" type="text" class="form-control" placeholder="分值(%)">
+                        </div><br>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
@@ -84,11 +82,22 @@
                     &times;
                 </button>
                 <h4 class="modal-title">
-                    添加评分标准
+                    修改评分标准
                 </h4>
             </div>
             <div class="modal-body">
-
+                <form class="bs-example bs-example-form" role="form">
+                    <!-- 评分标准 -->
+                    <div class="input-group">
+                        <span class="input-group-addon">评分标准</span>
+                        <input id="standard_edit" type="text" class="form-control" placeholder="评分标准">
+                    </div><br>
+                    <!-- 分值 -->
+                    <div class="input-group">
+                        <span class="input-group-addon">分值(%)</span>
+                        <input id="score_edit" type="text" class="form-control" placeholder="分值(%)">
+                    </div><br>
+                </form>
             </div>
             <div class="modal-footer">
                 <button id="btn_edit_cancel" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
