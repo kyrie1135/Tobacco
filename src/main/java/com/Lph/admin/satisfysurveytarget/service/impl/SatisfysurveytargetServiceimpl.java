@@ -39,9 +39,23 @@ public class SatisfysurveytargetServiceimpl implements SatisfysurveytargetServic
         return "200";
     }
 
+    /**
+     * 评分标准维护-》确认删除弹窗-》确定
+     * 删除评分标准
+     */
     @Override
     public String delStandard(String id) {
         tccSatisfysurveytargetDAO.deleteByPrimaryKey(id);
+        return "200";
+    }
+
+    /**
+     * 评分标准维护-》修改弹窗-》确定
+     * 删除评分标准
+     */
+    @Override
+    public String editStandard(TCCSatisfysurveytarget target) {
+        tccSatisfysurveytargetDAO.updateByPrimaryKey(target);
         return "200";
     }
 }

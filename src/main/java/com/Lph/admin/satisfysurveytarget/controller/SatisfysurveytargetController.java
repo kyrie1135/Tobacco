@@ -25,7 +25,7 @@ public class SatisfysurveytargetController {
     @Autowired
     private SatisfysurveytargetService satisfysurveytargetService;
 
-    @RequestMapping("/satisfysurveytargetList")
+    @RequestMapping(value = "/satisfysurveytargetList", method = RequestMethod.GET)
     public String getSatisfysurveytargetList(){
         return "/admin/satisfysurveytarget/satisfysurveytargetTable.html";
     }
@@ -62,5 +62,19 @@ public class SatisfysurveytargetController {
     @ResponseBody
     public String delStandard(@RequestBody TCCSatisfysurveytarget tccSatisfysurveytarget){
         return satisfysurveytargetService.delStandard(tccSatisfysurveytarget.getBickid());
+    }
+
+    /**
+     * 评分标准维护-》修改弹窗-》确定
+     * 修改评分标准
+     */
+    @RequestMapping(value = "/standard",method = RequestMethod.PUT)
+    @ResponseBody
+    public String editStandard(@RequestBody @Valid TCCSatisfysurveytarget target, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            log.info("评分标准维护修改错误 {}",bindingResult.getFieldError().getDefaultMessage());
+            return bindingResult.getFieldError().getDefaultMessage();
+        }
+        return satisfysurveytargetService.editStandard(target);
     }
 }

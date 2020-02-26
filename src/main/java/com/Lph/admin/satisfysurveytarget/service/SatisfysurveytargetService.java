@@ -22,4 +22,10 @@ public interface SatisfysurveytargetService {
      * 删除评分标准
      */
     public String delStandard(String id);
+
+    /**
+     * 评分标准维护-》修改弹窗-》确定
+     * 删除评分标准
+     */
+    public String editStandard(TCCSatisfysurveytarget target);
 }
