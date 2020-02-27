@@ -3,6 +3,12 @@ $(function () {
     //初始化table
     initTable();
 
+    //添加按钮
+    $("#mainBtnAdd").click(function () {
+        clearInputs("mainModalAdd");
+        $('#mainModalAdd').modal('show');
+    });
+
     //修改按钮
     $("#mainBtnEdit").click(function () {
         if ($("#list").bootstrapTable('getSelections').length == 0){
@@ -119,12 +125,4 @@ function initTable() {
         ]
     });
     $('#list').bootstrapTable('hideColumn','bickid');
-}
-
-function isNotBlank(text) {
-    if (text != null && text.trim() != ""){
-        return true;
-    }else {
-        return false;
-    }
 }

@@ -1,4 +1,6 @@
 $(function () {
+
+    //初始化table
     initTable();
 
     //添加按钮
@@ -13,8 +15,8 @@ $(function () {
             $('#noChoice').modal('show');
         } else {
             $('#mainModalEdit').modal('show');
-            $("#standard_edit").val($("#list").bootstrapTable('getSelections')[0].evaluateStandard);
-            $("#score_edit").val($("#list").bootstrapTable('getSelections')[0].evaluateTarget);
+            $("#standard_edit").val($("#list").bootstrapTable('getSelections')[0].itemName);
+            $("#description_edit").val($("#list").bootstrapTable('getSelections')[0].description);
         }
     });
     //删除按钮
@@ -26,20 +28,20 @@ $(function () {
         }
     });
 
-    //评分标准维护-》添加弹窗-》确定
+    //评测标准维护-》添加弹窗-〉确定
     $("#btn_add_ok").click(function () {
         if (!isNotBlank($("#standard_add").val())){
-            alert("评分标准不能为空");
+            alert("评测标准名称不能为空");
         }
-        if (!isNotBlank($("#score_add").val())){
-            alert("评分标准分值不能为空");
+        if (!isNotBlank($("#description_add").val())){
+            alert("评测标准描述不能为空");
         }
         $.ajax({
-            url: '/admin/standard',
+            url: '/admin/description',
             type: 'POST',
             data: JSON.stringify({
-                "evaluateTarget" : $("#score_add").val(),
-                "evaluateStandard" : $("#standard_add").val()
+                "itemName" : $("#standard_add").val(),
+                "description" : $("#description_add").val()
             }),
             contentType:"application/json;charset=UTF-8",
             dataType:"json",
@@ -47,7 +49,7 @@ $(function () {
                 if (result == "200"){
                     alert("添加成功");
                     $('#mainModalAdd').modal('hide');
-                    $('#list').bootstrapTable('refresh',{url:'/admin/standard'});
+                    $('#list').bootstrapTable('refresh',{url:'/admin/description'});
                 }else {
                     alert(result);
                 }
@@ -57,10 +59,34 @@ $(function () {
         });
     });
 
-    //评分标准维护-》确认删除弹窗-》确定
+    //评测标准维护-》修改弹窗-》确定
+    $("#btn_edit_ok").click(function () {
+        $.ajax({
+            url: '/admin/description',
+            type: 'PUT',
+            data: JSON.stringify({
+                "bickid" : $("#list").bootstrapTable('getSelections')[0].bickid,
+                "itemName" : $("#standard_add").val(),
+                "description" : $("#description_add").val()
+            }),
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success: function (result) {
+                if (result == "200"){
+                    alert("修改成功");
+                    $('#mainModalEdit').modal('hide');
+                    $('#list').bootstrapTable('refresh',{url:'/admin/description'});
+                }
+            }, error: function () {
+                alert("修改错误， 请稍后再试");
+            }
+        });
+    });
+
+    //评测标准维护-》确定删除弹窗-》确定
     $("#mainModalDel").click(function () {
         $.ajax({
-            url: '/admin/standard/',
+            url: '/admin/description',
             type: 'DELETE',
             data: JSON.stringify({
                 "bickid" : $("#list").bootstrapTable('getSelections')[0].bickid
@@ -71,7 +97,7 @@ $(function () {
                 if (result == "200"){
                     alert("删除成功");
                     $('#mainModalDel').modal('hide');
-                    $('#list').bootstrapTable('refresh',{url:'/admin/standard'});
+                    $('#list').bootstrapTable('refresh',{url:'/admin/description'});
                 }
             }, error: function () {
                 alert("删除错误， 请稍后再试");
@@ -79,36 +105,11 @@ $(function () {
         });
     });
 
-    //评分标准维护-》修改弹窗-》确定
-    $("#btn_edit_ok").click(function () {
-        $.ajax({
-            url: '/admin/standard/',
-            type: 'PUT',
-            data: JSON.stringify({
-                "bickid" : $("#list").bootstrapTable('getSelections')[0].bickid,
-                "evaluateTarget" : $("#score_edit").val(),
-                "evaluateStandard" : $("#standard_edit").val()
-            }),
-            contentType:"application/json;charset=UTF-8",
-            dataType:"json",
-            success: function (result) {
-                if (result == "200"){
-                    alert("修改成功");
-                    $('#mainModalEdit').modal('hide');
-                    $('#list').bootstrapTable('refresh',{url:'/admin/standard'});
-                }
-            }, error: function () {
-                alert("修改错误， 请稍后再试");
-            }
-        });
-    });
-
 });
 
-//初始化评测标准列表
 function initTable() {
     $('#list').bootstrapTable({
-        url:'/admin/standard',
+        url:'/admin/description',
         type:"GET",
         uniqueId:"bickid",
         singleSelect:true,
@@ -122,17 +123,18 @@ function initTable() {
                 align:'center',
                 width:1
             },{
-                field:'evaluateStandard',
-                title:'评分标准',
+                field:'itemName',
+                title:'评测标准',
                 align:'center',
-                width:100
+                width:150
             },{
-                field:'evaluateTarget',
-                title:'分值',
+                field:'description',
+                title:'项目标准描述',
                 align:'center',
-                width:60
+                width:150
             }
         ]
     });
     $('#list').bootstrapTable('hideColumn','bickid');
 }
+

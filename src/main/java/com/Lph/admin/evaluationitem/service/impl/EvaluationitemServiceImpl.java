@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Service
+@SuppressWarnings("all")
 public class EvaluationitemServiceImpl implements EvaluationitemService {
 
     @Autowired
