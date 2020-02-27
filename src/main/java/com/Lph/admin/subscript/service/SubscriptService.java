@@ -1,6 +1,7 @@
 package com.Lph.admin.subscript.service;
 
 import com.Lph.admin.Utils.Node;
+import com.Lph.admin.subscript.model.TCCClientsatisfy;
 
 import java.util.List;
 
@@ -18,4 +19,10 @@ public interface SubscriptService {
      * @return
      */
     public List<Node> getRoleTree(String id);
+
+    /**
+     * 获取所有评测指标
+     * @return
+     */
+    public List<TCCClientsatisfy> getSubscriptions();
 }

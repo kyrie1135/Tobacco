@@ -7,6 +7,9 @@ import com.Lph.admin.organdrole.model.OrganizationExample;
 import com.Lph.admin.organdrole.dao.RoleDAO;
 import com.Lph.admin.organdrole.model.Role;
 import com.Lph.admin.organdrole.model.RoleExample;
+import com.Lph.admin.subscript.dao.TCCClientsatisfyDAO;
+import com.Lph.admin.subscript.model.TCCClientsatisfy;
+import com.Lph.admin.subscript.model.TCCClientsatisfyExample;
 import com.Lph.admin.subscript.service.SubscriptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,8 @@ public class SubscriptServiceImpl implements SubscriptService {
     private OrganizationDAO organizationDAO;
     @Autowired
     private RoleDAO roleDAO;
+    @Autowired
+    private TCCClientsatisfyDAO tccClientsatisfyDAO;
 
     /**
      * 选择调查人员功能， 展示岗位树
@@ -58,5 +63,15 @@ public class SubscriptServiceImpl implements SubscriptService {
             nodes.add(new Node(role.getId(), role.getOrgid(), role.getName()));
         }
         return nodes;
+    }
+
+    /**
+     * 获取所有评测指标
+     * @return
+     */
+    @Override
+    public List<TCCClientsatisfy> getSubscriptions() {
+        TCCClientsatisfyExample example = new TCCClientsatisfyExample();
+        return tccClientsatisfyDAO.selectByExample(example);
     }
 }

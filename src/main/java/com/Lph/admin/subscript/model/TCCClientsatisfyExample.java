@@ -2,9 +2,11 @@ package com.Lph.admin.subscript.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
-public class SubscriptModelExample {
+public class TCCClientsatisfyExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +17,7 @@ public class SubscriptModelExample {
 
     private Long offset;
 
-    public SubscriptModelExample() {
+    public TCCClientsatisfyExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -123,6 +125,32 @@ public class SubscriptModelExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andBickidIsNull() {
@@ -662,6 +690,186 @@ public class SubscriptModelExample {
 
         public Criteria andEmpRoleNotBetween(String value1, String value2) {
             addCriterion("EMP_ROLE not between", value1, value2, "empRole");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateIsNull() {
+            addCriterion("CRE_DATE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateIsNotNull() {
+            addCriterion("CRE_DATE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateEqualTo(Date value) {
+            addCriterionForJDBCDate("CRE_DATE =", value, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("CRE_DATE <>", value, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("CRE_DATE >", value, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("CRE_DATE >=", value, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateLessThan(Date value) {
+            addCriterionForJDBCDate("CRE_DATE <", value, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("CRE_DATE <=", value, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateIn(List<Date> values) {
+            addCriterionForJDBCDate("CRE_DATE in", values, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("CRE_DATE not in", values, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("CRE_DATE between", value1, value2, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("CRE_DATE not between", value1, value2, "creDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateIsNull() {
+            addCriterion("END_DATE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateIsNotNull() {
+            addCriterion("END_DATE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateEqualTo(Date value) {
+            addCriterionForJDBCDate("END_DATE =", value, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("END_DATE <>", value, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("END_DATE >", value, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("END_DATE >=", value, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateLessThan(Date value) {
+            addCriterionForJDBCDate("END_DATE <", value, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("END_DATE <=", value, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateIn(List<Date> values) {
+            addCriterionForJDBCDate("END_DATE in", values, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("END_DATE not in", values, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("END_DATE between", value1, value2, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("END_DATE not between", value1, value2, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedIsNull() {
+            addCriterion("DELETED is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedIsNotNull() {
+            addCriterion("DELETED is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedEqualTo(Integer value) {
+            addCriterion("DELETED =", value, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedNotEqualTo(Integer value) {
+            addCriterion("DELETED <>", value, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedGreaterThan(Integer value) {
+            addCriterion("DELETED >", value, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedGreaterThanOrEqualTo(Integer value) {
+            addCriterion("DELETED >=", value, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedLessThan(Integer value) {
+            addCriterion("DELETED <", value, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedLessThanOrEqualTo(Integer value) {
+            addCriterion("DELETED <=", value, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedIn(List<Integer> values) {
+            addCriterion("DELETED in", values, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedNotIn(List<Integer> values) {
+            addCriterion("DELETED not in", values, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedBetween(Integer value1, Integer value2) {
+            addCriterion("DELETED between", value1, value2, "deleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeletedNotBetween(Integer value1, Integer value2) {
+            addCriterion("DELETED not between", value1, value2, "deleted");
             return (Criteria) this;
         }
     }

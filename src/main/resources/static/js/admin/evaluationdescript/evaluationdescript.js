@@ -3,9 +3,35 @@ $(function () {
     //初始化table
     initTable();
 
+    //评测项目选择框选择后， 刷新table内容
+    $("#belongItem").change(function () {
+        if ($("#belongItem").val() == "-"){
+            $('#list').bootstrapTable('refresh',{url:'/admin/description'});
+        } else {
+            $('#list').bootstrapTable('refresh',{url:'/admin/descriptionbyitem/'+$("#belongItem").val()});
+        }
+    });
+
+    //获取评测项目填入到select中
+    $.ajax({
+        url: '/admin/item',
+        type: 'GET',
+        data: 0,
+        contentType:"application/json;charset=UTF-8",
+        dataType:"json",
+        success:function (result) {
+            for (var i = 0; i<result.length ; i++){
+                $("#belongItem").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+                $("#belongItemAdd").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+                $("#belongItemEdit").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+            }
+        }
+    });
+
     //添加按钮
     $("#mainBtnAdd").click(function () {
         clearInputs("mainModalAdd");
+        $("#belongItemAdd > option")[0].selected = true;
         $('#mainModalAdd').modal('show');
     });
 
@@ -15,6 +41,7 @@ $(function () {
             $('#noChoice').modal('show');
         } else {
             $('#mainModalEdit').modal('show');
+            $("#belongItemEdit").val($("#list").bootstrapTable('getSelections')[0].belongItemId);
             $("#standard_edit").val($("#list").bootstrapTable('getSelections')[0].itemName);
             $("#description_edit").val($("#list").bootstrapTable('getSelections')[0].description);
         }
@@ -40,6 +67,7 @@ $(function () {
             url: '/admin/description',
             type: 'POST',
             data: JSON.stringify({
+                "belongItemId" : $("#belongItemAdd").val(),
                 "itemName" : $("#standard_add").val(),
                 "description" : $("#description_add").val()
             }),
@@ -47,14 +75,11 @@ $(function () {
             dataType:"json",
             success:function (result) {
                 if (result == "200"){
-                    alert("添加成功");
                     $('#mainModalAdd').modal('hide');
                     $('#list').bootstrapTable('refresh',{url:'/admin/description'});
                 }else {
                     alert(result);
                 }
-            },error: function () {
-                alert("请求失败， 请稍后再试");
             }
         });
     });
@@ -66,19 +91,17 @@ $(function () {
             type: 'PUT',
             data: JSON.stringify({
                 "bickid" : $("#list").bootstrapTable('getSelections')[0].bickid,
-                "itemName" : $("#standard_add").val(),
-                "description" : $("#description_add").val()
+                "belongItemId" : $("#belongItemEdit").val(),
+                "itemName" : $("#standard_edit").val(),
+                "description" : $("#description_edit").val()
             }),
             contentType:"application/json;charset=UTF-8",
             dataType:"json",
             success: function (result) {
                 if (result == "200"){
-                    alert("修改成功");
                     $('#mainModalEdit').modal('hide');
                     $('#list').bootstrapTable('refresh',{url:'/admin/description'});
                 }
-            }, error: function () {
-                alert("修改错误， 请稍后再试");
             }
         });
     });
@@ -95,12 +118,9 @@ $(function () {
             dataType:"json",
             success: function (result) {
                 if (result == "200"){
-                    alert("删除成功");
                     $('#mainModalDel').modal('hide');
                     $('#list').bootstrapTable('refresh',{url:'/admin/description'});
                 }
-            }, error: function () {
-                alert("删除错误， 请稍后再试");
             }
         });
     });
@@ -113,21 +133,29 @@ function initTable() {
         type:"GET",
         uniqueId:"bickid",
         singleSelect:true,
+        search: false,
+        pagination: true,
+        pageSize: 8,
+        paginationLoop: false,
         columns:[
             {
                 checkbox: true
-            },
-            {
+            }, {
                 field:'bickid',
                 title:'#',
                 align:'center',
                 width:1
-            },{
+            }, {
+                field:'belongItemId',
+                title:'所属评测项目',
+                align:'center',
+                width:150
+            }, {
                 field:'itemName',
                 title:'评测标准',
                 align:'center',
                 width:150
-            },{
+            }, {
                 field:'description',
                 title:'项目标准描述',
                 align:'center',
@@ -136,5 +164,6 @@ function initTable() {
         ]
     });
     $('#list').bootstrapTable('hideColumn','bickid');
+    $('#list').bootstrapTable('hideColumn','belongItemId');
 }
 

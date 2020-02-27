@@ -96,10 +96,10 @@ $(function () {
 
 });
 
-//初始化评测标准列表
+//初始化调查指标维护table
 function initTable() {
     $('#list').bootstrapTable({
-        url:'/admin/standard',
+        url:'/admin/subscript',
         type:"GET",
         uniqueId:"bickid",
         singleSelect:true,
@@ -116,17 +116,43 @@ function initTable() {
                 align:'center',
                 width:1
             },{
-                field:'evaluateStandard',
-                title:'评分标准',
+                field:'targetSort',
+                title:'指标归类',
+                align:'center',
+                width:1
+            }, {
+                field:'evaluateItem',
+                title:'测评项目',
                 align:'center',
                 width:100
             },{
                 field:'evaluateTarget',
-                title:'分值',
+                title:'评测指标',
+                align:'center',
+                width:60
+            },{
+                field:'isUse',
+                title:'是否启用',
+                align:'center',
+                width:60
+            },{
+                field:'empRole',
+                title:'调查人员',
+                align:'center',
+                width:60
+            },{
+                field:'evaluateCyc',
+                title:'评价周期',
+                align:'center',
+                width:60
+            },{
+                field:'proportion',
+                title:'权重',
                 align:'center',
                 width:60
             }
         ]
     });
     $('#list').bootstrapTable('hideColumn','bickid');
+    $('#list').bootstrapTable('hideColumn','targetSort');
 }

@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>评分标准描述维护</title>
+    <title>评测指标维护</title>
 
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/treeview.css">
 </head>
 <body>
 <div class="container">
@@ -13,14 +14,19 @@
 
         <div class="divBorder">
             <h4 class="panel panel-heading h4font">
-                评分标准描述维护
+                评测指标维护
             </h4>
 
             <div class="panel-body">
-                <!-- 所属评测项目 -->
-                <div class="input-group col-sm-4">
+                <div class="input-group col-sm-8">
+                    <!-- 所属评测项目 -->
                     <span class="input-group-addon">评测项目</span>
                     <select class="form-control" id="belongItem">
+                        <option>-</option>
+                    </select>
+                    <!-- 所属岗位 -->
+                    <span class="input-group-addon">所属岗位</span>
+                    <select class="form-control" id="belongOrg">
                         <option>-</option>
                     </select>
                 </div><br>
@@ -53,28 +59,49 @@
                     &times;
                 </button>
                 <h4 class="modal-title">
-                    添加评分标准
+                    评测指标维护
                 </h4>
             </div>
             <div class="modal-body">
                 <div class="panel-body">
                     <form class="bs-example bs-example-form" role="form">
-                        <!-- 所属评测项目 -->
+                        <!-- 评测项目 -->
                         <div class="input-group">
-                            <span class="input-group-addon">所属评测项目</span>
-                            <select class="form-control" id="belongItemAdd">
-                                <option>-</option>
-                            </select>
+                            <span class="input-group-addon">评测项目</span>
+                            <select class="form-control" id="evaluateItem"></select>
                         </div><br>
-                        <!-- 评测标准名称 -->
+                        <!-- 评测指标 -->
                         <div class="input-group">
-                            <span class="input-group-addon">评测标准名称</span>
-                            <input id="standard_add" type="text" class="form-control" placeholder="评测标准名称">
+                            <span class="input-group-addon">评测指标</span>
+                            <select class="form-control" id="evaluateTarget"></select>
                         </div><br>
-                        <!-- 评测标准描述 -->
+                        <!-- 是否启用 -->
                         <div class="input-group">
-                            <span class="input-group-addon">评测标准描述</span>
-                            <input id="description_add" type="text" class="form-control" placeholder="评测标准描述">
+                            <span class="input-group-addon">是否启用</span>
+                            <div class="col-sm-offset-1 col-sm-2">
+                                <input type="radio" value="1" name="isUse">是
+                            </div>
+                            <div class="col-sm-offset-1 col-sm-2">
+                                <input type="radio" value="0" name="isUse">否
+                            </div>
+                        </div><br>
+                        <!-- 调查人员 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">评测指标</span>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control" name="empRole" style="float: left;" placeholder="调查人员">
+                            </div>
+                            <button id="empRoleBtn" type="button" class="btn btn-info" data-target="#myModal" data-toggle="modal">选 择</button>
+                        </div><br>
+                        <!-- 评价周期 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">评价周期</span>
+                            <select class="form-control" id="evaluateCyc"></select>
+                        </div><br>
+                        <!-- 权重 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">权重</span>
+                            <input type="text" class="form-control" name="proportion" placeholder="">
                         </div><br>
                     </form>
                 </div>
@@ -176,7 +203,10 @@
 <script src="../static/bootstrap/js/bootstrap-table.js"></script>
 <script src="../static/bootstrap/js/bootstrap.js"></script>
 <script src="../static/js/include/publicMethod.js"></script>
-<script src="../static/js/admin/evaluationdescript/evaluationdescript.js"></script>
+<script src="../static/bootstrap/js/treeview.js"></script>
+
+<script src="../static/js/admin/subscript/subscript.js"></script>
+<script src="../static/js/admin/subscript/subscriptAdd.js"></script>
 
 </body>
 </html>

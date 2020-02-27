@@ -29,6 +29,13 @@ public class EvaluationDescriptServiceImpl implements EvaluationDescriptService 
         return tccDescriptionDAO.selectByExample(example);
     }
 
+    @Override
+    public List<TCCDescription> getDescriptionsByItem(String id) {
+        TCCDescriptionExample example = new TCCDescriptionExample();
+        example.createCriteria().andBelongItemIdEqualTo(id);
+        return tccDescriptionDAO.selectByExample(example);
+    }
+
     /**
      * 添加评测指标描述
      */
@@ -48,7 +55,7 @@ public class EvaluationDescriptServiceImpl implements EvaluationDescriptService 
     @Override
     public String editDescriptions(TCCDescription target) {
         target.setEndDate(new Timestamp(System.currentTimeMillis()));
-        tccDescriptionDAO.updateByPrimaryKey(target);
+        tccDescriptionDAO.updateByPrimaryKeySelective(target);
         return "200";
     }
 

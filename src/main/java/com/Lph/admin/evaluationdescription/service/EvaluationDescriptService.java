@@ -13,6 +13,12 @@ public interface EvaluationDescriptService {
     public List<TCCDescription> getDescriptions();
 
     /**
+     * 根据选择的所属评测项目获取评测描述
+     * @return
+     */
+    public List<TCCDescription> getDescriptionsByItem(String id);
+
+    /**
      * 添加评测指标描述
      */
     public String addDescriptions(TCCDescription target);

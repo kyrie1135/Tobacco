@@ -55,7 +55,7 @@ public class SatisfysurveytargetServiceimpl implements SatisfysurveytargetServic
      */
     @Override
     public String editStandard(TCCSatisfysurveytarget target) {
-        tccSatisfysurveytargetDAO.updateByPrimaryKey(target);
+        tccSatisfysurveytargetDAO.updateByPrimaryKeySelective(target);
         return "200";
     }
 }

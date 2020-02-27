@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.Lph.admin.subscript.dao.SubscriptDao">
-  <resultMap id="BaseResultMap" type="com.Lph.admin.subscript.model.SubscriptModel">
+<mapper namespace="com.Lph.admin.subscript.dao.TCCClientsatisfyDAO">
+  <resultMap id="BaseResultMap" type="com.Lph.admin.subscript.model.TCCClientsatisfy">
     <id column="BICKID" jdbcType="VARCHAR" property="bickid" />
     <result column="TARGET_SORT" jdbcType="VARCHAR" property="targetSort" />
     <result column="EVALUATE_ITEM" jdbcType="VARCHAR" property="evaluateItem" />
@@ -10,6 +10,9 @@
     <result column="EVALUATE_CYC" jdbcType="VARCHAR" property="evaluateCyc" />
     <result column="PROPORTION" jdbcType="DECIMAL" property="proportion" />
     <result column="EMP_ROLE" jdbcType="VARCHAR" property="empRole" />
+    <result column="CRE_DATE" jdbcType="DATE" property="creDate" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="DELETED" jdbcType="INTEGER" property="deleted" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,9 +74,9 @@
   </sql>
   <sql id="Base_Column_List">
     BICKID, TARGET_SORT, EVALUATE_ITEM, EVALUATE_TARGET, IS_USE, EVALUATE_CYC, PROPORTION, 
-    EMP_ROLE
+    EMP_ROLE, CRE_DATE, END_DATE, DELETED
   </sql>
-  <select id="selectByExample" parameterType="com.Lph.admin.subscript.model.SubscriptModelExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfyExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -105,21 +108,23 @@
     delete from t_c_c_clientsatisfy
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.Lph.admin.subscript.model.SubscriptModelExample">
+  <delete id="deleteByExample" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfyExample">
     delete from t_c_c_clientsatisfy
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.subscript.model.SubscriptModel" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfy" useGeneratedKeys="true">
     insert into t_c_c_clientsatisfy (TARGET_SORT, EVALUATE_ITEM, EVALUATE_TARGET, 
       IS_USE, EVALUATE_CYC, PROPORTION, 
-      EMP_ROLE)
+      EMP_ROLE, CRE_DATE, END_DATE, 
+      DELETED)
     values (#{targetSort,jdbcType=VARCHAR}, #{evaluateItem,jdbcType=VARCHAR}, #{evaluateTarget,jdbcType=VARCHAR}, 
       #{isUse,jdbcType=INTEGER}, #{evaluateCyc,jdbcType=VARCHAR}, #{proportion,jdbcType=DECIMAL}, 
-      #{empRole,jdbcType=VARCHAR})
+      #{empRole,jdbcType=VARCHAR}, #{creDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+      #{deleted,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.subscript.model.SubscriptModel" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfy" useGeneratedKeys="true">
     insert into t_c_c_clientsatisfy
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="targetSort != null">
@@ -142,6 +147,15 @@
       </if>
       <if test="empRole != null">
         EMP_ROLE,
+      </if>
+      <if test="creDate != null">
+        CRE_DATE,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="deleted != null">
+        DELETED,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -166,9 +180,18 @@
       <if test="empRole != null">
         #{empRole,jdbcType=VARCHAR},
       </if>
+      <if test="creDate != null">
+        #{creDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.Lph.admin.subscript.model.SubscriptModelExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfyExample" resultType="java.lang.Long">
     select count(*) from t_c_c_clientsatisfy
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -201,6 +224,15 @@
       <if test="record.empRole != null">
         EMP_ROLE = #{record.empRole,jdbcType=VARCHAR},
       </if>
+      <if test="record.creDate != null">
+        CRE_DATE = #{record.creDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        END_DATE = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.deleted != null">
+        DELETED = #{record.deleted,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -215,12 +247,15 @@
       IS_USE = #{record.isUse,jdbcType=INTEGER},
       EVALUATE_CYC = #{record.evaluateCyc,jdbcType=VARCHAR},
       PROPORTION = #{record.proportion,jdbcType=DECIMAL},
-      EMP_ROLE = #{record.empRole,jdbcType=VARCHAR}
+      EMP_ROLE = #{record.empRole,jdbcType=VARCHAR},
+      CRE_DATE = #{record.creDate,jdbcType=DATE},
+      END_DATE = #{record.endDate,jdbcType=DATE},
+      DELETED = #{record.deleted,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.admin.subscript.model.SubscriptModel">
+  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfy">
     update t_c_c_clientsatisfy
     <set>
       <if test="targetSort != null">
@@ -244,10 +279,19 @@
       <if test="empRole != null">
         EMP_ROLE = #{empRole,jdbcType=VARCHAR},
       </if>
+      <if test="creDate != null">
+        CRE_DATE = #{creDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        END_DATE = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
+      </if>
     </set>
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.Lph.admin.subscript.model.SubscriptModel">
+  <update id="updateByPrimaryKey" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfy">
     update t_c_c_clientsatisfy
     set TARGET_SORT = #{targetSort,jdbcType=VARCHAR},
       EVALUATE_ITEM = #{evaluateItem,jdbcType=VARCHAR},
@@ -255,7 +299,10 @@
       IS_USE = #{isUse,jdbcType=INTEGER},
       EVALUATE_CYC = #{evaluateCyc,jdbcType=VARCHAR},
       PROPORTION = #{proportion,jdbcType=DECIMAL},
-      EMP_ROLE = #{empRole,jdbcType=VARCHAR}
+      EMP_ROLE = #{empRole,jdbcType=VARCHAR},
+      CRE_DATE = #{creDate,jdbcType=DATE},
+      END_DATE = #{endDate,jdbcType=DATE},
+      DELETED = #{deleted,jdbcType=INTEGER}
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </update>
 </mapper>

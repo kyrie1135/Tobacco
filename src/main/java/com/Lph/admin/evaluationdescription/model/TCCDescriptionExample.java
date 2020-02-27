@@ -222,6 +222,76 @@ public class TCCDescriptionExample {
             return (Criteria) this;
         }
 
+        public Criteria andBelongItemIdIsNull() {
+            addCriterion("BELONG_ITEM_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdIsNotNull() {
+            addCriterion("BELONG_ITEM_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdEqualTo(String value) {
+            addCriterion("BELONG_ITEM_ID =", value, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdNotEqualTo(String value) {
+            addCriterion("BELONG_ITEM_ID <>", value, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdGreaterThan(String value) {
+            addCriterion("BELONG_ITEM_ID >", value, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdGreaterThanOrEqualTo(String value) {
+            addCriterion("BELONG_ITEM_ID >=", value, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdLessThan(String value) {
+            addCriterion("BELONG_ITEM_ID <", value, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdLessThanOrEqualTo(String value) {
+            addCriterion("BELONG_ITEM_ID <=", value, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdLike(String value) {
+            addCriterion("BELONG_ITEM_ID like", value, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdNotLike(String value) {
+            addCriterion("BELONG_ITEM_ID not like", value, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdIn(List<String> values) {
+            addCriterion("BELONG_ITEM_ID in", values, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdNotIn(List<String> values) {
+            addCriterion("BELONG_ITEM_ID not in", values, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdBetween(String value1, String value2) {
+            addCriterion("BELONG_ITEM_ID between", value1, value2, "belongItemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongItemIdNotBetween(String value1, String value2) {
+            addCriterion("BELONG_ITEM_ID not between", value1, value2, "belongItemId");
+            return (Criteria) this;
+        }
+
         public Criteria andItemNameIsNull() {
             addCriterion("ITEM_NAME is null");
             return (Criteria) this;

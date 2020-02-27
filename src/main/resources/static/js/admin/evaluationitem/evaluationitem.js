@@ -42,14 +42,11 @@ $(function () {
             dataType:"json",
             success:function (result) {
                 if (result == "200"){
-                    alert("添加成功");
                     $('#mainModalAdd').modal('hide');
                     $('#list').bootstrapTable('refresh',{url:'/admin/item'});
                 }else {
                     alert(result);
                 }
-            },error: function () {
-                alert("请求失败， 请稍后再试");
             }
         });
     });
@@ -67,12 +64,9 @@ $(function () {
             dataType:"json",
             success: function (result) {
                 if (result == "200"){
-                    alert("修改成功");
                     $('#mainModalEdit').modal('hide');
                     $('#list').bootstrapTable('refresh',{url:'/admin/item'});
                 }
-            }, error: function () {
-                alert("修改错误， 请稍后再试");
             }
         });
     });
@@ -89,12 +83,9 @@ $(function () {
             dataType:"json",
             success: function (result) {
                 if (result == "200"){
-                    alert("删除成功");
                     $('#mainModalDel').modal('hide');
                     $('#list').bootstrapTable('refresh',{url:'/admin/item'});
                 }
-            }, error: function () {
-                alert("删除错误， 请稍后再试");
             }
         });
     });
@@ -107,6 +98,9 @@ function initTable() {
         type:"GET",
         uniqueId:"bickid",
         singleSelect:true,
+        pagination: true,
+        pageSize: 8,
+        paginationLoop: false,
         columns:[
             {
                 checkbox: true

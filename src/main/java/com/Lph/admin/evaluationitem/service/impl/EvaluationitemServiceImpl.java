@@ -49,7 +49,7 @@ public class EvaluationitemServiceImpl implements EvaluationitemService {
     @Override
     public String editEvaluationItem(TCCEvaluationitem target) {
         target.setEndDate(new Timestamp(System.currentTimeMillis()));
-        tccEvaluationitemDAO.updateByPrimaryKey(target);
+        tccEvaluationitemDAO.updateByPrimaryKeySelective(target);
         return "200";
     }
 

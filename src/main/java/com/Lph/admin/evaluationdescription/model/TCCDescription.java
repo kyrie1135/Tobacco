@@ -11,10 +11,13 @@ import java.util.Date;
 public class TCCDescription implements Serializable {
     private String bickid;
 
-    @NotBlank(message = "标准名称不能为空")
+    @NotBlank(message = "所属测评项目不能为空")
+    private String belongItemId;
+
+    @NotBlank(message = "评测指标名称不能为空")
     private String itemName;
 
-    @NotBlank(message = "标准描述不能为空")
+    @NotBlank(message = "评测指标描述不能为空")
     private String description;
 
     private Date creDate;
@@ -31,6 +34,14 @@ public class TCCDescription implements Serializable {
 
     public void setBickid(String bickid) {
         this.bickid = bickid;
+    }
+
+    public String getBelongItemId() {
+        return belongItemId;
+    }
+
+    public void setBelongItemId(String belongItemId) {
+        this.belongItemId = belongItemId;
     }
 
     public String getItemName() {

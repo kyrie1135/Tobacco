@@ -42,7 +42,6 @@ public class EvaluationItemController {
     @RequestMapping(value = "/item", method = RequestMethod.GET)
     @ResponseBody
     public List<TCCEvaluationitem> getEvaluationItem(){
-        List<TCCEvaluationitem> list = new ArrayList<>();
         return evaluationitemService.getEvaluationItem();
     }
 

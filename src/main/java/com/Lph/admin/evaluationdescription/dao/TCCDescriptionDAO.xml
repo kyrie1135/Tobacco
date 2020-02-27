@@ -3,6 +3,7 @@
 <mapper namespace="com.Lph.admin.evaluationdescription.dao.TCCDescriptionDAO">
   <resultMap id="BaseResultMap" type="com.Lph.admin.evaluationdescription.model.TCCDescription">
     <id column="BICKID" jdbcType="VARCHAR" property="bickid" />
+    <result column="BELONG_ITEM_ID" jdbcType="VARCHAR" property="belongItemId" />
     <result column="ITEM_NAME" jdbcType="VARCHAR" property="itemName" />
     <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
     <result column="CRE_DATE" jdbcType="DATE" property="creDate" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    BICKID, ITEM_NAME, DESCRIPTION, CRE_DATE, END_DATE, DELETED
+    BICKID, BELONG_ITEM_ID, ITEM_NAME, DESCRIPTION, CRE_DATE, END_DATE, DELETED
   </sql>
   <select id="selectByExample" parameterType="com.Lph.admin.evaluationdescription.model.TCCDescriptionExample" resultMap="BaseResultMap">
     select
@@ -109,14 +110,19 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.evaluationdescription.model.TCCDescription" useGeneratedKeys="true">
-    insert into t_c_c_description (BICKID, ITEM_NAME, DESCRIPTION, CRE_DATE,
-      END_DATE, DELETED)
-    values (#{bickid,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{creDate,jdbcType=DATE},
-      #{endDate,jdbcType=DATE}, #{deleted,jdbcType=INTEGER})
+    insert into t_c_c_description (BICKID, BELONG_ITEM_ID, ITEM_NAME, DESCRIPTION,
+      CRE_DATE, END_DATE, DELETED
+      )
+    values (#{bickid,jdbcType=VARCHAR}, #{belongItemId,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+      #{creDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, #{deleted,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.evaluationdescription.model.TCCDescription" useGeneratedKeys="true">
     insert into t_c_c_description
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="belongItemId != null">
+        BELONG_ITEM_ID,
+      </if>
       <if test="itemName != null">
         ITEM_NAME,
       </if>
@@ -134,6 +140,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="belongItemId != null">
+        #{belongItemId,jdbcType=VARCHAR},
+      </if>
       <if test="itemName != null">
         #{itemName,jdbcType=VARCHAR},
       </if>
@@ -163,6 +172,9 @@
       <if test="record.bickid != null">
         BICKID = #{record.bickid,jdbcType=VARCHAR},
       </if>
+      <if test="record.belongItemId != null">
+        BELONG_ITEM_ID = #{record.belongItemId,jdbcType=VARCHAR},
+      </if>
       <if test="record.itemName != null">
         ITEM_NAME = #{record.itemName,jdbcType=VARCHAR},
       </if>
@@ -186,6 +198,7 @@
   <update id="updateByExample" parameterType="map">
     update t_c_c_description
     set BICKID = #{record.bickid,jdbcType=VARCHAR},
+      BELONG_ITEM_ID = #{record.belongItemId,jdbcType=VARCHAR},
       ITEM_NAME = #{record.itemName,jdbcType=VARCHAR},
       DESCRIPTION = #{record.description,jdbcType=VARCHAR},
       CRE_DATE = #{record.creDate,jdbcType=DATE},
@@ -198,6 +211,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.Lph.admin.evaluationdescription.model.TCCDescription">
     update t_c_c_description
     <set>
+      <if test="belongItemId != null">
+        BELONG_ITEM_ID = #{belongItemId,jdbcType=VARCHAR},
+      </if>
       <if test="itemName != null">
         ITEM_NAME = #{itemName,jdbcType=VARCHAR},
       </if>
@@ -218,7 +234,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.Lph.admin.evaluationdescription.model.TCCDescription">
     update t_c_c_description
-    set ITEM_NAME = #{itemName,jdbcType=VARCHAR},
+    set BELONG_ITEM_ID = #{belongItemId,jdbcType=VARCHAR},
+      ITEM_NAME = #{itemName,jdbcType=VARCHAR},
       DESCRIPTION = #{description,jdbcType=VARCHAR},
       CRE_DATE = #{creDate,jdbcType=DATE},
       END_DATE = #{endDate,jdbcType=DATE},

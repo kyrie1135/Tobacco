@@ -2,13 +2,13 @@ package com.Lph.admin.subscript.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * t_c_c_clientsatisfy
- * 主要功能： 评测指标维护
  * @author 
  */
-public class SubscriptModel implements Serializable {
+public class TCCClientsatisfy implements Serializable {
     private String bickid;
 
     private String targetSort;
@@ -24,6 +24,12 @@ public class SubscriptModel implements Serializable {
     private BigDecimal proportion;
 
     private String empRole;
+
+    private Date creDate;
+
+    private Date endDate;
+
+    private Integer deleted;
 
     private static final long serialVersionUID = 1L;
 
@@ -89,5 +95,29 @@ public class SubscriptModel implements Serializable {
 
     public void setEmpRole(String empRole) {
         this.empRole = empRole;
+    }
+
+    public Date getCreDate() {
+        return creDate;
+    }
+
+    public void setCreDate(Date creDate) {
+        this.creDate = creDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
     }
 }

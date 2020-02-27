@@ -1,6 +1,7 @@
 package com.Lph.admin.subscript.controller;
 
 import com.Lph.admin.Utils.Node;
+import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.service.SubscriptService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -46,11 +47,21 @@ public class SubscriptController {
     }
 
     /**
+     * 获取所有评测指标
+     * @return
+     */
+    @RequestMapping(value = "/subscript", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TCCClientsatisfy> getSubscriptions(){
+        return subscriptService.getSubscriptions();
+    }
+
+    /**
      * 跳转到评测指标添加界面
      * @return
      */
     @RequestMapping("/subscriptAdd")
     public String subscriptAdd(){
-        return "/admin/subscript/subscriptAdd.html";
+        return "/admin/subscript/subscript.html";
     }
 }
