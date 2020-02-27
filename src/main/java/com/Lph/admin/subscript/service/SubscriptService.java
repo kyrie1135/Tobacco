@@ -25,4 +25,9 @@ public interface SubscriptService {
      * @return
      */
     public List<TCCClientsatisfy> getSubscriptions();
+
+    /**
+     * 添加评测指标
+     */
+    public String addSubsrciption(TCCClientsatisfy target);
 }

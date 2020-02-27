@@ -12,4 +12,7 @@ function clearInputs(obj) {
     $("#"+obj+" input[type='text']").each(function () {
         this.value = "";
     });
+    $("#"+obj+" input[type='hidden']").each(function () {
+        this.value = "";
+    });
 }

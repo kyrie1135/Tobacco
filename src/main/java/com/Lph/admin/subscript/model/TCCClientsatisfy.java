@@ -1,5 +1,7 @@
 package com.Lph.admin.subscript.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,18 +13,25 @@ import java.util.Date;
 public class TCCClientsatisfy implements Serializable {
     private String bickid;
 
+    @NotBlank(message = "指标归类不能为空")
     private String targetSort;
 
+    @NotBlank(message = "评测项目不能为空")
     private String evaluateItem;
 
+    @NotBlank(message = "评测指标不能为空")
     private String evaluateTarget;
 
-    private Integer isUse;
+    @NotBlank(message = "是否启用不能为空")
+    private String isUse;
 
+    @NotBlank(message = "评测周期不能为空")
     private String evaluateCyc;
 
+    @NotNull(message = "权重不能为空")
     private BigDecimal proportion;
 
+    @NotBlank(message = "调查人员不能为空")
     private String empRole;
 
     private Date creDate;
@@ -65,11 +74,11 @@ public class TCCClientsatisfy implements Serializable {
         this.evaluateTarget = evaluateTarget;
     }
 
-    public Integer getIsUse() {
+    public String getIsUse() {
         return isUse;
     }
 
-    public void setIsUse(Integer isUse) {
+    public void setIsUse(String isUse) {
         this.isUse = isUse;
     }
 

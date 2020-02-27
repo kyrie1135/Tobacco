@@ -443,52 +443,62 @@ public class TCCClientsatisfyExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsUseEqualTo(Integer value) {
+        public Criteria andIsUseEqualTo(String value) {
             addCriterion("IS_USE =", value, "isUse");
             return (Criteria) this;
         }
 
-        public Criteria andIsUseNotEqualTo(Integer value) {
+        public Criteria andIsUseNotEqualTo(String value) {
             addCriterion("IS_USE <>", value, "isUse");
             return (Criteria) this;
         }
 
-        public Criteria andIsUseGreaterThan(Integer value) {
+        public Criteria andIsUseGreaterThan(String value) {
             addCriterion("IS_USE >", value, "isUse");
             return (Criteria) this;
         }
 
-        public Criteria andIsUseGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIsUseGreaterThanOrEqualTo(String value) {
             addCriterion("IS_USE >=", value, "isUse");
             return (Criteria) this;
         }
 
-        public Criteria andIsUseLessThan(Integer value) {
+        public Criteria andIsUseLessThan(String value) {
             addCriterion("IS_USE <", value, "isUse");
             return (Criteria) this;
         }
 
-        public Criteria andIsUseLessThanOrEqualTo(Integer value) {
+        public Criteria andIsUseLessThanOrEqualTo(String value) {
             addCriterion("IS_USE <=", value, "isUse");
             return (Criteria) this;
         }
 
-        public Criteria andIsUseIn(List<Integer> values) {
+        public Criteria andIsUseLike(String value) {
+            addCriterion("IS_USE like", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseNotLike(String value) {
+            addCriterion("IS_USE not like", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseIn(List<String> values) {
             addCriterion("IS_USE in", values, "isUse");
             return (Criteria) this;
         }
 
-        public Criteria andIsUseNotIn(List<Integer> values) {
+        public Criteria andIsUseNotIn(List<String> values) {
             addCriterion("IS_USE not in", values, "isUse");
             return (Criteria) this;
         }
 
-        public Criteria andIsUseBetween(Integer value1, Integer value2) {
+        public Criteria andIsUseBetween(String value1, String value2) {
             addCriterion("IS_USE between", value1, value2, "isUse");
             return (Criteria) this;
         }
 
-        public Criteria andIsUseNotBetween(Integer value1, Integer value2) {
+        public Criteria andIsUseNotBetween(String value1, String value2) {
             addCriterion("IS_USE not between", value1, value2, "isUse");
             return (Criteria) this;
         }

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
     <link rel="stylesheet" href="../static/bootstrap/css/treeview.css">
+
+    <link rel="stylesheet" href="../static/css/admin/subscript/subscriptAdd.css">
 </head>
 <body>
 <div class="container">
@@ -30,10 +32,10 @@
                         <option>-</option>
                     </select>
                 </div><br>
-                <table id="list" class="table" data-click-to-select="true"></table>
+                <table id="list" class="table" data-click-to-select="true" style="table-layout: fixed;"></table>
             </div>
         </div>
-
+        <br>
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-1">
                 <button id="mainBtnAdd" type="button" class="btn btn-primary">添 加</button>
@@ -59,7 +61,7 @@
                     &times;
                 </button>
                 <h4 class="modal-title">
-                    评测指标维护
+                    添加评测指标
                 </h4>
             </div>
             <div class="modal-body">
@@ -68,40 +70,47 @@
                         <!-- 评测项目 -->
                         <div class="input-group">
                             <span class="input-group-addon">评测项目</span>
-                            <select class="form-control" id="evaluateItem"></select>
+                            <select class="form-control" id="evaluateItem"><option value="" selected></option></select>
+                            <!--评测项目名称隐藏-->
+                            <input type="hidden" readonly class="form-control" name="itemName" style="float: left;">
                         </div><br>
                         <!-- 评测指标 -->
                         <div class="input-group">
                             <span class="input-group-addon">评测指标</span>
-                            <select class="form-control" id="evaluateTarget"></select>
-                        </div><br>
-                        <!-- 是否启用 -->
-                        <div class="input-group">
-                            <span class="input-group-addon">是否启用</span>
-                            <div class="col-sm-offset-1 col-sm-2">
-                                <input type="radio" value="1" name="isUse">是
-                            </div>
-                            <div class="col-sm-offset-1 col-sm-2">
-                                <input type="radio" value="0" name="isUse">否
-                            </div>
-                        </div><br>
-                        <!-- 调查人员 -->
-                        <div class="input-group">
-                            <span class="input-group-addon">评测指标</span>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control" name="empRole" style="float: left;" placeholder="调查人员">
-                            </div>
-                            <button id="empRoleBtn" type="button" class="btn btn-info" data-target="#myModal" data-toggle="modal">选 择</button>
+                            <select class="form-control" id="evaluateTarget"><option value="" selected></option></select>
                         </div><br>
                         <!-- 评价周期 -->
                         <div class="input-group">
                             <span class="input-group-addon">评价周期</span>
-                            <select class="form-control" id="evaluateCyc"></select>
+                            <select class="form-control" id="evaluateCyc">
+                                <option value="年">年</option>
+                                <option value="月">月</option>
+                            </select>
                         </div><br>
                         <!-- 权重 -->
                         <div class="input-group">
                             <span class="input-group-addon">权重</span>
                             <input type="text" class="form-control" name="proportion" placeholder="">
+                        </div><br>
+                        <!-- 是否启用 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">是否启用</span>
+                            <div class="col-sm-offset-1 col-sm-2">
+                                <input type="radio" value="是" name="isUse" checked="checked">是
+                            </div>
+                            <div class="col-sm-offset-1 col-sm-2">
+                                <input type="radio" value="否" name="isUse">否
+                            </div>
+                        </div><br>
+                        <!-- 调查人员 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">调查人员</span>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control" name="empRole" style="float: left;" placeholder="调查人员">
+                                <!--指标归类隐藏-->
+                                <input type="hidden" readonly class="form-control" name="targetSort" style="float: left;" placeholder="指标归类">
+                            </div>
+                            <button id="empRoleBtn" type="button" class="btn btn-info" data-target="#myModal" data-toggle="modal">选 择</button>
                         </div><br>
                     </form>
                 </div>
@@ -195,6 +204,29 @@
             </div>
             <div class="modal-footer">
                 <button id="btn_no_choice" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 指标归类-》选择岗位 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    选择调查人员
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="tree"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_empRole_cancel" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="btn_empRole_ok" type="button" class="btn btn-primary">确定</button>
             </div>
         </div>
     </div>

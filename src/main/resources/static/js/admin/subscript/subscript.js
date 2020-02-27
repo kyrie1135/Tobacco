@@ -1,9 +1,44 @@
 $(function () {
     initTable();
 
+    //为添加、修改弹窗填充评测项目
+    $.ajax({
+        url: '/admin/item',
+        type: 'GET',
+        data: 0,
+        contentType:"application/json;charset=UTF-8",
+        dataType:"json",
+        success: function (result) {
+            for (var i = 0; i<result.length ; i++){
+                $("#evaluateItem").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+            }
+        }
+    });
+
+    //为添加、修改弹窗填充评测指标
+    $("#evaluateItem").change(function () {
+        itemBickid = $("#evaluateItem").val();
+        $("input[name = 'itemName']").val($("#evaluateItem option[value = "+ itemBickid +"]").text());
+        $.ajax({
+            url: '/admin/descriptionbyitem/'+itemBickid,
+            type: 'GET',
+            data: 0,
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success: function (result) {
+                for (var i = 0; i<result.length ; i++){
+                    $("#evaluateTarget").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+                }
+            }
+        });
+    });
+
     //添加按钮
     $("#mainBtnAdd").click(function () {
         clearInputs("mainModalAdd");
+        $("#evaluateTarget").val("");
+        $("#evaluateItem").val("");
+        $("#evaluateCyc").val("年");
         $('#mainModalAdd').modal('show');
     });
 
@@ -28,25 +63,30 @@ $(function () {
 
     //评分标准维护-》添加弹窗-》确定
     $("#btn_add_ok").click(function () {
-        if (!isNotBlank($("#standard_add").val())){
-            alert("评分标准不能为空");
+        if (!isNotBlank($("input[name = 'proportion']").val())){
+            alert("权重不能为空");
         }
-        if (!isNotBlank($("#score_add").val())){
-            alert("评分标准分值不能为空");
+        if (!isNotBlank($("input[name = 'empRole']").val())){
+            alert("请选择调查人员");
         }
         $.ajax({
-            url: '/admin/standard',
+            url: '/admin/subscript',
             type: 'POST',
             data: JSON.stringify({
-                "evaluateTarget" : $("#score_add").val(),
-                "evaluateStandard" : $("#standard_add").val()
+                "targetSort" : $("input[name = 'targetSort']").val(),
+                "evaluateItem" :$("input[name = 'itemName']").val(),
+                "evaluateTarget" : $("#evaluateTarget option[value = "+ $("#evaluateTarget").val() +"]").text(),
+                "isUse" : $("input[name = 'isUse']").val(),
+                "evaluateCyc" : $("#evaluateCyc").val(),
+                "proportion" : $("input[name = 'proportion']").val(),
+                "empRole" : $("input[name = 'empRole']").val()
             }),
             contentType:"application/json;charset=UTF-8",
             dataType:"json",
             success:function (result) {
                 if (result == "200"){
                     $('#mainModalAdd').modal('hide');
-                    $('#list').bootstrapTable('refresh',{url:'/admin/standard'});
+                    $('#list').bootstrapTable('refresh',{url:'/admin/subscript'});
                 }else {
                     alert(result);
                 }
@@ -129,27 +169,27 @@ function initTable() {
                 field:'evaluateTarget',
                 title:'评测指标',
                 align:'center',
-                width:60
+                width:100
             },{
                 field:'isUse',
                 title:'是否启用',
                 align:'center',
-                width:60
+                width:30
             },{
                 field:'empRole',
                 title:'调查人员',
                 align:'center',
-                width:60
+                width:100
             },{
                 field:'evaluateCyc',
                 title:'评价周期',
                 align:'center',
-                width:60
+                width:30
             },{
                 field:'proportion',
                 title:'权重',
                 align:'center',
-                width:60
+                width:30
             }
         ]
     });

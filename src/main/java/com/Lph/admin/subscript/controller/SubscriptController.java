@@ -3,14 +3,14 @@ package com.Lph.admin.subscript.controller;
 import com.Lph.admin.Utils.Node;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.service.SubscriptService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -19,10 +19,20 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class SubscriptController {
 
     @Autowired
     private SubscriptService subscriptService;
+
+    /**
+     * 跳转到评测指标维护界面
+     * @return
+     */
+    @RequestMapping("/subscriptList")
+    public String subscriptAdd(){
+        return "/admin/subscript/subscript.html";
+    }
 
     /**
      * 选择调查人员功能， 展示岗位树
@@ -57,11 +67,16 @@ public class SubscriptController {
     }
 
     /**
-     * 跳转到评测指标添加界面
-     * @return
+     * 添加评测指标
      */
-    @RequestMapping("/subscriptAdd")
-    public String subscriptAdd(){
-        return "/admin/subscript/subscript.html";
+    @RequestMapping(value = "/subscript", method = RequestMethod.POST)
+    @ResponseBody
+    public String addSubsrciption(@RequestBody @Valid TCCClientsatisfy target, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            log.info("评分标准维护插入错误 {}: ",bindingResult.getFieldError().getDefaultMessage());
+            return bindingResult.getFieldError().getDefaultMessage();
+        }
+        return subscriptService.addSubsrciption(target);
     }
+
 }

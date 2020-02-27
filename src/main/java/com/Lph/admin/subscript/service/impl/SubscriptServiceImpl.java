@@ -1,5 +1,6 @@
 package com.Lph.admin.subscript.service.impl;
 
+import com.Lph.admin.Utils.IdUtil;
 import com.Lph.admin.Utils.Node;
 import com.Lph.admin.organdrole.dao.OrganizationDAO;
 import com.Lph.admin.organdrole.model.Organization;
@@ -14,6 +15,7 @@ import com.Lph.admin.subscript.service.SubscriptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,5 +75,17 @@ public class SubscriptServiceImpl implements SubscriptService {
     public List<TCCClientsatisfy> getSubscriptions() {
         TCCClientsatisfyExample example = new TCCClientsatisfyExample();
         return tccClientsatisfyDAO.selectByExample(example);
+    }
+
+    /**
+     * 添加评测指标
+     */
+    @Override
+    public String addSubsrciption(TCCClientsatisfy target) {
+        target.setBickid(IdUtil.nextId());
+        target.setCreDate(new Timestamp(System.currentTimeMillis()));
+        target.setEndDate(new Timestamp(System.currentTimeMillis()));
+        tccClientsatisfyDAO.insert(target);
+        return "200";
     }
 }

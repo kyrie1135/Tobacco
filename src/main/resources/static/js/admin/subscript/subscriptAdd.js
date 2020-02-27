@@ -1,5 +1,6 @@
 
 var empRole = "";
+var targetSort = ""
 
 $(function () {
     $("#empRoleBtn").click(function () {
@@ -8,6 +9,7 @@ $(function () {
     //指标归类-》选择-》确定
     $("#btn_empRole_ok").click(function () {
         $('input[name = "empRole"]').val(empRole);
+        $('input[name = "targetSort"]').val(targetSort);
         $("#btn_empRole_cancel").trigger('click');
     });
 })
@@ -27,10 +29,13 @@ function initTargetSortTree() {
                 loadingIcon:"fa fa-hourglass",//懒加载过程中显示的沙漏字符图标
                 lazyLoad:loadNode,
                 onNodeSelected:function (event,node) {
-                    empRole = node.text;
+                    empRole = $("#"+ node.parentid +"").text();
+                    empRole += node.text;
+                    targetSort = node.parentid;
                 },
                 onNodeUnselected:function () {
                     empRole = "";
+                    targetSort = "";
                 }
             });
         }
