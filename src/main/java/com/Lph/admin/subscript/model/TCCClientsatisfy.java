@@ -19,13 +19,19 @@ public class TCCClientsatisfy implements Serializable {
     @NotBlank(message = "评测项目不能为空")
     private String evaluateItem;
 
+    @NotBlank(message = "评测项目bickid不能为空")
+    private String evaluateItemBickid;
+
     @NotBlank(message = "评测指标不能为空")
     private String evaluateTarget;
+
+    @NotBlank(message = "评测指标bickid不能为空")
+    private String evaluateTargetBickid;
 
     @NotBlank(message = "是否启用不能为空")
     private String isUse;
 
-    @NotBlank(message = "评测周期不能为空")
+    @NotBlank(message = "评价周期不能为空")
     private String evaluateCyc;
 
     @NotNull(message = "权重不能为空")
@@ -66,12 +72,28 @@ public class TCCClientsatisfy implements Serializable {
         this.evaluateItem = evaluateItem;
     }
 
+    public String getEvaluateItemBickid() {
+        return evaluateItemBickid;
+    }
+
+    public void setEvaluateItemBickid(String evaluateItemBickid) {
+        this.evaluateItemBickid = evaluateItemBickid;
+    }
+
     public String getEvaluateTarget() {
         return evaluateTarget;
     }
 
     public void setEvaluateTarget(String evaluateTarget) {
         this.evaluateTarget = evaluateTarget;
+    }
+
+    public String getEvaluateTargetBickid() {
+        return evaluateTargetBickid;
+    }
+
+    public void setEvaluateTargetBickid(String evaluateTargetBickid) {
+        this.evaluateTargetBickid = evaluateTargetBickid;
     }
 
     public String getIsUse() {

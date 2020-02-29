@@ -1,7 +1,14 @@
 $(function () {
     initTable();
 
-    //为添加、修改弹窗填充评测项目
+    //为添加弹窗填充评测项目
+    fullAddItem();
+
+    //为修改弹窗填充评测项目
+    fullEditItem();
+
+    //为评测指标维护上层查询条件填充
+    //评测项目
     $.ajax({
         url: '/admin/item',
         type: 'GET',
@@ -10,15 +17,63 @@ $(function () {
         dataType:"json",
         success: function (result) {
             for (var i = 0; i<result.length ; i++){
-                $("#evaluateItem").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+                $("#belongItem").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
             }
         }
     });
 
-    //为添加、修改弹窗填充评测指标
-    $("#evaluateItem").change(function () {
-        itemBickid = $("#evaluateItem").val();
-        $("input[name = 'itemName']").val($("#evaluateItem option[value = "+ itemBickid +"]").text());
+    //所属岗位
+    $.ajax({
+        url: '/admin/org',
+        type: 'GET',
+        data: 0,
+        contentType:"application/json;charset=UTF-8",
+        dataType:"json",
+        success: function (result) {
+            for (var i = 0; i<result.length ; i++){
+                $("#belongOrg").append("<option value = '"+ result[i].id +"'>"+ result[i].name +"</option>");
+            }
+        }
+    });
+
+    //当筛选条件改变时
+    $("#belongItem, #belongOrg").change(function () {
+        itemBickid = $("#belongItem").val();
+        if (itemBickid == ""){
+            itemBickid = null;
+        }
+        orgId = $("#belongOrg").val();
+        if (orgId == ""){
+            orgId = null;
+        }
+        $('#list').bootstrapTable('refresh',{url:'/admin/subscriptBy/'+itemBickid+'/'+orgId+''});
+    });
+
+    //为添加弹窗填充评测指标
+    $("#evaluateItemAdd").change(function () {
+        $("#evaluateTargetAdd").val("");
+        $("#evaluateTargetAdd").empty();
+        $.ajax({
+            url: '/admin/descriptionbyitem/'+$("#evaluateItemAdd").val(),
+            type: 'GET',
+            data: 0,
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success: function (result) {
+                $("#evaluateTargetAdd").append("<option value = ''></option>");
+                for (var i = 0; i<result.length ; i++){
+                    $("#evaluateTargetAdd").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+                }
+            }
+        });
+    });
+
+    //为修改弹窗填充评测指标
+    $("#evaluateItemEdit").change(function () {
+        itemBickid = $("#evaluateItemEdit").val();
+        $("#evaluateTargetEdit").val("");
+        $("#evaluateTargetEdit").empty();
+        $("#itemNameEdit").val($("#evaluateItemEdit option[value = "+ itemBickid +"]").text());
         $.ajax({
             url: '/admin/descriptionbyitem/'+itemBickid,
             type: 'GET',
@@ -26,8 +81,9 @@ $(function () {
             contentType:"application/json;charset=UTF-8",
             dataType:"json",
             success: function (result) {
+                $("#evaluateTargetEdit").append("<option value = ''></option>");
                 for (var i = 0; i<result.length ; i++){
-                    $("#evaluateTarget").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+                    $("#evaluateTargetEdit").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
                 }
             }
         });
@@ -48,8 +104,26 @@ $(function () {
             $('#noChoice').modal('show');
         } else {
             $('#mainModalEdit').modal('show');
-            $("#standard_edit").val($("#list").bootstrapTable('getSelections')[0].evaluateStandard);
-            $("#score_edit").val($("#list").bootstrapTable('getSelections')[0].evaluateTarget);
+            $("#evaluateItemEdit").val($("#list").bootstrapTable('getSelections')[0].evaluateItemBickid);
+            $.ajax({
+                url: '/admin/descriptionbyitem/'+$("#evaluateItemEdit").val(),
+                type: 'GET',
+                data: 0,
+                contentType:"application/json;charset=UTF-8",
+                dataType:"json",
+                success: function (result) {
+                    $("#evaluateTargetEdit").append("<option value = ''></option>");
+                    for (var i = 0; i<result.length ; i++){
+                        $("#evaluateTargetEdit").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+                        $("#evaluateTargetEdit").val($("#list").bootstrapTable('getSelections')[0].evaluateTargetBickid);
+                        $("#evaluateCycEdit").val($("#list").bootstrapTable('getSelections')[0].evaluateCyc);
+                        $("#proportionEdit").val($("#list").bootstrapTable('getSelections')[0].proportion);
+                        $("#isUseEdit").val($("#list").bootstrapTable('getSelections')[0].isUse);
+                        $("#empRoleEdit").val($("#list").bootstrapTable('getSelections')[0].empRole);
+                        $("#targetSortEdit").val($("#list").bootstrapTable('getSelections')[0].targetSort);
+                    }
+                }
+            });
         }
     });
     //删除按钮
@@ -63,23 +137,25 @@ $(function () {
 
     //评分标准维护-》添加弹窗-》确定
     $("#btn_add_ok").click(function () {
-        if (!isNotBlank($("input[name = 'proportion']").val())){
+        if (!isNotBlank($("#proportionAdd").val())){
             alert("权重不能为空");
         }
-        if (!isNotBlank($("input[name = 'empRole']").val())){
+        if (!isNotBlank($("#empRoleAdd").val())){
             alert("请选择调查人员");
         }
         $.ajax({
             url: '/admin/subscript',
             type: 'POST',
             data: JSON.stringify({
-                "targetSort" : $("input[name = 'targetSort']").val(),
-                "evaluateItem" :$("input[name = 'itemName']").val(),
-                "evaluateTarget" : $("#evaluateTarget option[value = "+ $("#evaluateTarget").val() +"]").text(),
-                "isUse" : $("input[name = 'isUse']").val(),
-                "evaluateCyc" : $("#evaluateCyc").val(),
-                "proportion" : $("input[name = 'proportion']").val(),
-                "empRole" : $("input[name = 'empRole']").val()
+                "targetSort" : $("#targetSortAdd").val(),
+                "evaluateItem" : $("#evaluateItemAdd option[value = "+ $("#evaluateItemAdd").val() +"]").text(),
+                "evaluateItemBickid" : $("#evaluateItemAdd").val(),
+                "evaluateTarget" : $("#evaluateTargetAdd option[value = "+ $("#evaluateTargetAdd").val() +"]").text(),
+                "evaluateTargetBickid" : $("#evaluateTargetAdd").val(),
+                "isUse" : $("#isUseAdd").val(),
+                "evaluateCyc" : $("#evaluateCycAdd").val(),
+                "proportion" : $("#proportionAdd").val(),
+                "empRole" : $("#empRoleAdd").val()
             }),
             contentType:"application/json;charset=UTF-8",
             dataType:"json",
@@ -94,10 +170,38 @@ $(function () {
         });
     });
 
+    //评分标准维护-》修改弹窗-》确定
+    $("#btn_edit_ok").click(function () {
+        $.ajax({
+            url: '/admin/subscript',
+            type: 'PUT',
+            data: JSON.stringify({
+                "bickid" : $("#list").bootstrapTable('getSelections')[0].bickid,
+                "targetSort" : $("#targetSortEdit").val(),
+                "evaluateItem" : $("#evaluateItemEdit option[value = "+ $("#evaluateItemEdit").val() +"]").text(),
+                "evaluateItemBickid" : $("#evaluateItemEdit").val(),
+                "evaluateTarget" : $("#evaluateTargetEdit option[value = "+ $("#evaluateTargetEdit").val() +"]").text(),
+                "evaluateTargetBickid" : $("#evaluateTargetEdit").val(),
+                "isUse" : $("#isUseEdit").val(),
+                "evaluateCyc" : $("#evaluateCycEdit").val(),
+                "proportion" : $("#proportionEdit").val(),
+                "empRole" : $("#empRoleEdit").val()
+            }),
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success: function (result) {
+                if (result == "200"){
+                    $('#mainModalEdit').modal('hide');
+                    $('#list').bootstrapTable('refresh',{url:'/admin/subscript'});
+                }
+            }
+        });
+    });
+
     //评分标准维护-》确认删除弹窗-》确定
     $("#mainModalDel").click(function () {
         $.ajax({
-            url: '/admin/standard/',
+            url: '/admin/subscript',
             type: 'DELETE',
             data: JSON.stringify({
                 "bickid" : $("#list").bootstrapTable('getSelections')[0].bickid
@@ -107,34 +211,45 @@ $(function () {
             success: function (result) {
                 if (result == "200"){
                     $('#mainModalDel').modal('hide');
-                    $('#list').bootstrapTable('refresh',{url:'/admin/standard'});
-                }
-            }
-        });
-    });
-
-    //评分标准维护-》修改弹窗-》确定
-    $("#btn_edit_ok").click(function () {
-        $.ajax({
-            url: '/admin/standard/',
-            type: 'PUT',
-            data: JSON.stringify({
-                "bickid" : $("#list").bootstrapTable('getSelections')[0].bickid,
-                "evaluateTarget" : $("#score_edit").val(),
-                "evaluateStandard" : $("#standard_edit").val()
-            }),
-            contentType:"application/json;charset=UTF-8",
-            dataType:"json",
-            success: function (result) {
-                if (result == "200"){
-                    $('#mainModalEdit').modal('hide');
-                    $('#list').bootstrapTable('refresh',{url:'/admin/standard'});
+                    $('#list').bootstrapTable('refresh',{url:'/admin/subscript'});
                 }
             }
         });
     });
 
 });
+
+//为添加弹窗填充评测项目
+function fullAddItem() {
+    $.ajax({
+        url: '/admin/item',
+        type: 'GET',
+        data: 0,
+        contentType:"application/json;charset=UTF-8",
+        dataType:"json",
+        success: function (result) {
+            for (var i = 0; i<result.length ; i++){
+                $("#evaluateItemAdd").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+            }
+        }
+    }) ;
+}
+
+//为修改弹窗填充测评项目
+function fullEditItem() {
+    $.ajax({
+        url: '/admin/item',
+        type: 'GET',
+        data: 0,
+        contentType:"application/json;charset=UTF-8",
+        dataType:"json",
+        success: function (result) {
+            for (var i = 0; i<result.length ; i++){
+                $("#evaluateItemEdit").append("<option value = '"+ result[i].bickid +"'>"+ result[i].itemName +"</option>");
+            }
+        }
+    });
+}
 
 //初始化调查指标维护table
 function initTable() {
@@ -164,12 +279,22 @@ function initTable() {
                 field:'evaluateItem',
                 title:'测评项目',
                 align:'center',
-                width:100
+                width:60
+            },{
+                field:'evaluateItemBickid',
+                title:'测评项目bickid',
+                align:'center',
+                width:1
             },{
                 field:'evaluateTarget',
                 title:'评测指标',
                 align:'center',
-                width:100
+                width:130
+            },{
+                field:'evaluateTargetBickid',
+                title:'评测指标',
+                align:'center',
+                width:1
             },{
                 field:'isUse',
                 title:'是否启用',
@@ -195,4 +320,6 @@ function initTable() {
     });
     $('#list').bootstrapTable('hideColumn','bickid');
     $('#list').bootstrapTable('hideColumn','targetSort');
+    $('#list').bootstrapTable('hideColumn','evaluateItemBickid');
+    $('#list').bootstrapTable('hideColumn','evaluateTargetBickid');
 }

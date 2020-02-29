@@ -3,13 +3,13 @@ var empRole = "";
 var targetSort = ""
 
 $(function () {
-    $("#empRoleBtn").click(function () {
+    $("#empRoleBtnAdd").click(function () {
         initTargetSortTree();
     });
     //指标归类-》选择-》确定
     $("#btn_empRole_ok").click(function () {
-        $('input[name = "empRole"]').val(empRole);
-        $('input[name = "targetSort"]').val(targetSort);
+        $('#empRoleAdd').val(empRole);
+        $('#targetSortAdd').val(targetSort);
         $("#btn_empRole_cancel").trigger('click');
     });
 })

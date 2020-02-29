@@ -5,7 +5,9 @@
     <id column="BICKID" jdbcType="VARCHAR" property="bickid" />
     <result column="TARGET_SORT" jdbcType="VARCHAR" property="targetSort" />
     <result column="EVALUATE_ITEM" jdbcType="VARCHAR" property="evaluateItem" />
+    <result column="EVALUATE_ITEM_BICKID" jdbcType="VARCHAR" property="evaluateItemBickid" />
     <result column="EVALUATE_TARGET" jdbcType="VARCHAR" property="evaluateTarget" />
+    <result column="EVALUATE_TARGET_BICKID" jdbcType="VARCHAR" property="evaluateTargetBickid" />
     <result column="IS_USE" jdbcType="VARCHAR" property="isUse" />
     <result column="EVALUATE_CYC" jdbcType="VARCHAR" property="evaluateCyc" />
     <result column="PROPORTION" jdbcType="DECIMAL" property="proportion" />
@@ -73,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    BICKID, TARGET_SORT, EVALUATE_ITEM, EVALUATE_TARGET, IS_USE, EVALUATE_CYC, PROPORTION, 
-    EMP_ROLE, CRE_DATE, END_DATE, DELETED
+    BICKID, TARGET_SORT, EVALUATE_ITEM, EVALUATE_ITEM_BICKID, EVALUATE_TARGET, EVALUATE_TARGET_BICKID, 
+    IS_USE, EVALUATE_CYC, PROPORTION, EMP_ROLE, CRE_DATE, END_DATE, DELETED
   </sql>
   <select id="selectByExample" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfyExample" resultMap="BaseResultMap">
     select
@@ -115,14 +117,16 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfy" useGeneratedKeys="true">
-    insert into t_c_c_clientsatisfy (BICKID, TARGET_SORT, EVALUATE_ITEM, EVALUATE_TARGET,
-      IS_USE, EVALUATE_CYC, PROPORTION, 
-      EMP_ROLE, CRE_DATE, END_DATE, 
-      DELETED)
-    values (#{bickid,jdbcType=VARCHAR}, #{targetSort,jdbcType=VARCHAR}, #{evaluateItem,jdbcType=VARCHAR}, #{evaluateTarget,jdbcType=VARCHAR},
-      #{isUse,jdbcType=VARCHAR}, #{evaluateCyc,jdbcType=VARCHAR}, #{proportion,jdbcType=DECIMAL}, 
-      #{empRole,jdbcType=VARCHAR}, #{creDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
-      #{deleted,jdbcType=INTEGER})
+    insert into t_c_c_clientsatisfy (BICKID, TARGET_SORT, EVALUATE_ITEM, EVALUATE_ITEM_BICKID,
+      EVALUATE_TARGET, EVALUATE_TARGET_BICKID, IS_USE, 
+      EVALUATE_CYC, PROPORTION, EMP_ROLE, 
+      CRE_DATE, END_DATE, DELETED
+      )
+    values (#{bickid,jdbcType=VARCHAR}, #{targetSort,jdbcType=VARCHAR}, #{evaluateItem,jdbcType=VARCHAR}, #{evaluateItemBickid,jdbcType=VARCHAR},
+      #{evaluateTarget,jdbcType=VARCHAR}, #{evaluateTargetBickid,jdbcType=VARCHAR}, #{isUse,jdbcType=VARCHAR}, 
+      #{evaluateCyc,jdbcType=VARCHAR}, #{proportion,jdbcType=DECIMAL}, #{empRole,jdbcType=VARCHAR}, 
+      #{creDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, #{deleted,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.admin.subscript.model.TCCClientsatisfy" useGeneratedKeys="true">
     insert into t_c_c_clientsatisfy
@@ -133,8 +137,14 @@
       <if test="evaluateItem != null">
         EVALUATE_ITEM,
       </if>
+      <if test="evaluateItemBickid != null">
+        EVALUATE_ITEM_BICKID,
+      </if>
       <if test="evaluateTarget != null">
         EVALUATE_TARGET,
+      </if>
+      <if test="evaluateTargetBickid != null">
+        EVALUATE_TARGET_BICKID,
       </if>
       <if test="isUse != null">
         IS_USE,
@@ -165,8 +175,14 @@
       <if test="evaluateItem != null">
         #{evaluateItem,jdbcType=VARCHAR},
       </if>
+      <if test="evaluateItemBickid != null">
+        #{evaluateItemBickid,jdbcType=VARCHAR},
+      </if>
       <if test="evaluateTarget != null">
         #{evaluateTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTargetBickid != null">
+        #{evaluateTargetBickid,jdbcType=VARCHAR},
       </if>
       <if test="isUse != null">
         #{isUse,jdbcType=VARCHAR},
@@ -209,8 +225,14 @@
       <if test="record.evaluateItem != null">
         EVALUATE_ITEM = #{record.evaluateItem,jdbcType=VARCHAR},
       </if>
+      <if test="record.evaluateItemBickid != null">
+        EVALUATE_ITEM_BICKID = #{record.evaluateItemBickid,jdbcType=VARCHAR},
+      </if>
       <if test="record.evaluateTarget != null">
         EVALUATE_TARGET = #{record.evaluateTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluateTargetBickid != null">
+        EVALUATE_TARGET_BICKID = #{record.evaluateTargetBickid,jdbcType=VARCHAR},
       </if>
       <if test="record.isUse != null">
         IS_USE = #{record.isUse,jdbcType=VARCHAR},
@@ -243,7 +265,9 @@
     set BICKID = #{record.bickid,jdbcType=VARCHAR},
       TARGET_SORT = #{record.targetSort,jdbcType=VARCHAR},
       EVALUATE_ITEM = #{record.evaluateItem,jdbcType=VARCHAR},
+      EVALUATE_ITEM_BICKID = #{record.evaluateItemBickid,jdbcType=VARCHAR},
       EVALUATE_TARGET = #{record.evaluateTarget,jdbcType=VARCHAR},
+      EVALUATE_TARGET_BICKID = #{record.evaluateTargetBickid,jdbcType=VARCHAR},
       IS_USE = #{record.isUse,jdbcType=VARCHAR},
       EVALUATE_CYC = #{record.evaluateCyc,jdbcType=VARCHAR},
       PROPORTION = #{record.proportion,jdbcType=DECIMAL},
@@ -264,8 +288,14 @@
       <if test="evaluateItem != null">
         EVALUATE_ITEM = #{evaluateItem,jdbcType=VARCHAR},
       </if>
+      <if test="evaluateItemBickid != null">
+        EVALUATE_ITEM_BICKID = #{evaluateItemBickid,jdbcType=VARCHAR},
+      </if>
       <if test="evaluateTarget != null">
         EVALUATE_TARGET = #{evaluateTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTargetBickid != null">
+        EVALUATE_TARGET_BICKID = #{evaluateTargetBickid,jdbcType=VARCHAR},
       </if>
       <if test="isUse != null">
         IS_USE = #{isUse,jdbcType=VARCHAR},
@@ -295,7 +325,9 @@
     update t_c_c_clientsatisfy
     set TARGET_SORT = #{targetSort,jdbcType=VARCHAR},
       EVALUATE_ITEM = #{evaluateItem,jdbcType=VARCHAR},
+      EVALUATE_ITEM_BICKID = #{evaluateItemBickid,jdbcType=VARCHAR},
       EVALUATE_TARGET = #{evaluateTarget,jdbcType=VARCHAR},
+      EVALUATE_TARGET_BICKID = #{evaluateTargetBickid,jdbcType=VARCHAR},
       IS_USE = #{isUse,jdbcType=VARCHAR},
       EVALUATE_CYC = #{evaluateCyc,jdbcType=VARCHAR},
       PROPORTION = #{proportion,jdbcType=DECIMAL},

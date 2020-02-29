@@ -1,6 +1,7 @@
 package com.Lph.admin.subscript.controller;
 
 import com.Lph.admin.Utils.Node;
+import com.Lph.admin.organdrole.model.Organization;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.service.SubscriptService;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,15 @@ public class SubscriptController {
     }
 
     /**
+     * 为评测指标维护上层，根据岗位查询填充内容，返回所有岗位
+     */
+    @RequestMapping(value = "/org", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Organization> getOrganizations(){
+        return subscriptService.getOrganizations();
+    }
+
+    /**
      * 选择调查人员功能， 展示角色树
      * @param id
      * @return
@@ -71,12 +81,42 @@ public class SubscriptController {
      */
     @RequestMapping(value = "/subscript", method = RequestMethod.POST)
     @ResponseBody
-    public String addSubsrciption(@RequestBody @Valid TCCClientsatisfy target, BindingResult bindingResult){
+    public String addSubscription(@RequestBody @Valid TCCClientsatisfy target, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            log.info("评分标准维护插入错误 {}: ",bindingResult.getFieldError().getDefaultMessage());
+            log.info("评测指标维护插入错误 {}: ",bindingResult.getFieldError().getDefaultMessage());
             return bindingResult.getFieldError().getDefaultMessage();
         }
-        return subscriptService.addSubsrciption(target);
+        return subscriptService.addSubscription(target);
     }
 
+    /**
+     * 修改评测指标
+     */
+    @RequestMapping(value = "/subscript", method = RequestMethod.PUT)
+    @ResponseBody
+    public String editSubscription(@RequestBody @Valid TCCClientsatisfy target, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            log.info("评测指标维护插入错误 {}: ",bindingResult.getFieldError().getDefaultMessage());
+            return bindingResult.getFieldError().getDefaultMessage();
+        }
+        return subscriptService.editSubscription(target);
+    }
+
+    /**
+     * 删除评测指标
+     */
+    @RequestMapping(value = "/subscript", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String deleteSubscription(@RequestBody TCCClientsatisfy target){
+        return subscriptService.deleteSubscription(target);
+    }
+
+    /**
+     * 根据评测项目和所属项目筛选
+     */
+    @RequestMapping(value = "/subscriptBy/{itemBickid}/{orgId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TCCClientsatisfy> getSubscriptionsBy(@PathVariable("itemBickid") String itemBickid, @PathVariable("orgId") String orgId){
+        return subscriptService.getSubscriptionsBy(itemBickid, orgId);
+    }
 }

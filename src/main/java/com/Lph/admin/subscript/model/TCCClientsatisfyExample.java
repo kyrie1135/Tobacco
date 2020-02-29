@@ -363,6 +363,76 @@ public class TCCClientsatisfyExample {
             return (Criteria) this;
         }
 
+        public Criteria andEvaluateItemBickidIsNull() {
+            addCriterion("EVALUATE_ITEM_BICKID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidIsNotNull() {
+            addCriterion("EVALUATE_ITEM_BICKID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidEqualTo(String value) {
+            addCriterion("EVALUATE_ITEM_BICKID =", value, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidNotEqualTo(String value) {
+            addCriterion("EVALUATE_ITEM_BICKID <>", value, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidGreaterThan(String value) {
+            addCriterion("EVALUATE_ITEM_BICKID >", value, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidGreaterThanOrEqualTo(String value) {
+            addCriterion("EVALUATE_ITEM_BICKID >=", value, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidLessThan(String value) {
+            addCriterion("EVALUATE_ITEM_BICKID <", value, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidLessThanOrEqualTo(String value) {
+            addCriterion("EVALUATE_ITEM_BICKID <=", value, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidLike(String value) {
+            addCriterion("EVALUATE_ITEM_BICKID like", value, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidNotLike(String value) {
+            addCriterion("EVALUATE_ITEM_BICKID not like", value, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidIn(List<String> values) {
+            addCriterion("EVALUATE_ITEM_BICKID in", values, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidNotIn(List<String> values) {
+            addCriterion("EVALUATE_ITEM_BICKID not in", values, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidBetween(String value1, String value2) {
+            addCriterion("EVALUATE_ITEM_BICKID between", value1, value2, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateItemBickidNotBetween(String value1, String value2) {
+            addCriterion("EVALUATE_ITEM_BICKID not between", value1, value2, "evaluateItemBickid");
+            return (Criteria) this;
+        }
+
         public Criteria andEvaluateTargetIsNull() {
             addCriterion("EVALUATE_TARGET is null");
             return (Criteria) this;
@@ -430,6 +500,76 @@ public class TCCClientsatisfyExample {
 
         public Criteria andEvaluateTargetNotBetween(String value1, String value2) {
             addCriterion("EVALUATE_TARGET not between", value1, value2, "evaluateTarget");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidIsNull() {
+            addCriterion("EVALUATE_TARGET_BICKID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidIsNotNull() {
+            addCriterion("EVALUATE_TARGET_BICKID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidEqualTo(String value) {
+            addCriterion("EVALUATE_TARGET_BICKID =", value, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidNotEqualTo(String value) {
+            addCriterion("EVALUATE_TARGET_BICKID <>", value, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidGreaterThan(String value) {
+            addCriterion("EVALUATE_TARGET_BICKID >", value, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidGreaterThanOrEqualTo(String value) {
+            addCriterion("EVALUATE_TARGET_BICKID >=", value, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidLessThan(String value) {
+            addCriterion("EVALUATE_TARGET_BICKID <", value, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidLessThanOrEqualTo(String value) {
+            addCriterion("EVALUATE_TARGET_BICKID <=", value, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidLike(String value) {
+            addCriterion("EVALUATE_TARGET_BICKID like", value, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidNotLike(String value) {
+            addCriterion("EVALUATE_TARGET_BICKID not like", value, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidIn(List<String> values) {
+            addCriterion("EVALUATE_TARGET_BICKID in", values, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidNotIn(List<String> values) {
+            addCriterion("EVALUATE_TARGET_BICKID not in", values, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidBetween(String value1, String value2) {
+            addCriterion("EVALUATE_TARGET_BICKID between", value1, value2, "evaluateTargetBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateTargetBickidNotBetween(String value1, String value2) {
+            addCriterion("EVALUATE_TARGET_BICKID not between", value1, value2, "evaluateTargetBickid");
             return (Criteria) this;
         }
 

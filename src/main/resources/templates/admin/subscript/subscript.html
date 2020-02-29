@@ -24,12 +24,12 @@
                     <!-- 所属评测项目 -->
                     <span class="input-group-addon">评测项目</span>
                     <select class="form-control" id="belongItem">
-                        <option>-</option>
+                        <option value="">-</option>
                     </select>
                     <!-- 所属岗位 -->
                     <span class="input-group-addon">所属岗位</span>
                     <select class="form-control" id="belongOrg">
-                        <option>-</option>
+                        <option value="">-</option>
                     </select>
                 </div><br>
                 <table id="list" class="table" data-click-to-select="true" style="table-layout: fixed;"></table>
@@ -70,19 +70,17 @@
                         <!-- 评测项目 -->
                         <div class="input-group">
                             <span class="input-group-addon">评测项目</span>
-                            <select class="form-control" id="evaluateItem"><option value="" selected></option></select>
-                            <!--评测项目名称隐藏-->
-                            <input type="hidden" readonly class="form-control" name="itemName" style="float: left;">
+                            <select class="form-control" id="evaluateItemAdd"><option value=""></option></select>
                         </div><br>
                         <!-- 评测指标 -->
                         <div class="input-group">
                             <span class="input-group-addon">评测指标</span>
-                            <select class="form-control" id="evaluateTarget"><option value="" selected></option></select>
+                            <select class="form-control" id="evaluateTargetAdd"><option value=""></option></select>
                         </div><br>
                         <!-- 评价周期 -->
                         <div class="input-group">
                             <span class="input-group-addon">评价周期</span>
-                            <select class="form-control" id="evaluateCyc">
+                            <select class="form-control" id="evaluateCycAdd">
                                 <option value="年">年</option>
                                 <option value="月">月</option>
                             </select>
@@ -90,27 +88,25 @@
                         <!-- 权重 -->
                         <div class="input-group">
                             <span class="input-group-addon">权重</span>
-                            <input type="text" class="form-control" name="proportion" placeholder="">
+                            <input type="text" class="form-control" id="proportionAdd" placeholder="">
                         </div><br>
                         <!-- 是否启用 -->
                         <div class="input-group">
                             <span class="input-group-addon">是否启用</span>
-                            <div class="col-sm-offset-1 col-sm-2">
-                                <input type="radio" value="是" name="isUse" checked="checked">是
-                            </div>
-                            <div class="col-sm-offset-1 col-sm-2">
-                                <input type="radio" value="否" name="isUse">否
-                            </div>
+                            <select class="form-control" id="isUseAdd">
+                                <option value="是">是</option>
+                                <option value="否">否</option>
+                            </select>
                         </div><br>
                         <!-- 调查人员 -->
                         <div class="input-group">
                             <span class="input-group-addon">调查人员</span>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control" name="empRole" style="float: left;" placeholder="调查人员">
+                                <input type="text" readonly class="form-control" id="empRoleAdd" style="float: left;" placeholder="调查人员">
                                 <!--指标归类隐藏-->
-                                <input type="hidden" readonly class="form-control" name="targetSort" style="float: left;" placeholder="指标归类">
+                                <input type="hidden" readonly class="form-control" id="targetSortAdd" style="float: left;" placeholder="指标归类">
                             </div>
-                            <button id="empRoleBtn" type="button" class="btn btn-info" data-target="#myModal" data-toggle="modal">选 择</button>
+                            <button id="empRoleBtnAdd" type="button" class="btn btn-info" data-target="#myModal" data-toggle="modal">选 择</button>
                         </div><br>
                     </form>
                 </div>
@@ -136,25 +132,51 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <form class="bs-example bs-example-form" role="form">
-                    <!-- 所属评测项目 -->
-                    <div class="input-group">
-                        <span class="input-group-addon">所属评测项目</span>
-                        <select class="form-control" id="belongItemEdit">
-                            <option>-</option>
-                        </select>
-                    </div><br>
-                    <!-- 评测标准名称 -->
-                    <div class="input-group">
-                        <span class="input-group-addon">评测标准名称</span>
-                        <input id="standard_edit" type="text" class="form-control" placeholder="评测标准名称">
-                    </div><br>
-                    <!-- 评测标准描述 -->
-                    <div class="input-group">
-                        <span class="input-group-addon">评测标准描述</span>
-                        <input id="description_edit" type="text" class="form-control" placeholder="评测标准描述">
-                    </div><br>
-                </form>
+                <div class="panel-body">
+                    <form class="bs-example bs-example-form" role="form">
+                        <!-- 评测项目 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">评测项目</span>
+                            <select class="form-control" id="evaluateItemEdit"><option value="" selected></option></select>
+                        </div><br>
+                        <!-- 评测指标 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">评测指标</span>
+                            <select class="form-control" id="evaluateTargetEdit"><option value="" selected></option></select>
+                        </div><br>
+                        <!-- 评价周期 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">评价周期</span>
+                            <select class="form-control" id="evaluateCycEdit">
+                                <option value="年">年</option>
+                                <option value="月">月</option>
+                            </select>
+                        </div><br>
+                        <!-- 权重 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">权重</span>
+                            <input type="text" class="form-control" id="proportionEdit" placeholder="">
+                        </div><br>
+                        <!-- 是否启用 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">是否启用</span>
+                            <select class="form-control" id="isUseEdit">
+                                <option value="是">是</option>
+                                <option value="否">否</option>
+                            </select>
+                        </div><br>
+                        <!-- 调查人员 -->
+                        <div class="input-group">
+                            <span class="input-group-addon">调查人员</span>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control" id="empRoleEdit" style="float: left;" placeholder="调查人员">
+                                <!--指标归类隐藏-->
+                                <input type="hidden" readonly class="form-control" id="targetSortEdit" style="float: left;" placeholder="指标归类">
+                            </div>
+                            <button id="empRoleBtnEdit" type="button" class="btn btn-info" data-target="#myModal" data-toggle="modal">选 择</button>
+                        </div><br>
+                    </form>
+                </div>
             </div>
             <div class="modal-footer">
                 <button id="btn_edit_cancel" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
