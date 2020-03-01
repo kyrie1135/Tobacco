@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Lph.project.samplebright.bright.dao.TBCClientDAO">
+  <resultMap id="BaseResultMap" type="com.Lph.project.samplebright.bright.model.TBCClient">
+    <id column="CLIENT_CODE" jdbcType="VARCHAR" property="clientCode" />
+    <result column="FACILITY_NUM" jdbcType="VARCHAR" property="facilityNum" />
+    <result column="CLIENT_NAME" jdbcType="VARCHAR" property="clientName" />
+    <result column="VS_LINE" jdbcType="VARCHAR" property="vsLine" />
+    <result column="CALL_LINE" jdbcType="VARCHAR" property="callLine" />
+    <result column="DELIVER_LINE" jdbcType="VARCHAR" property="deliverLine" />
+    <result column="BIG_CORP_CODE" jdbcType="VARCHAR" property="bigCorpCode" />
+    <result column="CLIENT_TYPE_CODE" jdbcType="VARCHAR" property="clientTypeCode" />
+    <result column="WORK_STATE" jdbcType="VARCHAR" property="workState" />
+    <result column="CLIENT_MGR" jdbcType="VARCHAR" property="clientMgr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CLIENT_CODE, FACILITY_NUM, CLIENT_NAME, VS_LINE, CALL_LINE, DELIVER_LINE, BIG_CORP_CODE, 
+    CLIENT_TYPE_CODE, WORK_STATE, CLIENT_MGR
+  </sql>
+  <select id="selectByExample" parameterType="com.Lph.project.samplebright.bright.model.TBCClientExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_b_c_client
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_c_client
+    where CLIENT_CODE = #{clientCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_b_c_client
+    where CLIENT_CODE = #{clientCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.Lph.project.samplebright.bright.model.TBCClientExample">
+    delete from t_b_c_client
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="CLIENT_CODE" keyProperty="clientCode" parameterType="com.Lph.project.samplebright.bright.model.TBCClient" useGeneratedKeys="true">
+    insert into t_b_c_client (FACILITY_NUM, CLIENT_NAME, VS_LINE, 
+      CALL_LINE, DELIVER_LINE, BIG_CORP_CODE, 
+      CLIENT_TYPE_CODE, WORK_STATE, CLIENT_MGR
+      )
+    values (#{facilityNum,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, #{vsLine,jdbcType=VARCHAR}, 
+      #{callLine,jdbcType=VARCHAR}, #{deliverLine,jdbcType=VARCHAR}, #{bigCorpCode,jdbcType=VARCHAR}, 
+      #{clientTypeCode,jdbcType=VARCHAR}, #{workState,jdbcType=VARCHAR}, #{clientMgr,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="CLIENT_CODE" keyProperty="clientCode" parameterType="com.Lph.project.samplebright.bright.model.TBCClient" useGeneratedKeys="true">
+    insert into t_b_c_client
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="facilityNum != null">
+        FACILITY_NUM,
+      </if>
+      <if test="clientName != null">
+        CLIENT_NAME,
+      </if>
+      <if test="vsLine != null">
+        VS_LINE,
+      </if>
+      <if test="callLine != null">
+        CALL_LINE,
+      </if>
+      <if test="deliverLine != null">
+        DELIVER_LINE,
+      </if>
+      <if test="bigCorpCode != null">
+        BIG_CORP_CODE,
+      </if>
+      <if test="clientTypeCode != null">
+        CLIENT_TYPE_CODE,
+      </if>
+      <if test="workState != null">
+        WORK_STATE,
+      </if>
+      <if test="clientMgr != null">
+        CLIENT_MGR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="facilityNum != null">
+        #{facilityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="vsLine != null">
+        #{vsLine,jdbcType=VARCHAR},
+      </if>
+      <if test="callLine != null">
+        #{callLine,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverLine != null">
+        #{deliverLine,jdbcType=VARCHAR},
+      </if>
+      <if test="bigCorpCode != null">
+        #{bigCorpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="clientTypeCode != null">
+        #{clientTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="workState != null">
+        #{workState,jdbcType=VARCHAR},
+      </if>
+      <if test="clientMgr != null">
+        #{clientMgr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.Lph.project.samplebright.bright.model.TBCClientExample" resultType="java.lang.Long">
+    select count(*) from t_b_c_client
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_b_c_client
+    <set>
+      <if test="record.clientCode != null">
+        CLIENT_CODE = #{record.clientCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facilityNum != null">
+        FACILITY_NUM = #{record.facilityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientName != null">
+        CLIENT_NAME = #{record.clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vsLine != null">
+        VS_LINE = #{record.vsLine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.callLine != null">
+        CALL_LINE = #{record.callLine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverLine != null">
+        DELIVER_LINE = #{record.deliverLine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigCorpCode != null">
+        BIG_CORP_CODE = #{record.bigCorpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientTypeCode != null">
+        CLIENT_TYPE_CODE = #{record.clientTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workState != null">
+        WORK_STATE = #{record.workState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientMgr != null">
+        CLIENT_MGR = #{record.clientMgr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_b_c_client
+    set CLIENT_CODE = #{record.clientCode,jdbcType=VARCHAR},
+      FACILITY_NUM = #{record.facilityNum,jdbcType=VARCHAR},
+      CLIENT_NAME = #{record.clientName,jdbcType=VARCHAR},
+      VS_LINE = #{record.vsLine,jdbcType=VARCHAR},
+      CALL_LINE = #{record.callLine,jdbcType=VARCHAR},
+      DELIVER_LINE = #{record.deliverLine,jdbcType=VARCHAR},
+      BIG_CORP_CODE = #{record.bigCorpCode,jdbcType=VARCHAR},
+      CLIENT_TYPE_CODE = #{record.clientTypeCode,jdbcType=VARCHAR},
+      WORK_STATE = #{record.workState,jdbcType=VARCHAR},
+      CLIENT_MGR = #{record.clientMgr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.project.samplebright.bright.model.TBCClient">
+    update t_b_c_client
+    <set>
+      <if test="facilityNum != null">
+        FACILITY_NUM = #{facilityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        CLIENT_NAME = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="vsLine != null">
+        VS_LINE = #{vsLine,jdbcType=VARCHAR},
+      </if>
+      <if test="callLine != null">
+        CALL_LINE = #{callLine,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverLine != null">
+        DELIVER_LINE = #{deliverLine,jdbcType=VARCHAR},
+      </if>
+      <if test="bigCorpCode != null">
+        BIG_CORP_CODE = #{bigCorpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="clientTypeCode != null">
+        CLIENT_TYPE_CODE = #{clientTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="workState != null">
+        WORK_STATE = #{workState,jdbcType=VARCHAR},
+      </if>
+      <if test="clientMgr != null">
+        CLIENT_MGR = #{clientMgr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CLIENT_CODE = #{clientCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Lph.project.samplebright.bright.model.TBCClient">
+    update t_b_c_client
+    set FACILITY_NUM = #{facilityNum,jdbcType=VARCHAR},
+      CLIENT_NAME = #{clientName,jdbcType=VARCHAR},
+      VS_LINE = #{vsLine,jdbcType=VARCHAR},
+      CALL_LINE = #{callLine,jdbcType=VARCHAR},
+      DELIVER_LINE = #{deliverLine,jdbcType=VARCHAR},
+      BIG_CORP_CODE = #{bigCorpCode,jdbcType=VARCHAR},
+      CLIENT_TYPE_CODE = #{clientTypeCode,jdbcType=VARCHAR},
+      WORK_STATE = #{workState,jdbcType=VARCHAR},
+      CLIENT_MGR = #{clientMgr,jdbcType=VARCHAR}
+    where CLIENT_CODE = #{clientCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

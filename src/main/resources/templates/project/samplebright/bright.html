@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>督查抽样</title>
+
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/treeview.css">
+
+    <link rel="stylesheet" href="../static/css/admin/subscript/subscriptAdd.css">
+</head>
+<body>
+<div class="container-fluid panel-body" style="padding-bottom:0px">
+    <form class="form-horizontal" id="formAdd" action="#" method="post">
+
+        <div class="panel panel-default" style="margin-bottom: 0px">
+            <h4 class="panel panel-heading h4font">
+                督查抽样
+                <small>（*星号是必填项）</small>
+            </h4>
+            <div class="panel-body">
+
+                <!-- 客户分类 -->
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">客户分类</label>
+                    <div class="col-sm-4">
+                        <select class="form-control col-sm-4" id="clientType">
+                            <option value="所有客户">所有客户</option>
+                            <option value="一类客户">一类客户</option>
+                            <option value="二类客户">二类客户</option>
+                            <option value="三类客户">三类客户</option>
+                            <option value="四类客户">四类客户</option>
+                            <option value="五类客户">五类客户</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 经营业态 -->
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">经营业态</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="workState">
+                            <option value="所有状态">所有状态</option>
+                            <option value="初始申请">初始申请</option>
+                            <option value="正常营业">正常营业</option>
+                            <option value="歇业">歇业</option>
+                            <option value="注销">注销</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 客户经理 -->
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">客户经理</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="clientMGR">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 抽样数量 -->
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"><span style="color: red;font-weight: bold">＊</span>抽样数量</label>
+                    <div class="col-sm-4">
+                            <input type="text" class="form-control" name="getNum" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" placeholder="请输入正整数">
+                    </div>
+                </div>
+
+                <!-- 抽样日期 -->
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"><span style="color: red;font-weight: bold">＊</span>抽样日期</label>
+                    <div class="col-sm-4">
+                        <input type="date" class="form-control" name="getDate" placeholder="抽样日期">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-1">
+                <button type="submit" class="btn btn-primary">筛 选</button>
+            </div>
+
+<!--            <div class="col-sm-1">-->
+<!--                <a href="" class="btn btn-primary">返 回</a>-->
+<!--            </div>-->
+        </div>
+    </form>
+</div>
+
+<script src="../static/bootstrap/js/jquery-3.3.1.js"></script>
+<script src="../static/bootstrap/js/bootstrap-table.js"></script>
+<script src="../static/bootstrap/js/bootstrap.js"></script>
+<script src="../static/js/include/publicMethod.js"></script>
+<script src="../static/bootstrap/js/treeview.js"></script>
+
+<script src="../static/js/admin/subscript/subscript.js"></script>
+<script src="../static/js/admin/subscript/subscriptAdd.js"></script>
+
+</body>
+</html>
