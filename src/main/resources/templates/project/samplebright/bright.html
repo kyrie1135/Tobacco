@@ -49,15 +49,15 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"><span style="color: red;font-weight: bold">＊</span>抽样数量</label>
                     <div class="col-sm-4">
-                            <input type="text" class="form-control" name="getNum" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" placeholder="请输入正整数">
+                            <input type="text" class="form-control" id="getNum" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" placeholder="请输入正整数">
                     </div>
                 </div>
 
                 <!-- 抽样日期 -->
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"><span style="color: red;font-weight: bold">＊</span>抽样日期</label>
+                    <label class="col-sm-4 control-label">抽样日期</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" name="getDate" placeholder="抽样日期">
+                        <input type="text" readonly class="form-control" id="getDate" placeholder="抽样日期">
                     </div>
                 </div>
             </div>
@@ -66,14 +66,33 @@
         <br>
         <div class="form-group">
             <div class="col-sm-offset-5 col-sm-1">
-                <button type="submit" class="btn btn-primary">筛 选</button>
+                <button type="button" id="search" class="btn btn-primary">筛 选</button>
             </div>
-
-<!--            <div class="col-sm-1">-->
-<!--                <a href="" class="btn btn-primary">返 回</a>-->
-<!--            </div>-->
         </div>
     </form>
+</div>
+
+<!-- 点击筛选后生成抽样客户table -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    选择调查人员
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table id="clientTable" style="table-layout: fixed;"></table>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_empRole_cancel" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="btn_empRole_ok" type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="../static/bootstrap/js/jquery-3.3.1.js"></script>

@@ -1,15 +1,17 @@
 package com.Lph.project.samplebright.bright.controller;
 
+import com.Lph.project.samplebright.bright.model.TBCClient;
 import com.Lph.project.samplebright.bright.service.BrightService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/project")
+@Slf4j
 public class BrightController {
 
     @Autowired
@@ -50,4 +52,29 @@ public class BrightController {
         return brightService.getTypes();
     }
 
+    /**
+     * 点击筛选触发
+     * @param clientType 客户分类
+     * @param workState 经营状态
+     * @param clientMgr 客户经理
+     * @param num 抽样数量
+     * @return
+     */
+    @RequestMapping(value = "/searchClients/{clientType}/{workState}/{clientMgr}/{num}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TBCClient> searchClients(@PathVariable("clientType") String clientType, @PathVariable("workState") String workState, @PathVariable("clientMgr")String clientMgr, @PathVariable("num")String num){
+        return brightService.searchClients(clientType, workState, clientMgr, num);
+    }
+
+    /**
+     * 点击筛选-》保存触发
+     * @param params
+     * @return
+     */
+
+    @RequestMapping(value = "/saveSearchClients", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveSearchClients(@RequestParam(value = "params", required = false) String params){
+        return brightService.saveSearchClients(params);
+    }
 }

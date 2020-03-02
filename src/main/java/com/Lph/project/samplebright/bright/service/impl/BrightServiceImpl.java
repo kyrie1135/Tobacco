@@ -1,11 +1,20 @@
 package com.Lph.project.samplebright.bright.service.impl;
 
+import com.Lph.admin.Utils.IdUtil;
 import com.Lph.project.samplebright.bright.dao.TBCClientDAO;
+import com.Lph.project.samplebright.bright.dao.TCCSampleBrightDAO;
+import com.Lph.project.samplebright.bright.model.TBCClient;
+import com.Lph.project.samplebright.bright.model.TBCClientExample;
+import com.Lph.project.samplebright.bright.model.TCCSampleBright;
 import com.Lph.project.samplebright.bright.service.BrightService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -13,6 +22,8 @@ public class BrightServiceImpl implements BrightService {
 
     @Autowired
     private TBCClientDAO tbcClientDAO;
+    @Autowired
+    private TCCSampleBrightDAO tccSampleBrightDAO;
 
     /**
      * 获取路段， 为督查抽样界面填充客户经理select
@@ -55,5 +66,61 @@ public class BrightServiceImpl implements BrightService {
         types.add("四类客户");
         types.add("五类客户");
         return types;
+    }
+
+    /**
+     * 点击筛选触发
+     * @param clientType 客户分类
+     * @param workState 经营状态
+     * @param clientMgr 客户经理
+     * @param num 抽样数量
+     * @return
+     */
+    @Override
+    public List<TBCClient> searchClients(String clientType, String workState, String clientMgr, String num) {
+        int n = Integer.parseInt(num);
+        TBCClientExample example = new TBCClientExample();
+        TBCClientExample.Criteria criteria = example.createCriteria();
+        if (!clientType.equals("所有客户分类")){
+            criteria.andClientTypeCodeEqualTo(clientType);
+        }
+        if (!workState.equals("所有经营状态")){
+            criteria.andWorkStateEqualTo(workState);
+        }
+        if (!clientMgr.equals("所有客户经理")){
+            criteria.andClientMgrEqualTo(clientMgr);
+        }
+
+        List<TBCClient> list = tbcClientDAO.selectByExample(example);
+        if (n > list.size()){
+            n = list.size();
+        }
+        Collections.shuffle(list);
+        List<TBCClient> afterList = new ArrayList<>();
+        for (int i = 0; i<n; i++){
+            afterList.add(list.get(i));
+        }
+        //随机删选
+        return afterList;
+    }
+
+    /**
+     * 点击筛选-》保存触发
+     * @param list
+     * @return
+     */
+    @Override
+    public String saveSearchClients(String list) {
+        TCCSampleBright target = new TCCSampleBright();
+        JSONArray paradms = JSON.parseArray(list);
+        for (int i = 0; i< paradms.size();i++) {
+            JSONObject paramjson = (JSONObject) paradms.get(i);
+            target.setBickid(IdUtil.nextId());
+            target.setClientCode(paramjson.getString("facilityNum"));
+            target.setClientName(paramjson.getString("clientName"));
+            target.setDeleted(0);
+            tccSampleBrightDAO.insert(target);
+        }
+        return "200";
     }
 }
