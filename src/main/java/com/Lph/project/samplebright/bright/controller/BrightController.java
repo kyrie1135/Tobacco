@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -100,4 +101,14 @@ public class BrightController {
         return brightService.saveClientsSearch(target);
     }
 
+    /**
+     * 抽样调查结果分析table填充内容
+     * @return
+     */
+    @RequestMapping(value = "/getClients/{date}/{clientCode}/{clientName}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TCCSampleBright> getClients(@PathVariable("date") String date, @PathVariable("clientCode") String clientCode, @PathVariable("clientName") String clientName) throws ParseException {
+
+        return brightService.getClients(date, clientCode, clientName);
+    }
 }

@@ -45,4 +45,10 @@ public interface BrightService {
      * @return
      */
     public List<TCCSampleBright> saveClientsSearch(TCCSampleBright target);
+
+    /**
+     * 抽样调查结果分析table填充内容
+     * @return
+     */
+    public List<TCCSampleBright> getClients(String date, String clientCode, String clientName) throws ParseException ;
 }

@@ -6,6 +6,7 @@ import com.Lph.project.samplebright.bright.dao.TCCSampleBrightDAO;
 import com.Lph.project.samplebright.bright.model.TBCClient;
 import com.Lph.project.samplebright.bright.model.TBCClientExample;
 import com.Lph.project.samplebright.bright.model.TCCSampleBright;
+import com.Lph.project.samplebright.bright.model.TCCSampleBrightExample;
 import com.Lph.project.samplebright.bright.service.BrightService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -15,9 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class BrightServiceImpl implements BrightService {
@@ -135,5 +134,36 @@ public class BrightServiceImpl implements BrightService {
     public List<TCCSampleBright> saveClientsSearch(TCCSampleBright target) {
 
         return null;
+    }
+
+    /**
+     * 抽样调查结果分析table填充内容
+     * @return
+     */
+    @Override
+    public List<TCCSampleBright> getClients(String date, String clientCode, String clientName) throws ParseException {
+        TCCSampleBrightExample example = new TCCSampleBrightExample();
+        TCCSampleBrightExample.Criteria criteria = example.createCriteria();
+        if (!date.equals("null") && date != null){
+            Date today = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+            Calendar c = Calendar.getInstance();
+            c.setTime(today);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            Date tomorrow = c.getTime(); //date的下一天
+            c.setTime(today);
+            c.add(Calendar.DAY_OF_MONTH, -1);
+            Date yesterday = c.getTime();   //date的前一天
+            criteria.andSampleDataBetween(yesterday, tomorrow);
+        }
+
+        if (!clientCode.equals("null") && clientCode != null){
+            criteria.andClientCodeEqualTo(clientCode);
+        }
+        if (!clientName.equals("null") && clientName != null){
+            criteria.andClientNameEqualTo(clientName);
+        }
+        criteria.andDeletedEqualTo(0);
+        List<TCCSampleBright> list = tccSampleBrightDAO.selectByExample(example);
+        return tccSampleBrightDAO.selectByExample(example);
     }
 }
