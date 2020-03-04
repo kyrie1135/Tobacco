@@ -2,6 +2,7 @@ $(function () {
 
     initTable();
 
+    //筛选-》保存点击
     $("#btn_empRole_ok").click(function () {
         var arr = $('#clientTable').bootstrapTable('getData');
         // var list =[];
@@ -12,8 +13,10 @@ $(function () {
         $.ajax({
             url: '/project/saveSearchClients',
             type: 'POST',
-            data: {params:JSON.stringify(arr)},
-
+            data: {
+                params : JSON.stringify(arr),
+                date : JSON.stringify($("#getDate").val())
+            },
             success: function (result) {
                 $('#myModal').modal('hide');
                 alert("保存成功， 请在督查抽样分析处查看")

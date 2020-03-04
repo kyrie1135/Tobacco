@@ -13,6 +13,8 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -110,7 +112,7 @@ public class BrightServiceImpl implements BrightService {
      * @return
      */
     @Override
-    public String saveSearchClients(String list) {
+    public String saveSearchClients(String list, String date) throws ParseException {
         TCCSampleBright target = new TCCSampleBright();
         JSONArray paradms = JSON.parseArray(list);
         for (int i = 0; i< paradms.size();i++) {
@@ -118,9 +120,20 @@ public class BrightServiceImpl implements BrightService {
             target.setBickid(IdUtil.nextId());
             target.setClientCode(paramjson.getString("facilityNum"));
             target.setClientName(paramjson.getString("clientName"));
+            target.setSampleData(new SimpleDateFormat("yyyy-MM-dd").parse(date.substring(1, date.length()-1)));
             target.setDeleted(0);
             tccSampleBrightDAO.insert(target);
         }
         return "200";
+    }
+
+    /**
+     * 抽样调查结果分析
+     * @return
+     */
+    @Override
+    public List<TCCSampleBright> saveClientsSearch(TCCSampleBright target) {
+
+        return null;
     }
 }

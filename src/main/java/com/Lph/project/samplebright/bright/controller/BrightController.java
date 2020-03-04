@@ -1,12 +1,14 @@
 package com.Lph.project.samplebright.bright.controller;
 
 import com.Lph.project.samplebright.bright.model.TBCClient;
+import com.Lph.project.samplebright.bright.model.TCCSampleBright;
 import com.Lph.project.samplebright.bright.service.BrightService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -74,7 +76,28 @@ public class BrightController {
 
     @RequestMapping(value = "/saveSearchClients", method = RequestMethod.POST)
     @ResponseBody
-    public String saveSearchClients(@RequestParam(value = "params", required = false) String params){
-        return brightService.saveSearchClients(params);
+    public String saveSearchClients(@RequestParam(value = "params", required = false) String params, @RequestParam(value = "date", required = false) String date) throws ParseException {
+        return brightService.saveSearchClients(params, date);
     }
+
+    //*******************************************抽样结果分析***********************************************************
+
+    /**
+     * 跳转到督查抽样结果分析页面
+     */
+    @RequestMapping(value = "/brightSearch")
+    public String clientsSearch(){
+        return "/project/samplebright/brightsearch.html";
+    }
+
+    /**
+     * 抽样调查结果分析
+     * @return
+     */
+    @RequestMapping(value = "/saveClientsSearch", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TCCSampleBright> saveClientsSearch(@RequestBody TCCSampleBright target){
+        return brightService.saveClientsSearch(target);
+    }
+
 }

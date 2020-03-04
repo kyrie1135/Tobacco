@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评测指标维护</title>
+
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/treeview.css">
+
+    <link rel="stylesheet" href="../static/css/admin/subscript/subscriptAdd.css">
+</head>
+<body>
+<div class="container">
+    <form class="form-horizontal" id="formAdd" action="#" method="post">
+
+        <div class="divBorder">
+            <h4 class="panel panel-heading h4font">
+                评测指标维护
+            </h4>
+
+            <div class="panel-body">
+                <div class="input-group col-sm-12">
+                    <!-- 根据抽样日期查询 -->
+                    <span class="input-group-addon">抽样日期</span>
+                    <input type="date" class="form-control" id="searchDate" placeholder="抽样日期">
+                    <!-- 根据用户代码查询 -->
+                    <span class="input-group-addon">用户代码</span>
+                    <input type="text" class="form-control" id="clientsNum" placeholder="用户代码">
+                    <!-- 根据用户名称查询 -->
+                    <span class="input-group-addon">用户名称</span>
+                    <input type="text" class="form-control" id="clientsName" placeholder="用户名称">
+                </div><br>
+                <table id="list" class="table" data-click-to-select="true" style="table-layout: fixed;"></table>
+            </div>
+        </div>
+        <br>
+        <!--<div class="form-group">-->
+            <!--<div class="col-sm-offset-4 col-sm-1">-->
+                <!--<button id="mainBtnAdd" type="button" class="btn btn-primary">添 加</button>-->
+            <!--</div>-->
+
+            <!--<div class="col-sm-1">-->
+                <!--<button id="mainBtnEdit" type="button" class="btn btn-primary">修 改</button>-->
+            <!--</div>-->
+
+            <!--<div class="col-sm-1">-->
+                <!--<button id="mainBtnDel" type="button" class="btn btn-primary">删 除</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    </form>
+</div>
+
+<script src="../static/bootstrap/js/jquery-3.3.1.js"></script>
+<script src="../static/bootstrap/js/bootstrap-table.js"></script>
+<script src="../static/bootstrap/js/bootstrap.js"></script>
+<script src="../static/js/include/publicMethod.js"></script>
+<script src="../static/bootstrap/js/treeview.js"></script>
+
+<script src="../static/js/project/samplebright/brightsearch.js"></script>
+
+</body>
+</html>

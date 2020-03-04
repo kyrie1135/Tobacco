@@ -1,7 +1,9 @@
 package com.Lph.project.samplebright.bright.service;
 
 import com.Lph.project.samplebright.bright.model.TBCClient;
+import com.Lph.project.samplebright.bright.model.TCCSampleBright;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface BrightService {
@@ -36,5 +38,11 @@ public interface BrightService {
      * @param list
      * @return
      */
-    public String saveSearchClients(String list);
+    public String saveSearchClients(String list, String date) throws ParseException;
+
+    /**
+     * 抽样调查结果分析
+     * @return
+     */
+    public List<TCCSampleBright> saveClientsSearch(TCCSampleBright target);
 }
