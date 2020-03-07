@@ -87,7 +87,7 @@
                         </div><br>
                         <!-- 权重 -->
                         <div class="input-group">
-                            <span class="input-group-addon">权重</span>
+                            <span class="input-group-addon">权  重</span>
                             <input type="text" class="form-control" id="proportionAdd" placeholder="">
                         </div><br>
                         <!-- 是否启用 -->
@@ -154,7 +154,7 @@
                         </div><br>
                         <!-- 权重 -->
                         <div class="input-group">
-                            <span class="input-group-addon">权重</span>
+                            <span class="input-group-addon">权  重</span>
                             <input type="text" class="form-control" id="proportionEdit" placeholder="">
                         </div><br>
                         <!-- 是否启用 -->
@@ -170,6 +170,7 @@
                             <span class="input-group-addon">调查人员</span>
                             <div class="col-sm-10">
                                 <input type="text" readonly class="form-control" id="empRoleEdit" style="float: left;" placeholder="调查人员">
+
                                 <!--指标归类隐藏-->
                                 <input type="hidden" readonly class="form-control" id="targetSortEdit" style="float: left;" placeholder="指标归类">
                             </div>
@@ -243,8 +244,11 @@
                     选择调查人员
                 </h4>
             </div>
-            <div class="modal-body">
-                <div id="tree"></div>
+            <div class="modal-body col-sm-12">
+                <div class="col-sm-5" id="tree"></div>
+                <div class="col-sm-7">
+                    <table id="perlist" class="table" data-click-to-select="true"></table>
+                </div>
             </div>
             <div class="modal-footer">
                 <button id="btn_empRole_cancel" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

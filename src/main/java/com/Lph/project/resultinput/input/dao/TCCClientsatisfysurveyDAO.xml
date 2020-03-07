@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.Lph.project.samplebright.bright.dao.TCCSampleBrightDAO">
-  <resultMap id="BaseResultMap" type="com.Lph.project.samplebright.bright.model.TCCSampleBright">
+<mapper namespace="com.Lph.project.resultinput.input.dao.TCCClientsatisfysurveyDAO">
+  <resultMap id="BaseResultMap" type="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey">
     <id column="BICKID" jdbcType="VARCHAR" property="bickid" />
+    <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName" />
     <result column="CLIENT_CODE" jdbcType="VARCHAR" property="clientCode" />
-    <result column="CLIENT_NAME" jdbcType="VARCHAR" property="clientName" />
-    <result column="SAMPLE_DATA" jdbcType="DATE" property="sampleData" />
-    <result column="DIAOCHA_DATA" jdbcType="DATE" property="diaochaData" />
-    <result column="LURU_DATA" jdbcType="DATE" property="luruData" />
-    <result column="DELETED" jdbcType="INTEGER" property="deleted" />
+    <result column="INPUT_DATE" jdbcType="DATE" property="inputDate" />
+    <result column="GET_DATE" jdbcType="DATE" property="getDate" />
+    <result column="INPUTER" jdbcType="VARCHAR" property="inputer" />
+    <result column="GETER" jdbcType="VARCHAR" property="geter" />
+    <result column="IS_OVER" jdbcType="INTEGER" property="isOver" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    BICKID, CLIENT_CODE, CLIENT_NAME, SAMPLE_DATA, DIAOCHA_DATA, LURU_DATA, DELETED
+    BICKID, DEPT_NAME, CLIENT_CODE, INPUT_DATE, GET_DATE, INPUTER, GETER, IS_OVER
   </sql>
-  <select id="selectByExample" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBrightExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurveyExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_c_c_sample_bright
+    from t_c_c_clientsatisfysurvey
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,99 +97,108 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_c_c_sample_bright
+    from t_c_c_clientsatisfysurvey
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from t_c_c_sample_bright
+    delete from t_c_c_clientsatisfysurvey
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBrightExample">
-    delete from t_c_c_sample_bright
+  <delete id="deleteByExample" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurveyExample">
+    delete from t_c_c_clientsatisfysurvey
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBright" useGeneratedKeys="true">
-    insert into t_c_c_sample_bright (BICKID, CLIENT_CODE, CLIENT_NAME, SAMPLE_DATA,
-      DIAOCHA_DATA, LURU_DATA, DELETED
-      )
-    values (#{bickid,jdbcType=VARCHAR}, #{clientCode,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, #{sampleData,jdbcType=DATE},
-      #{diaochaData,jdbcType=DATE}, #{luruData,jdbcType=DATE}, #{deleted,jdbcType=INTEGER}
-      )
+  <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey" useGeneratedKeys="true">
+    insert into t_c_c_clientsatisfysurvey (DEPT_NAME, CLIENT_CODE, INPUT_DATE, 
+      GET_DATE, INPUTER, GETER, 
+      IS_OVER)
+    values (#{deptName,jdbcType=VARCHAR}, #{clientCode,jdbcType=VARCHAR}, #{inputDate,jdbcType=DATE}, 
+      #{getDate,jdbcType=DATE}, #{inputer,jdbcType=VARCHAR}, #{geter,jdbcType=VARCHAR}, 
+      #{isOver,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBright" useGeneratedKeys="true">
-    insert into t_c_c_sample_bright
+  <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey" useGeneratedKeys="true">
+    insert into t_c_c_clientsatisfysurvey
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptName != null">
+        DEPT_NAME,
+      </if>
       <if test="clientCode != null">
         CLIENT_CODE,
       </if>
-      <if test="clientName != null">
-        CLIENT_NAME,
+      <if test="inputDate != null">
+        INPUT_DATE,
       </if>
-      <if test="sampleData != null">
-        SAMPLE_DATA,
+      <if test="getDate != null">
+        GET_DATE,
       </if>
-      <if test="diaochaData != null">
-        DIAOCHA_DATA,
+      <if test="inputer != null">
+        INPUTER,
       </if>
-      <if test="luruData != null">
-        LURU_DATA,
+      <if test="geter != null">
+        GETER,
       </if>
-      <if test="deleted != null">
-        DELETED,
+      <if test="isOver != null">
+        IS_OVER,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptName != null">
+        #{deptName,jdbcType=VARCHAR},
+      </if>
       <if test="clientCode != null">
         #{clientCode,jdbcType=VARCHAR},
       </if>
-      <if test="clientName != null">
-        #{clientName,jdbcType=VARCHAR},
+      <if test="inputDate != null">
+        #{inputDate,jdbcType=DATE},
       </if>
-      <if test="sampleData != null">
-        #{sampleData,jdbcType=DATE},
+      <if test="getDate != null">
+        #{getDate,jdbcType=DATE},
       </if>
-      <if test="diaochaData != null">
-        #{diaochaData,jdbcType=DATE},
+      <if test="inputer != null">
+        #{inputer,jdbcType=VARCHAR},
       </if>
-      <if test="luruData != null">
-        #{luruData,jdbcType=DATE},
+      <if test="geter != null">
+        #{geter,jdbcType=VARCHAR},
       </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
+      <if test="isOver != null">
+        #{isOver,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBrightExample" resultType="java.lang.Long">
-    select count(*) from t_c_c_sample_bright
+  <select id="countByExample" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurveyExample" resultType="java.lang.Long">
+    select count(*) from t_c_c_clientsatisfysurvey
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update t_c_c_sample_bright
+    update t_c_c_clientsatisfysurvey
     <set>
       <if test="record.bickid != null">
         BICKID = #{record.bickid,jdbcType=VARCHAR},
       </if>
+      <if test="record.deptName != null">
+        DEPT_NAME = #{record.deptName,jdbcType=VARCHAR},
+      </if>
       <if test="record.clientCode != null">
         CLIENT_CODE = #{record.clientCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.clientName != null">
-        CLIENT_NAME = #{record.clientName,jdbcType=VARCHAR},
+      <if test="record.inputDate != null">
+        INPUT_DATE = #{record.inputDate,jdbcType=DATE},
       </if>
-      <if test="record.sampleData != null">
-        SAMPLE_DATA = #{record.sampleData,jdbcType=DATE},
+      <if test="record.getDate != null">
+        GET_DATE = #{record.getDate,jdbcType=DATE},
       </if>
-      <if test="record.diaochaData != null">
-        DIAOCHA_DATA = #{record.diaochaData,jdbcType=DATE},
+      <if test="record.inputer != null">
+        INPUTER = #{record.inputer,jdbcType=VARCHAR},
       </if>
-      <if test="record.luruData != null">
-        LURU_DATA = #{record.luruData,jdbcType=DATE},
+      <if test="record.geter != null">
+        GETER = #{record.geter,jdbcType=VARCHAR},
       </if>
-      <if test="record.deleted != null">
-        DELETED = #{record.deleted,jdbcType=INTEGER},
+      <if test="record.isOver != null">
+        IS_OVER = #{record.isOver,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -196,50 +206,55 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update t_c_c_sample_bright
+    update t_c_c_clientsatisfysurvey
     set BICKID = #{record.bickid,jdbcType=VARCHAR},
+      DEPT_NAME = #{record.deptName,jdbcType=VARCHAR},
       CLIENT_CODE = #{record.clientCode,jdbcType=VARCHAR},
-      CLIENT_NAME = #{record.clientName,jdbcType=VARCHAR},
-      SAMPLE_DATA = #{record.sampleData,jdbcType=DATE},
-      DIAOCHA_DATA = #{record.diaochaData,jdbcType=DATE},
-      LURU_DATA = #{record.luruData,jdbcType=DATE},
-      DELETED = #{record.deleted,jdbcType=INTEGER}
+      INPUT_DATE = #{record.inputDate,jdbcType=DATE},
+      GET_DATE = #{record.getDate,jdbcType=DATE},
+      INPUTER = #{record.inputer,jdbcType=VARCHAR},
+      GETER = #{record.geter,jdbcType=VARCHAR},
+      IS_OVER = #{record.isOver,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBright">
-    update t_c_c_sample_bright
+  <update id="updateByPrimaryKeySelective" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey">
+    update t_c_c_clientsatisfysurvey
     <set>
+      <if test="deptName != null">
+        DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      </if>
       <if test="clientCode != null">
         CLIENT_CODE = #{clientCode,jdbcType=VARCHAR},
       </if>
-      <if test="clientName != null">
-        CLIENT_NAME = #{clientName,jdbcType=VARCHAR},
+      <if test="inputDate != null">
+        INPUT_DATE = #{inputDate,jdbcType=DATE},
       </if>
-      <if test="sampleData != null">
-        SAMPLE_DATA = #{sampleData,jdbcType=DATE},
+      <if test="getDate != null">
+        GET_DATE = #{getDate,jdbcType=DATE},
       </if>
-      <if test="diaochaData != null">
-        DIAOCHA_DATA = #{diaochaData,jdbcType=DATE},
+      <if test="inputer != null">
+        INPUTER = #{inputer,jdbcType=VARCHAR},
       </if>
-      <if test="luruData != null">
-        LURU_DATA = #{luruData,jdbcType=DATE},
+      <if test="geter != null">
+        GETER = #{geter,jdbcType=VARCHAR},
       </if>
-      <if test="deleted != null">
-        DELETED = #{deleted,jdbcType=INTEGER},
+      <if test="isOver != null">
+        IS_OVER = #{isOver,jdbcType=INTEGER},
       </if>
     </set>
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBright">
-    update t_c_c_sample_bright
-    set CLIENT_CODE = #{clientCode,jdbcType=VARCHAR},
-      CLIENT_NAME = #{clientName,jdbcType=VARCHAR},
-      SAMPLE_DATA = #{sampleData,jdbcType=DATE},
-      DIAOCHA_DATA = #{diaochaData,jdbcType=DATE},
-      LURU_DATA = #{luruData,jdbcType=DATE},
-      DELETED = #{deleted,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey">
+    update t_c_c_clientsatisfysurvey
+    set DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      CLIENT_CODE = #{clientCode,jdbcType=VARCHAR},
+      INPUT_DATE = #{inputDate,jdbcType=DATE},
+      GET_DATE = #{getDate,jdbcType=DATE},
+      INPUTER = #{inputer,jdbcType=VARCHAR},
+      GETER = #{geter,jdbcType=VARCHAR},
+      IS_OVER = #{isOver,jdbcType=INTEGER}
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </update>
 </mapper>

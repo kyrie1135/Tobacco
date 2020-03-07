@@ -42,6 +42,22 @@ function initTable() {
                 title:'客户简称',
                 align:'center',
                 width:150
+            }, {
+                field:'diaochaData',
+                title:'调查日期',
+                align:'center',
+                formatter: function(value, row, index){
+                    return changeDateFormat(value)
+                },
+                width:150
+            }, {
+                field:'luruData',
+                title:'录入日期',
+                align:'center',
+                formatter: function(value, row, index){
+                    return changeDateFormat(value)
+                },
+                width:150
             }
         ]
     });

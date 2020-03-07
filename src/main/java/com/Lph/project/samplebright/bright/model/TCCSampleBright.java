@@ -16,6 +16,10 @@ public class TCCSampleBright implements Serializable {
 
     private Date sampleData;
 
+    private Date diaochaData;
+
+    private Date luruData;
+
     private Integer deleted;
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +54,22 @@ public class TCCSampleBright implements Serializable {
 
     public void setSampleData(Date sampleData) {
         this.sampleData = sampleData;
+    }
+
+    public Date getDiaochaData() {
+        return diaochaData;
+    }
+
+    public void setDiaochaData(Date diaochaData) {
+        this.diaochaData = diaochaData;
+    }
+
+    public Date getLuruData() {
+        return luruData;
+    }
+
+    public void setLuruData(Date luruData) {
+        this.luruData = luruData;
     }
 
     public Integer getDeleted() {

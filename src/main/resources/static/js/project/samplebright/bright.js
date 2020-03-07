@@ -15,7 +15,9 @@ $(function () {
             type: 'POST',
             data: {
                 params : JSON.stringify(arr),
-                date : JSON.stringify($("#getDate").val())
+                date : JSON.stringify($("#getDate").val()),
+                diaochaDate : JSON.stringify($("#diaochaDate").val()),
+                luruDate : JSON.stringify($("#luruDate").val())
             },
             success: function (result) {
                 $('#myModal').modal('hide');

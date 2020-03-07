@@ -2,6 +2,7 @@ package com.Lph.admin.subscript.controller;
 
 import com.Lph.admin.Utils.Node;
 import com.Lph.admin.organdrole.model.Organization;
+import com.Lph.admin.organdrole.model.Person;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.service.SubscriptService;
 import lombok.extern.slf4j.Slf4j;
@@ -118,5 +119,27 @@ public class SubscriptController {
     @ResponseBody
     public List<TCCClientsatisfy> getSubscriptionsBy(@PathVariable("itemBickid") String itemBickid, @PathVariable("orgId") String orgId){
         return subscriptService.getSubscriptionsBy(itemBickid, orgId);
+    }
+
+    /**
+     * 选择调查人员   当选择角色时， 显示属于此角色的人员
+     * @param roleId
+     * @return
+     */
+    @RequestMapping(value = "/getpersbyroleid/{roleid}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Person> getPersByRoleId(@PathVariable("roleid") String roleId){
+        return subscriptService.getPersByRoleId(roleId);
+    }
+
+    /**
+     * 选择调查人员   当选择部门时， 显示属于此部门的人员
+     * @param orgId
+     * @return
+     */
+    @RequestMapping(value = "/getpersbyorgid/{orgid}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Person> getPersByOrgId(@PathVariable("orgid") String orgId){
+        return subscriptService.getPersByOrgId(orgId);
     }
 }

@@ -1,16 +1,17 @@
 
-var empRole = "";
-var targetSort = ""
+var tempOrg = "";
 
 $(function () {
     $("#empRoleBtnAdd").click(function () {
         initTargetSortTree();
+        initPerTable();
+        $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyroleid/null'});
     });
     //指标归类-》选择-》确定
     $("#btn_empRole_ok").click(function () {
-        $('#empRoleAdd').val(empRole);
-        $('#targetSortAdd').val(targetSort);
-        $("#btn_empRole_cancel").trigger('click');
+        $("#empRoleAdd").val($('#perlist').bootstrapTable('getSelections')[0].name);
+        $("#targetSortAdd").val(tempOrg);
+        $('#myModal').modal('hide');
     });
 })
 
@@ -29,13 +30,16 @@ function initTargetSortTree() {
                 loadingIcon:"fa fa-hourglass",//懒加载过程中显示的沙漏字符图标
                 lazyLoad:loadNode,
                 onNodeSelected:function (event,node) {
-                    empRole = $("#"+ node.parentid +"").text();
-                    empRole += node.text;
-                    targetSort = node.parentid;
+                    if (node.parentId == undefined){
+                        $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyorgid/'+node.id});
+                        tempOrg = node.id;
+                    }else {
+                        $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyroleid/'+node.id});
+                        tempOrg = node.parentId;
+                    }
                 },
                 onNodeUnselected:function () {
-                    empRole = "";
-                    targetSort = "";
+                    $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyroleid/null'});
                 }
             });
         }
@@ -50,4 +54,34 @@ function loadNode(node,func) {
             func(data);
         }
     });
+}
+
+//初始化调查人员table
+function initPerTable() {
+    $('#perlist').bootstrapTable({
+        url:'/admin/getpersbyroleid/null',
+        type:"GET",
+        uniqueId:"id",
+        singleSelect:true,
+        pagination: true,
+        pageSize: 8,
+        paginationLoop: false,
+        columns:[
+            {
+                checkbox: true
+            },
+            {
+                field:'id',
+                title:'#',
+                align:'center',
+                width:1
+            },{
+                field:'name',
+                title:'姓名',
+                align:'center',
+                width:1
+            }
+        ]
+    });
+    $('#perlist').bootstrapTable('hideColumn','id');
 }

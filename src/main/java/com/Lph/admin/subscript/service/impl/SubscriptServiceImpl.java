@@ -2,18 +2,14 @@ package com.Lph.admin.subscript.service.impl;
 
 import com.Lph.admin.Utils.IdUtil;
 import com.Lph.admin.Utils.Node;
-import com.Lph.admin.evaluationitem.model.TCCEvaluationitemExample;
 import com.Lph.admin.organdrole.dao.OrganizationDAO;
-import com.Lph.admin.organdrole.model.Organization;
-import com.Lph.admin.organdrole.model.OrganizationExample;
+import com.Lph.admin.organdrole.dao.PersonDAO;
+import com.Lph.admin.organdrole.model.*;
 import com.Lph.admin.organdrole.dao.RoleDAO;
-import com.Lph.admin.organdrole.model.Role;
-import com.Lph.admin.organdrole.model.RoleExample;
 import com.Lph.admin.subscript.dao.TCCClientsatisfyDAO;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.model.TCCClientsatisfyExample;
 import com.Lph.admin.subscript.service.SubscriptService;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +26,8 @@ public class SubscriptServiceImpl implements SubscriptService {
     private RoleDAO roleDAO;
     @Autowired
     private TCCClientsatisfyDAO tccClientsatisfyDAO;
+    @Autowired
+    private PersonDAO personDAO;
 
     /**
      * 选择调查人员功能， 展示岗位树
@@ -135,5 +133,35 @@ public class SubscriptServiceImpl implements SubscriptService {
         }
         criteria.andDeletedEqualTo(0);
         return tccClientsatisfyDAO.selectByExample(example);
+    }
+
+    /**
+     * 选择调查人员
+     * @param roleId
+     * @return
+     */
+    @Override
+    public List<Person> getPersByRoleId(String roleId) {
+        PersonExample example = new PersonExample();
+        PersonExample.Criteria criteria = example.createCriteria();
+        if (!roleId.equals("null")){
+            criteria.andRoleidEqualTo(roleId);
+        }
+        return personDAO.selectByExample(example);
+    }
+
+    /**
+     * 选择调查人员
+     * @param orgId
+     * @return
+     */
+    @Override
+    public List<Person> getPersByOrgId(String orgId) {
+        PersonExample example = new PersonExample();
+        PersonExample.Criteria criteria = example.createCriteria();
+        if (!orgId.equals("null")){
+            criteria.andOrgidEqualTo(orgId);
+        }
+        return personDAO.selectByExample(example);
     }
 }

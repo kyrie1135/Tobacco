@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -77,8 +76,8 @@ public class BrightController {
 
     @RequestMapping(value = "/saveSearchClients", method = RequestMethod.POST)
     @ResponseBody
-    public String saveSearchClients(@RequestParam(value = "params", required = false) String params, @RequestParam(value = "date", required = false) String date) throws ParseException {
-        return brightService.saveSearchClients(params, date);
+    public String saveSearchClients(@RequestParam(value = "params", required = false) String params, @RequestParam(value = "date", required = false) String date, @RequestParam(value = "diaochaDate") String diaochaDate, @RequestParam(value = "luruDate")String luruDate) throws ParseException {
+        return brightService.saveSearchClients(params, date, diaochaDate, luruDate);
     }
 
     //*******************************************抽样结果分析***********************************************************

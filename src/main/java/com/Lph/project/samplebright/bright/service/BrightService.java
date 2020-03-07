@@ -38,7 +38,7 @@ public interface BrightService {
      * @param list
      * @return
      */
-    public String saveSearchClients(String list, String date) throws ParseException;
+    public String saveSearchClients(String list, String date, String diaochaDate, String luruDate) throws ParseException;
 
     /**
      * 抽样调查结果分析

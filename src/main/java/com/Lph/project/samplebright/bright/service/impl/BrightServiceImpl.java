@@ -1,6 +1,7 @@
 package com.Lph.project.samplebright.bright.service.impl;
 
 import com.Lph.admin.Utils.IdUtil;
+import com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey;
 import com.Lph.project.samplebright.bright.dao.TBCClientDAO;
 import com.Lph.project.samplebright.bright.dao.TCCSampleBrightDAO;
 import com.Lph.project.samplebright.bright.model.TBCClient;
@@ -35,10 +36,10 @@ public class BrightServiceImpl implements BrightService {
         mgrs.add("客户经理1");
         mgrs.add("客户经理2");
         mgrs.add("客户经理3");
-        mgrs.add("客户经理4");
-        mgrs.add("客户经理5");
-        mgrs.add("客户经理6");
-        mgrs.add("客户经理7");
+//        mgrs.add("客户经理4");
+//        mgrs.add("客户经理5");
+//        mgrs.add("客户经理6");
+//        mgrs.add("客户经理7");
         return mgrs;
     }
 
@@ -65,7 +66,7 @@ public class BrightServiceImpl implements BrightService {
         types.add("二类客户");
         types.add("三类客户");
         types.add("四类客户");
-        types.add("五类客户");
+//        types.add("五类客户");
         return types;
     }
 
@@ -111,15 +112,40 @@ public class BrightServiceImpl implements BrightService {
      * @return
      */
     @Override
-    public String saveSearchClients(String list, String date) throws ParseException {
+    public String saveSearchClients(String list, String date, String diaochaDate, String luruDate) throws ParseException {
+        TCCClientsatisfysurvey tccClientsatisfysurvey = new TCCClientsatisfysurvey();
         TCCSampleBright target = new TCCSampleBright();
         JSONArray paradms = JSON.parseArray(list);
+        TBCClientExample example = new TBCClientExample();
         for (int i = 0; i< paradms.size();i++) {
             JSONObject paramjson = (JSONObject) paradms.get(i);
+            tccClientsatisfysurvey.setBickid(IdUtil.nextId());
+            tccClientsatisfysurvey.setDeptName(tbcClientDAO.selectByExample(example).get(0).getBigCorpCode());
+            example.clear();
+            example.createCriteria().andFacilityNumEqualTo(paramjson.getString("facilityNum"));
+            tccClientsatisfysurvey.setClientCode(paramjson.getString("clientName"));
+
+
             target.setBickid(IdUtil.nextId());
             target.setClientCode(paramjson.getString("facilityNum"));
             target.setClientName(paramjson.getString("clientName"));
-            target.setSampleData(new SimpleDateFormat("yyyy-MM-dd").parse(date.substring(1, date.length()-1)));
+            Date tempDate = new SimpleDateFormat("yyyy-MM-dd").parse(date.substring(1, date.length()-1));
+            Calendar c = Calendar.getInstance();
+            c.setTime(tempDate);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            target.setSampleData(c.getTime());
+
+            tempDate = new SimpleDateFormat("yyyy-MM-dd").parse(diaochaDate.substring(1, diaochaDate.length()-1));
+            c.setTime(tempDate);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            target.setDiaochaData(c.getTime());
+            tccClientsatisfysurvey.setGetDate(c.getTime());
+
+            tempDate = new SimpleDateFormat("yyyy-MM-dd").parse(luruDate.substring(1, luruDate.length()-1));
+            c.setTime(tempDate);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            target.setLuruData(c.getTime());
+            tccClientsatisfysurvey.setInputDate(c.getTime());
             target.setDeleted(0);
             tccSampleBrightDAO.insert(target);
         }

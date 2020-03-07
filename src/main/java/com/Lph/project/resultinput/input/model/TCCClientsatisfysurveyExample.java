@@ -1,11 +1,11 @@
-package com.Lph.project.samplebright.bright.model;
+package com.Lph.project.resultinput.input.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class TCCSampleBrightExample {
+public class TCCClientsatisfysurveyExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -16,7 +16,7 @@ public class TCCSampleBrightExample {
 
     private Long offset;
 
-    public TCCSampleBrightExample() {
+    public TCCClientsatisfysurveyExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -222,6 +222,76 @@ public class TCCSampleBrightExample {
             return (Criteria) this;
         }
 
+        public Criteria andDeptNameIsNull() {
+            addCriterion("DEPT_NAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameIsNotNull() {
+            addCriterion("DEPT_NAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameEqualTo(String value) {
+            addCriterion("DEPT_NAME =", value, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameNotEqualTo(String value) {
+            addCriterion("DEPT_NAME <>", value, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameGreaterThan(String value) {
+            addCriterion("DEPT_NAME >", value, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameGreaterThanOrEqualTo(String value) {
+            addCriterion("DEPT_NAME >=", value, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameLessThan(String value) {
+            addCriterion("DEPT_NAME <", value, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameLessThanOrEqualTo(String value) {
+            addCriterion("DEPT_NAME <=", value, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameLike(String value) {
+            addCriterion("DEPT_NAME like", value, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameNotLike(String value) {
+            addCriterion("DEPT_NAME not like", value, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameIn(List<String> values) {
+            addCriterion("DEPT_NAME in", values, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameNotIn(List<String> values) {
+            addCriterion("DEPT_NAME not in", values, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameBetween(String value1, String value2) {
+            addCriterion("DEPT_NAME between", value1, value2, "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeptNameNotBetween(String value1, String value2) {
+            addCriterion("DEPT_NAME not between", value1, value2, "deptName");
+            return (Criteria) this;
+        }
+
         public Criteria andClientCodeIsNull() {
             addCriterion("CLIENT_CODE is null");
             return (Criteria) this;
@@ -292,313 +362,323 @@ public class TCCSampleBrightExample {
             return (Criteria) this;
         }
 
-        public Criteria andClientNameIsNull() {
-            addCriterion("CLIENT_NAME is null");
+        public Criteria andInputDateIsNull() {
+            addCriterion("INPUT_DATE is null");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameIsNotNull() {
-            addCriterion("CLIENT_NAME is not null");
+        public Criteria andInputDateIsNotNull() {
+            addCriterion("INPUT_DATE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameEqualTo(String value) {
-            addCriterion("CLIENT_NAME =", value, "clientName");
+        public Criteria andInputDateEqualTo(Date value) {
+            addCriterionForJDBCDate("INPUT_DATE =", value, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameNotEqualTo(String value) {
-            addCriterion("CLIENT_NAME <>", value, "clientName");
+        public Criteria andInputDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("INPUT_DATE <>", value, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameGreaterThan(String value) {
-            addCriterion("CLIENT_NAME >", value, "clientName");
+        public Criteria andInputDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("INPUT_DATE >", value, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameGreaterThanOrEqualTo(String value) {
-            addCriterion("CLIENT_NAME >=", value, "clientName");
+        public Criteria andInputDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("INPUT_DATE >=", value, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameLessThan(String value) {
-            addCriterion("CLIENT_NAME <", value, "clientName");
+        public Criteria andInputDateLessThan(Date value) {
+            addCriterionForJDBCDate("INPUT_DATE <", value, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameLessThanOrEqualTo(String value) {
-            addCriterion("CLIENT_NAME <=", value, "clientName");
+        public Criteria andInputDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("INPUT_DATE <=", value, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameLike(String value) {
-            addCriterion("CLIENT_NAME like", value, "clientName");
+        public Criteria andInputDateIn(List<Date> values) {
+            addCriterionForJDBCDate("INPUT_DATE in", values, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameNotLike(String value) {
-            addCriterion("CLIENT_NAME not like", value, "clientName");
+        public Criteria andInputDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("INPUT_DATE not in", values, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameIn(List<String> values) {
-            addCriterion("CLIENT_NAME in", values, "clientName");
+        public Criteria andInputDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("INPUT_DATE between", value1, value2, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameNotIn(List<String> values) {
-            addCriterion("CLIENT_NAME not in", values, "clientName");
+        public Criteria andInputDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("INPUT_DATE not between", value1, value2, "inputDate");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameBetween(String value1, String value2) {
-            addCriterion("CLIENT_NAME between", value1, value2, "clientName");
+        public Criteria andGetDateIsNull() {
+            addCriterion("GET_DATE is null");
             return (Criteria) this;
         }
 
-        public Criteria andClientNameNotBetween(String value1, String value2) {
-            addCriterion("CLIENT_NAME not between", value1, value2, "clientName");
+        public Criteria andGetDateIsNotNull() {
+            addCriterion("GET_DATE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataIsNull() {
-            addCriterion("SAMPLE_DATA is null");
+        public Criteria andGetDateEqualTo(Date value) {
+            addCriterionForJDBCDate("GET_DATE =", value, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataIsNotNull() {
-            addCriterion("SAMPLE_DATA is not null");
+        public Criteria andGetDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("GET_DATE <>", value, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataEqualTo(Date value) {
-            addCriterionForJDBCDate("SAMPLE_DATA =", value, "sampleData");
+        public Criteria andGetDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("GET_DATE >", value, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataNotEqualTo(Date value) {
-            addCriterionForJDBCDate("SAMPLE_DATA <>", value, "sampleData");
+        public Criteria andGetDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("GET_DATE >=", value, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataGreaterThan(Date value) {
-            addCriterionForJDBCDate("SAMPLE_DATA >", value, "sampleData");
+        public Criteria andGetDateLessThan(Date value) {
+            addCriterionForJDBCDate("GET_DATE <", value, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("SAMPLE_DATA >=", value, "sampleData");
+        public Criteria andGetDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("GET_DATE <=", value, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataLessThan(Date value) {
-            addCriterionForJDBCDate("SAMPLE_DATA <", value, "sampleData");
+        public Criteria andGetDateIn(List<Date> values) {
+            addCriterionForJDBCDate("GET_DATE in", values, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("SAMPLE_DATA <=", value, "sampleData");
+        public Criteria andGetDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("GET_DATE not in", values, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataIn(List<Date> values) {
-            addCriterionForJDBCDate("SAMPLE_DATA in", values, "sampleData");
+        public Criteria andGetDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("GET_DATE between", value1, value2, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataNotIn(List<Date> values) {
-            addCriterionForJDBCDate("SAMPLE_DATA not in", values, "sampleData");
+        public Criteria andGetDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("GET_DATE not between", value1, value2, "getDate");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("SAMPLE_DATA between", value1, value2, "sampleData");
+        public Criteria andInputerIsNull() {
+            addCriterion("INPUTER is null");
             return (Criteria) this;
         }
 
-        public Criteria andSampleDataNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("SAMPLE_DATA not between", value1, value2, "sampleData");
+        public Criteria andInputerIsNotNull() {
+            addCriterion("INPUTER is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataIsNull() {
-            addCriterion("DIAOCHA_DATA is null");
+        public Criteria andInputerEqualTo(String value) {
+            addCriterion("INPUTER =", value, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataIsNotNull() {
-            addCriterion("DIAOCHA_DATA is not null");
+        public Criteria andInputerNotEqualTo(String value) {
+            addCriterion("INPUTER <>", value, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataEqualTo(Date value) {
-            addCriterionForJDBCDate("DIAOCHA_DATA =", value, "diaochaData");
+        public Criteria andInputerGreaterThan(String value) {
+            addCriterion("INPUTER >", value, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataNotEqualTo(Date value) {
-            addCriterionForJDBCDate("DIAOCHA_DATA <>", value, "diaochaData");
+        public Criteria andInputerGreaterThanOrEqualTo(String value) {
+            addCriterion("INPUTER >=", value, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataGreaterThan(Date value) {
-            addCriterionForJDBCDate("DIAOCHA_DATA >", value, "diaochaData");
+        public Criteria andInputerLessThan(String value) {
+            addCriterion("INPUTER <", value, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("DIAOCHA_DATA >=", value, "diaochaData");
+        public Criteria andInputerLessThanOrEqualTo(String value) {
+            addCriterion("INPUTER <=", value, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataLessThan(Date value) {
-            addCriterionForJDBCDate("DIAOCHA_DATA <", value, "diaochaData");
+        public Criteria andInputerLike(String value) {
+            addCriterion("INPUTER like", value, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("DIAOCHA_DATA <=", value, "diaochaData");
+        public Criteria andInputerNotLike(String value) {
+            addCriterion("INPUTER not like", value, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataIn(List<Date> values) {
-            addCriterionForJDBCDate("DIAOCHA_DATA in", values, "diaochaData");
+        public Criteria andInputerIn(List<String> values) {
+            addCriterion("INPUTER in", values, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataNotIn(List<Date> values) {
-            addCriterionForJDBCDate("DIAOCHA_DATA not in", values, "diaochaData");
+        public Criteria andInputerNotIn(List<String> values) {
+            addCriterion("INPUTER not in", values, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("DIAOCHA_DATA between", value1, value2, "diaochaData");
+        public Criteria andInputerBetween(String value1, String value2) {
+            addCriterion("INPUTER between", value1, value2, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andDiaochaDataNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("DIAOCHA_DATA not between", value1, value2, "diaochaData");
+        public Criteria andInputerNotBetween(String value1, String value2) {
+            addCriterion("INPUTER not between", value1, value2, "inputer");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataIsNull() {
-            addCriterion("LURU_DATA is null");
+        public Criteria andGeterIsNull() {
+            addCriterion("GETER is null");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataIsNotNull() {
-            addCriterion("LURU_DATA is not null");
+        public Criteria andGeterIsNotNull() {
+            addCriterion("GETER is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataEqualTo(Date value) {
-            addCriterionForJDBCDate("LURU_DATA =", value, "luruData");
+        public Criteria andGeterEqualTo(String value) {
+            addCriterion("GETER =", value, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataNotEqualTo(Date value) {
-            addCriterionForJDBCDate("LURU_DATA <>", value, "luruData");
+        public Criteria andGeterNotEqualTo(String value) {
+            addCriterion("GETER <>", value, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataGreaterThan(Date value) {
-            addCriterionForJDBCDate("LURU_DATA >", value, "luruData");
+        public Criteria andGeterGreaterThan(String value) {
+            addCriterion("GETER >", value, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("LURU_DATA >=", value, "luruData");
+        public Criteria andGeterGreaterThanOrEqualTo(String value) {
+            addCriterion("GETER >=", value, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataLessThan(Date value) {
-            addCriterionForJDBCDate("LURU_DATA <", value, "luruData");
+        public Criteria andGeterLessThan(String value) {
+            addCriterion("GETER <", value, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("LURU_DATA <=", value, "luruData");
+        public Criteria andGeterLessThanOrEqualTo(String value) {
+            addCriterion("GETER <=", value, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataIn(List<Date> values) {
-            addCriterionForJDBCDate("LURU_DATA in", values, "luruData");
+        public Criteria andGeterLike(String value) {
+            addCriterion("GETER like", value, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataNotIn(List<Date> values) {
-            addCriterionForJDBCDate("LURU_DATA not in", values, "luruData");
+        public Criteria andGeterNotLike(String value) {
+            addCriterion("GETER not like", value, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("LURU_DATA between", value1, value2, "luruData");
+        public Criteria andGeterIn(List<String> values) {
+            addCriterion("GETER in", values, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andLuruDataNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("LURU_DATA not between", value1, value2, "luruData");
+        public Criteria andGeterNotIn(List<String> values) {
+            addCriterion("GETER not in", values, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedIsNull() {
-            addCriterion("DELETED is null");
+        public Criteria andGeterBetween(String value1, String value2) {
+            addCriterion("GETER between", value1, value2, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedIsNotNull() {
-            addCriterion("DELETED is not null");
+        public Criteria andGeterNotBetween(String value1, String value2) {
+            addCriterion("GETER not between", value1, value2, "geter");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedEqualTo(Integer value) {
-            addCriterion("DELETED =", value, "deleted");
+        public Criteria andIsOverIsNull() {
+            addCriterion("IS_OVER is null");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedNotEqualTo(Integer value) {
-            addCriterion("DELETED <>", value, "deleted");
+        public Criteria andIsOverIsNotNull() {
+            addCriterion("IS_OVER is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedGreaterThan(Integer value) {
-            addCriterion("DELETED >", value, "deleted");
+        public Criteria andIsOverEqualTo(Integer value) {
+            addCriterion("IS_OVER =", value, "isOver");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedGreaterThanOrEqualTo(Integer value) {
-            addCriterion("DELETED >=", value, "deleted");
+        public Criteria andIsOverNotEqualTo(Integer value) {
+            addCriterion("IS_OVER <>", value, "isOver");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedLessThan(Integer value) {
-            addCriterion("DELETED <", value, "deleted");
+        public Criteria andIsOverGreaterThan(Integer value) {
+            addCriterion("IS_OVER >", value, "isOver");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedLessThanOrEqualTo(Integer value) {
-            addCriterion("DELETED <=", value, "deleted");
+        public Criteria andIsOverGreaterThanOrEqualTo(Integer value) {
+            addCriterion("IS_OVER >=", value, "isOver");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedIn(List<Integer> values) {
-            addCriterion("DELETED in", values, "deleted");
+        public Criteria andIsOverLessThan(Integer value) {
+            addCriterion("IS_OVER <", value, "isOver");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedNotIn(List<Integer> values) {
-            addCriterion("DELETED not in", values, "deleted");
+        public Criteria andIsOverLessThanOrEqualTo(Integer value) {
+            addCriterion("IS_OVER <=", value, "isOver");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedBetween(Integer value1, Integer value2) {
-            addCriterion("DELETED between", value1, value2, "deleted");
+        public Criteria andIsOverIn(List<Integer> values) {
+            addCriterion("IS_OVER in", values, "isOver");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedNotBetween(Integer value1, Integer value2) {
-            addCriterion("DELETED not between", value1, value2, "deleted");
+        public Criteria andIsOverNotIn(List<Integer> values) {
+            addCriterion("IS_OVER not in", values, "isOver");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOverBetween(Integer value1, Integer value2) {
+            addCriterion("IS_OVER between", value1, value2, "isOver");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsOverNotBetween(Integer value1, Integer value2) {
+            addCriterion("IS_OVER not between", value1, value2, "isOver");
             return (Criteria) this;
         }
     }

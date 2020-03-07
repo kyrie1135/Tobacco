@@ -2,6 +2,7 @@ package com.Lph.admin.subscript.service;
 
 import com.Lph.admin.Utils.Node;
 import com.Lph.admin.organdrole.model.Organization;
+import com.Lph.admin.organdrole.model.Person;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 
 import java.util.List;
@@ -51,4 +52,18 @@ public interface SubscriptService {
      * 根据评测项目和所属项目筛选
      */
     public List<TCCClientsatisfy> getSubscriptionsBy(String itemBickid, String orgId);
+
+    /**
+     * 选择调查人员
+     * @param roleId
+     * @return
+     */
+    public List<Person> getPersByRoleId(String roleId);
+
+    /**
+     * 选择调查人员
+     * @param orgId
+     * @return
+     */
+    public List<Person> getPersByOrgId(String orgId);
 }
