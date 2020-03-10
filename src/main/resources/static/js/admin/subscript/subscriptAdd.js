@@ -5,7 +5,7 @@ $(function () {
     $("#empRoleBtnAdd").click(function () {
         initTargetSortTree();
         initPerTable();
-        $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyroleid/null'});
+        $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyroleid/0'});
     });
     //指标归类-》选择-》确定
     $("#btn_empRole_ok").click(function () {
@@ -59,7 +59,7 @@ function loadNode(node,func) {
 //初始化调查人员table
 function initPerTable() {
     $('#perlist').bootstrapTable({
-        url:'/admin/getpersbyroleid/null',
+        url:'/admin/getpersbyroleid/0',
         type:"GET",
         uniqueId:"id",
         singleSelect:true,

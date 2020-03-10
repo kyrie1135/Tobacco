@@ -222,6 +222,76 @@ public class TCCClientsatisfysurveyExample {
             return (Criteria) this;
         }
 
+        public Criteria andSubscriptBickidIsNull() {
+            addCriterion("SUBSCRIPT_BICKID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidIsNotNull() {
+            addCriterion("SUBSCRIPT_BICKID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidEqualTo(String value) {
+            addCriterion("SUBSCRIPT_BICKID =", value, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidNotEqualTo(String value) {
+            addCriterion("SUBSCRIPT_BICKID <>", value, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidGreaterThan(String value) {
+            addCriterion("SUBSCRIPT_BICKID >", value, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidGreaterThanOrEqualTo(String value) {
+            addCriterion("SUBSCRIPT_BICKID >=", value, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidLessThan(String value) {
+            addCriterion("SUBSCRIPT_BICKID <", value, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidLessThanOrEqualTo(String value) {
+            addCriterion("SUBSCRIPT_BICKID <=", value, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidLike(String value) {
+            addCriterion("SUBSCRIPT_BICKID like", value, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidNotLike(String value) {
+            addCriterion("SUBSCRIPT_BICKID not like", value, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidIn(List<String> values) {
+            addCriterion("SUBSCRIPT_BICKID in", values, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidNotIn(List<String> values) {
+            addCriterion("SUBSCRIPT_BICKID not in", values, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidBetween(String value1, String value2) {
+            addCriterion("SUBSCRIPT_BICKID between", value1, value2, "subscriptBickid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscriptBickidNotBetween(String value1, String value2) {
+            addCriterion("SUBSCRIPT_BICKID not between", value1, value2, "subscriptBickid");
+            return (Criteria) this;
+        }
+
         public Criteria andDeptNameIsNull() {
             addCriterion("DEPT_NAME is null");
             return (Criteria) this;
@@ -359,6 +429,76 @@ public class TCCClientsatisfysurveyExample {
 
         public Criteria andClientCodeNotBetween(String value1, String value2) {
             addCriterion("CLIENT_CODE not between", value1, value2, "clientCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameIsNull() {
+            addCriterion("CLIENT_NAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameIsNotNull() {
+            addCriterion("CLIENT_NAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameEqualTo(String value) {
+            addCriterion("CLIENT_NAME =", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameNotEqualTo(String value) {
+            addCriterion("CLIENT_NAME <>", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameGreaterThan(String value) {
+            addCriterion("CLIENT_NAME >", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameGreaterThanOrEqualTo(String value) {
+            addCriterion("CLIENT_NAME >=", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameLessThan(String value) {
+            addCriterion("CLIENT_NAME <", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameLessThanOrEqualTo(String value) {
+            addCriterion("CLIENT_NAME <=", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameLike(String value) {
+            addCriterion("CLIENT_NAME like", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameNotLike(String value) {
+            addCriterion("CLIENT_NAME not like", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameIn(List<String> values) {
+            addCriterion("CLIENT_NAME in", values, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameNotIn(List<String> values) {
+            addCriterion("CLIENT_NAME not in", values, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameBetween(String value1, String value2) {
+            addCriterion("CLIENT_NAME between", value1, value2, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameNotBetween(String value1, String value2) {
+            addCriterion("CLIENT_NAME not between", value1, value2, "clientName");
             return (Criteria) this;
         }
 

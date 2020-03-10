@@ -542,6 +542,76 @@ public class TCCSampleBrightExample {
             return (Criteria) this;
         }
 
+        public Criteria andLuruPerIsNull() {
+            addCriterion("LURU_PER is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerIsNotNull() {
+            addCriterion("LURU_PER is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerEqualTo(String value) {
+            addCriterion("LURU_PER =", value, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerNotEqualTo(String value) {
+            addCriterion("LURU_PER <>", value, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerGreaterThan(String value) {
+            addCriterion("LURU_PER >", value, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerGreaterThanOrEqualTo(String value) {
+            addCriterion("LURU_PER >=", value, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerLessThan(String value) {
+            addCriterion("LURU_PER <", value, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerLessThanOrEqualTo(String value) {
+            addCriterion("LURU_PER <=", value, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerLike(String value) {
+            addCriterion("LURU_PER like", value, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerNotLike(String value) {
+            addCriterion("LURU_PER not like", value, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerIn(List<String> values) {
+            addCriterion("LURU_PER in", values, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerNotIn(List<String> values) {
+            addCriterion("LURU_PER not in", values, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerBetween(String value1, String value2) {
+            addCriterion("LURU_PER between", value1, value2, "luruPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLuruPerNotBetween(String value1, String value2) {
+            addCriterion("LURU_PER not between", value1, value2, "luruPer");
+            return (Criteria) this;
+        }
+
         public Criteria andDeletedIsNull() {
             addCriterion("DELETED is null");
             return (Criteria) this;

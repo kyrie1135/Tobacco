@@ -3,8 +3,10 @@
 <mapper namespace="com.Lph.project.resultinput.input.dao.TCCClientsatisfysurveyDAO">
   <resultMap id="BaseResultMap" type="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey">
     <id column="BICKID" jdbcType="VARCHAR" property="bickid" />
+    <result column="SUBSCRIPT_BICKID" jdbcType="VARCHAR" property="subscriptBickid" />
     <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName" />
     <result column="CLIENT_CODE" jdbcType="VARCHAR" property="clientCode" />
+    <result column="CLIENT_NAME" jdbcType="VARCHAR" property="clientName" />
     <result column="INPUT_DATE" jdbcType="DATE" property="inputDate" />
     <result column="GET_DATE" jdbcType="DATE" property="getDate" />
     <result column="INPUTER" jdbcType="VARCHAR" property="inputer" />
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    BICKID, DEPT_NAME, CLIENT_CODE, INPUT_DATE, GET_DATE, INPUTER, GETER, IS_OVER
+    BICKID, SUBSCRIPT_BICKID, DEPT_NAME, CLIENT_CODE, CLIENT_NAME, INPUT_DATE, GET_DATE, 
+    INPUTER, GETER, IS_OVER
   </sql>
   <select id="selectByExample" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurveyExample" resultMap="BaseResultMap">
     select
@@ -111,21 +114,29 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey" useGeneratedKeys="true">
-    insert into t_c_c_clientsatisfysurvey (DEPT_NAME, CLIENT_CODE, INPUT_DATE, 
-      GET_DATE, INPUTER, GETER, 
-      IS_OVER)
-    values (#{deptName,jdbcType=VARCHAR}, #{clientCode,jdbcType=VARCHAR}, #{inputDate,jdbcType=DATE}, 
-      #{getDate,jdbcType=DATE}, #{inputer,jdbcType=VARCHAR}, #{geter,jdbcType=VARCHAR}, 
-      #{isOver,jdbcType=INTEGER})
+    insert into t_c_c_clientsatisfysurvey (BICKID, SUBSCRIPT_BICKID, DEPT_NAME, CLIENT_CODE,
+      CLIENT_NAME, INPUT_DATE, GET_DATE, 
+      INPUTER, GETER, IS_OVER
+      )
+    values (#{bickid,jdbcType=VARCHAR}, #{subscriptBickid,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{clientCode,jdbcType=VARCHAR},
+      #{clientName,jdbcType=VARCHAR}, #{inputDate,jdbcType=DATE}, #{getDate,jdbcType=DATE}, 
+      #{inputer,jdbcType=VARCHAR}, #{geter,jdbcType=VARCHAR}, #{isOver,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey" useGeneratedKeys="true">
     insert into t_c_c_clientsatisfysurvey
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subscriptBickid != null">
+        SUBSCRIPT_BICKID,
+      </if>
       <if test="deptName != null">
         DEPT_NAME,
       </if>
       <if test="clientCode != null">
         CLIENT_CODE,
+      </if>
+      <if test="clientName != null">
+        CLIENT_NAME,
       </if>
       <if test="inputDate != null">
         INPUT_DATE,
@@ -144,11 +155,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subscriptBickid != null">
+        #{subscriptBickid,jdbcType=VARCHAR},
+      </if>
       <if test="deptName != null">
         #{deptName,jdbcType=VARCHAR},
       </if>
       <if test="clientCode != null">
         #{clientCode,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        #{clientName,jdbcType=VARCHAR},
       </if>
       <if test="inputDate != null">
         #{inputDate,jdbcType=DATE},
@@ -179,11 +196,17 @@
       <if test="record.bickid != null">
         BICKID = #{record.bickid,jdbcType=VARCHAR},
       </if>
+      <if test="record.subscriptBickid != null">
+        SUBSCRIPT_BICKID = #{record.subscriptBickid,jdbcType=VARCHAR},
+      </if>
       <if test="record.deptName != null">
         DEPT_NAME = #{record.deptName,jdbcType=VARCHAR},
       </if>
       <if test="record.clientCode != null">
         CLIENT_CODE = #{record.clientCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientName != null">
+        CLIENT_NAME = #{record.clientName,jdbcType=VARCHAR},
       </if>
       <if test="record.inputDate != null">
         INPUT_DATE = #{record.inputDate,jdbcType=DATE},
@@ -208,8 +231,10 @@
   <update id="updateByExample" parameterType="map">
     update t_c_c_clientsatisfysurvey
     set BICKID = #{record.bickid,jdbcType=VARCHAR},
+      SUBSCRIPT_BICKID = #{record.subscriptBickid,jdbcType=VARCHAR},
       DEPT_NAME = #{record.deptName,jdbcType=VARCHAR},
       CLIENT_CODE = #{record.clientCode,jdbcType=VARCHAR},
+      CLIENT_NAME = #{record.clientName,jdbcType=VARCHAR},
       INPUT_DATE = #{record.inputDate,jdbcType=DATE},
       GET_DATE = #{record.getDate,jdbcType=DATE},
       INPUTER = #{record.inputer,jdbcType=VARCHAR},
@@ -222,11 +247,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey">
     update t_c_c_clientsatisfysurvey
     <set>
+      <if test="subscriptBickid != null">
+        SUBSCRIPT_BICKID = #{subscriptBickid,jdbcType=VARCHAR},
+      </if>
       <if test="deptName != null">
         DEPT_NAME = #{deptName,jdbcType=VARCHAR},
       </if>
       <if test="clientCode != null">
         CLIENT_CODE = #{clientCode,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null">
+        CLIENT_NAME = #{clientName,jdbcType=VARCHAR},
       </if>
       <if test="inputDate != null">
         INPUT_DATE = #{inputDate,jdbcType=DATE},
@@ -248,8 +279,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey">
     update t_c_c_clientsatisfysurvey
-    set DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+    set SUBSCRIPT_BICKID = #{subscriptBickid,jdbcType=VARCHAR},
+      DEPT_NAME = #{deptName,jdbcType=VARCHAR},
       CLIENT_CODE = #{clientCode,jdbcType=VARCHAR},
+      CLIENT_NAME = #{clientName,jdbcType=VARCHAR},
       INPUT_DATE = #{inputDate,jdbcType=DATE},
       GET_DATE = #{getDate,jdbcType=DATE},
       INPUTER = #{inputer,jdbcType=VARCHAR},

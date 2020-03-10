@@ -10,9 +10,13 @@ import java.util.Date;
 public class TCCClientsatisfysurvey implements Serializable {
     private String bickid;
 
+    private String subscriptBickid;
+
     private String deptName;
 
     private String clientCode;
+
+    private String clientName;
 
     private Date inputDate;
 
@@ -34,6 +38,14 @@ public class TCCClientsatisfysurvey implements Serializable {
         this.bickid = bickid;
     }
 
+    public String getSubscriptBickid() {
+        return subscriptBickid;
+    }
+
+    public void setSubscriptBickid(String subscriptBickid) {
+        this.subscriptBickid = subscriptBickid;
+    }
+
     public String getDeptName() {
         return deptName;
     }
@@ -48,6 +60,14 @@ public class TCCClientsatisfysurvey implements Serializable {
 
     public void setClientCode(String clientCode) {
         this.clientCode = clientCode;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     public Date getInputDate() {

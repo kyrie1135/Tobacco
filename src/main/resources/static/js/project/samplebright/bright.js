@@ -1,15 +1,11 @@
 $(function () {
 
     initTable();
-
+    setDateMaxToToday();
     //筛选-》保存点击
     $("#btn_empRole_ok").click(function () {
         var arr = $('#clientTable').bootstrapTable('getData');
-        // var list =[];
-        // for (var i = 0; i<arr.length; i++){
-        //     var json = {"clientNum" : arr[i].facilityNum, "clientName" : arr[i].clientName}
-        //     list.push(json);
-        // }
+
         $.ajax({
             url: '/project/saveSearchClients',
             type: 'POST',
@@ -17,7 +13,8 @@ $(function () {
                 params : JSON.stringify(arr),
                 date : JSON.stringify($("#getDate").val()),
                 diaochaDate : JSON.stringify($("#diaochaDate").val()),
-                luruDate : JSON.stringify($("#luruDate").val())
+                luruDate : JSON.stringify($("#luruDate").val()),
+                luruPer : JSON.stringify($("#luruPer").val())
             },
             success: function (result) {
                 $('#myModal').modal('hide');
@@ -77,8 +74,18 @@ $(function () {
 
     //筛选点击
     $("#search").click(function () {
-        $('#myModal').modal('show');
-        $('#clientTable').bootstrapTable('refresh',{url:'/project/searchClients/'+$("#clientType").val()+'/'+$("#workState").val()+'/'+$("#clientMGR").val()+'/'+$("#getNum").val(),});
+        if ($("#getNum").val() == ""){
+            alert("请填写抽样数量");
+        }else if ($("#diaochaDate").val() == ""){
+            alert("请填写调查日期");
+        }else if ($("#luruDate").val() == ""){
+            alert("请填写录入日期");
+        }else if ($("#luruPer").val() == ""){
+            alert("请填写录入人员")
+        }else {
+            $('#myModal').modal('show');
+            $('#clientTable').bootstrapTable('refresh',{url:'/project/searchClients/'+$("#clientType").val()+'/'+$("#workState").val()+'/'+$("#clientMGR").val()+'/'+$("#getNum").val()});
+        }
     });
 
 });
@@ -115,4 +122,20 @@ function initTable() {
         ]
     });
     $('#clientTable').bootstrapTable('hideColumn','clientCode');
+}
+
+$(function(){
+
+})
+
+function setDateMaxToToday() {
+    var date_now = new Date();
+    //得到当前年份
+    var year = date_now.getFullYear();
+    //得到当前月份
+    var month = date_now.getMonth()+1 < 10 ? "0"+(date_now.getMonth()+1) : (date_now.getMonth()+1);
+    //得到当前日子（多少号）
+    var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();
+    //设置input标签的max属性
+    $("#diaochaDate, #luruDate").attr("min",year+"-"+month+"-"+date);
 }

@@ -76,8 +76,8 @@ public class BrightController {
 
     @RequestMapping(value = "/saveSearchClients", method = RequestMethod.POST)
     @ResponseBody
-    public String saveSearchClients(@RequestParam(value = "params", required = false) String params, @RequestParam(value = "date", required = false) String date, @RequestParam(value = "diaochaDate") String diaochaDate, @RequestParam(value = "luruDate")String luruDate) throws ParseException {
-        return brightService.saveSearchClients(params, date, diaochaDate, luruDate);
+    public String saveSearchClients(@RequestParam(value = "params", required = false) String params, @RequestParam(value = "date", required = false) String date, @RequestParam(value = "diaochaDate") String diaochaDate, @RequestParam(value = "luruDate")String luruDate, @RequestParam(value = "luruPer") String luruPer) throws ParseException {
+        return brightService.saveSearchClients(params, date, diaochaDate, luruDate, luruPer);
     }
 
     //*******************************************抽样结果分析***********************************************************
@@ -107,7 +107,6 @@ public class BrightController {
     @RequestMapping(value = "/getClients/{date}/{clientCode}/{clientName}", method = RequestMethod.GET)
     @ResponseBody
     public List<TCCSampleBright> getClients(@PathVariable("date") String date, @PathVariable("clientCode") String clientCode, @PathVariable("clientName") String clientName) throws ParseException {
-
         return brightService.getClients(date, clientCode, clientName);
     }
 }

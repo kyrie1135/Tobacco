@@ -20,6 +20,8 @@ public class TCCSampleBright implements Serializable {
 
     private Date luruData;
 
+    private String luruPer;
+
     private Integer deleted;
 
     private static final long serialVersionUID = 1L;
@@ -70,6 +72,14 @@ public class TCCSampleBright implements Serializable {
 
     public void setLuruData(Date luruData) {
         this.luruData = luruData;
+    }
+
+    public String getLuruPer() {
+        return luruPer;
+    }
+
+    public void setLuruPer(String luruPer) {
+        this.luruPer = luruPer;
     }
 
     public Integer getDeleted() {

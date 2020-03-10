@@ -8,6 +8,7 @@
     <result column="SAMPLE_DATA" jdbcType="DATE" property="sampleData" />
     <result column="DIAOCHA_DATA" jdbcType="DATE" property="diaochaData" />
     <result column="LURU_DATA" jdbcType="DATE" property="luruData" />
+    <result column="LURU_PER" jdbcType="VARCHAR" property="luruPer" />
     <result column="DELETED" jdbcType="INTEGER" property="deleted" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    BICKID, CLIENT_CODE, CLIENT_NAME, SAMPLE_DATA, DIAOCHA_DATA, LURU_DATA, DELETED
+    BICKID, CLIENT_CODE, CLIENT_NAME, SAMPLE_DATA, DIAOCHA_DATA, LURU_DATA, LURU_PER, 
+    DELETED
   </sql>
   <select id="selectByExample" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBrightExample" resultMap="BaseResultMap">
     select
@@ -111,11 +113,11 @@
   </delete>
   <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBright" useGeneratedKeys="true">
     insert into t_c_c_sample_bright (BICKID, CLIENT_CODE, CLIENT_NAME, SAMPLE_DATA,
-      DIAOCHA_DATA, LURU_DATA, DELETED
-      )
+      DIAOCHA_DATA, LURU_DATA, LURU_PER, 
+      DELETED)
     values (#{bickid,jdbcType=VARCHAR}, #{clientCode,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, #{sampleData,jdbcType=DATE},
-      #{diaochaData,jdbcType=DATE}, #{luruData,jdbcType=DATE}, #{deleted,jdbcType=INTEGER}
-      )
+      #{diaochaData,jdbcType=DATE}, #{luruData,jdbcType=DATE}, #{luruPer,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.samplebright.bright.model.TCCSampleBright" useGeneratedKeys="true">
     insert into t_c_c_sample_bright
@@ -134,6 +136,9 @@
       </if>
       <if test="luruData != null">
         LURU_DATA,
+      </if>
+      <if test="luruPer != null">
+        LURU_PER,
       </if>
       <if test="deleted != null">
         DELETED,
@@ -154,6 +159,9 @@
       </if>
       <if test="luruData != null">
         #{luruData,jdbcType=DATE},
+      </if>
+      <if test="luruPer != null">
+        #{luruPer,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=INTEGER},
@@ -187,6 +195,9 @@
       <if test="record.luruData != null">
         LURU_DATA = #{record.luruData,jdbcType=DATE},
       </if>
+      <if test="record.luruPer != null">
+        LURU_PER = #{record.luruPer,jdbcType=VARCHAR},
+      </if>
       <if test="record.deleted != null">
         DELETED = #{record.deleted,jdbcType=INTEGER},
       </if>
@@ -203,6 +214,7 @@
       SAMPLE_DATA = #{record.sampleData,jdbcType=DATE},
       DIAOCHA_DATA = #{record.diaochaData,jdbcType=DATE},
       LURU_DATA = #{record.luruData,jdbcType=DATE},
+      LURU_PER = #{record.luruPer,jdbcType=VARCHAR},
       DELETED = #{record.deleted,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -226,6 +238,9 @@
       <if test="luruData != null">
         LURU_DATA = #{luruData,jdbcType=DATE},
       </if>
+      <if test="luruPer != null">
+        LURU_PER = #{luruPer,jdbcType=VARCHAR},
+      </if>
       <if test="deleted != null">
         DELETED = #{deleted,jdbcType=INTEGER},
       </if>
@@ -239,6 +254,7 @@
       SAMPLE_DATA = #{sampleData,jdbcType=DATE},
       DIAOCHA_DATA = #{diaochaData,jdbcType=DATE},
       LURU_DATA = #{luruData,jdbcType=DATE},
+      LURU_PER = #{luruPer,jdbcType=VARCHAR},
       DELETED = #{deleted,jdbcType=INTEGER}
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </update>

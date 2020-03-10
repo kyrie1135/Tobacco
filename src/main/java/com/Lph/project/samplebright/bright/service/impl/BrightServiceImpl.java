@@ -1,6 +1,10 @@
 package com.Lph.project.samplebright.bright.service.impl;
 
 import com.Lph.admin.Utils.IdUtil;
+import com.Lph.admin.subscript.dao.TCCClientsatisfyDAO;
+import com.Lph.admin.subscript.model.TCCClientsatisfy;
+import com.Lph.admin.subscript.model.TCCClientsatisfyExample;
+import com.Lph.project.resultinput.input.dao.TCCClientsatisfysurveyDAO;
 import com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey;
 import com.Lph.project.samplebright.bright.dao.TBCClientDAO;
 import com.Lph.project.samplebright.bright.dao.TCCSampleBrightDAO;
@@ -26,6 +30,10 @@ public class BrightServiceImpl implements BrightService {
     private TBCClientDAO tbcClientDAO;
     @Autowired
     private TCCSampleBrightDAO tccSampleBrightDAO;
+    @Autowired
+    private TCCClientsatisfyDAO tccClientsatisfyDAO;
+    @Autowired
+    private TCCClientsatisfysurveyDAO tccClientsatisfysurveyDAO;
 
     /**
      * 获取路段， 为督查抽样界面填充客户经理select
@@ -112,21 +120,18 @@ public class BrightServiceImpl implements BrightService {
      * @return
      */
     @Override
-    public String saveSearchClients(String list, String date, String diaochaDate, String luruDate) throws ParseException {
-        TCCClientsatisfysurvey tccClientsatisfysurvey = new TCCClientsatisfysurvey();
+    public String saveSearchClients(String list, String date, String diaochaDate, String luruDate, String luruPer) throws ParseException {
         TCCSampleBright target = new TCCSampleBright();
+        List<TCCSampleBright> clients = new ArrayList<>();
         JSONArray paradms = JSON.parseArray(list);
         TBCClientExample example = new TBCClientExample();
         for (int i = 0; i< paradms.size();i++) {
             JSONObject paramjson = (JSONObject) paradms.get(i);
-            tccClientsatisfysurvey.setBickid(IdUtil.nextId());
-            tccClientsatisfysurvey.setDeptName(tbcClientDAO.selectByExample(example).get(0).getBigCorpCode());
             example.clear();
             example.createCriteria().andFacilityNumEqualTo(paramjson.getString("facilityNum"));
-            tccClientsatisfysurvey.setClientCode(paramjson.getString("clientName"));
-
 
             target.setBickid(IdUtil.nextId());
+            target.setLuruPer(luruPer.substring(1, luruPer.length()-1));
             target.setClientCode(paramjson.getString("facilityNum"));
             target.setClientName(paramjson.getString("clientName"));
             Date tempDate = new SimpleDateFormat("yyyy-MM-dd").parse(date.substring(1, date.length()-1));
@@ -139,17 +144,47 @@ public class BrightServiceImpl implements BrightService {
             c.setTime(tempDate);
             c.add(Calendar.DAY_OF_MONTH, 1);
             target.setDiaochaData(c.getTime());
-            tccClientsatisfysurvey.setGetDate(c.getTime());
 
             tempDate = new SimpleDateFormat("yyyy-MM-dd").parse(luruDate.substring(1, luruDate.length()-1));
             c.setTime(tempDate);
             c.add(Calendar.DAY_OF_MONTH, 1);
             target.setLuruData(c.getTime());
-            tccClientsatisfysurvey.setInputDate(c.getTime());
             target.setDeleted(0);
+            clients.add(target);
             tccSampleBrightDAO.insert(target);
         }
+        buildResultInputList(clients);
         return "200";
+    }
+
+    public void buildResultInputList(List<TCCSampleBright> list){
+        TCCClientsatisfysurvey target = new TCCClientsatisfysurvey();
+        List<TCCClientsatisfy> zhibiaoList = new ArrayList<>();
+        TCCClientsatisfyExample example = new TCCClientsatisfyExample();
+        TBCClientExample clientExample = new TBCClientExample();
+        TBCClientExample.Criteria criteria = clientExample.createCriteria();
+        zhibiaoList = tccClientsatisfyDAO.selectByExample(example);
+
+        for (TCCSampleBright t : list){
+            for (TCCClientsatisfy tc : zhibiaoList){
+                target.setBickid(IdUtil.nextId());
+                target.setSubscriptBickid(tc.getBickid());
+
+                criteria.andFacilityNumEqualTo(t.getClientCode());
+                List<TBCClient> tbcClients = tbcClientDAO.selectByExample(clientExample);
+                target.setDeptName(tbcClients.get(0).getBigCorpCode());
+
+                target.setClientCode(t.getClientCode());
+                target.setClientName(t.getClientName());
+
+                target.setInputDate(t.getLuruData());
+                target.setGetDate(t.getDiaochaData());
+                target.setGeter(tc.getEmpRole());
+                target.setInputer(t.getLuruPer());
+                target.setIsOver(0);
+                tccClientsatisfysurveyDAO.insert(target);
+            }
+        }
     }
 
     /**
@@ -158,7 +193,6 @@ public class BrightServiceImpl implements BrightService {
      */
     @Override
     public List<TCCSampleBright> saveClientsSearch(TCCSampleBright target) {
-
         return null;
     }
 
