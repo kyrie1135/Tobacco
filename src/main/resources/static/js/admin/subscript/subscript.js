@@ -276,9 +276,12 @@ function initTable() {
                 align:'center',
                 width:1
             }, {
-                field:'evaluateItem',
+                field:'evaluateItemBickid',
                 title:'测评项目',
                 align:'center',
+                formatter: function(value, row, index){
+                    return changeEvaluateItemBickid(value)
+                },
                 width:60
             },{
                 field:'evaluateItemBickid',
@@ -286,9 +289,12 @@ function initTable() {
                 align:'center',
                 width:1
             },{
-                field:'evaluateTarget',
+                field:'evaluateTargetBickid',
                 title:'评测指标',
                 align:'center',
+                formatter: function(value, row, index){
+                    return changeEvaluateTargetBickid(value)
+                },
                 width:130
             },{
                 field:'evaluateTargetBickid',
@@ -322,4 +328,36 @@ function initTable() {
     $('#list').bootstrapTable('hideColumn','targetSort');
     $('#list').bootstrapTable('hideColumn','evaluateItemBickid');
     $('#list').bootstrapTable('hideColumn','evaluateTargetBickid');
+}
+
+function changeEvaluateItemBickid(value) {
+    var target = "";
+    $.ajax({
+        url: '/admin/changeevaluateItemBickid',
+        type: 'GET',
+        data: {
+            evaluateItemBickid : JSON.stringify(value)
+        },
+        async: false,
+        success:function (result) {
+            target = result;
+        }
+    });
+    return target;
+}
+
+function changeEvaluateTargetBickid(value) {
+    var target = "";
+    $.ajax({
+        url: '/admin/changeevaluateTargetBickid',
+        type: 'GET',
+        async: false,
+        data: {
+            evaluateTargetBickid : JSON.stringify(value)
+        },
+        success:function (result) {
+            target = result;
+        }
+    });
+    return target;
 }

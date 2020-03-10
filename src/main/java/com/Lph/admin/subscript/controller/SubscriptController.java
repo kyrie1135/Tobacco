@@ -142,4 +142,26 @@ public class SubscriptController {
     public List<Person> getPersByOrgId(@PathVariable("orgid") String orgId){
         return subscriptService.getPersByOrgId(orgId);
     }
+
+    /**
+     * 将evaluateItemBickid转换为evaluateItem
+     * @param bickid
+     * @return
+     */
+    @RequestMapping(value = "/changeevaluateItemBickid", method = RequestMethod.GET)
+    @ResponseBody
+    public String changeEvaluateItemBickid(@RequestParam("evaluateItemBickid") String bickid){
+        return subscriptService.changeEvaluateItemBickid(bickid);
+    }
+
+    /**
+     * 将evaluateTargetBickid转换为evaluateTarget
+     * @param bickid
+     * @return
+     */
+    @RequestMapping(value = "/changeevaluateTargetBickid", method = RequestMethod.GET)
+    @ResponseBody
+    public String changeEvaluateTargetBickid(@RequestParam("evaluateTargetBickid") String bickid){
+        return subscriptService.changeEvaluateTargetBickid(bickid);
+    }
 }

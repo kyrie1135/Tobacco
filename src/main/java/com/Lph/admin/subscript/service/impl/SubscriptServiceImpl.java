@@ -2,6 +2,9 @@ package com.Lph.admin.subscript.service.impl;
 
 import com.Lph.admin.Utils.IdUtil;
 import com.Lph.admin.Utils.Node;
+import com.Lph.admin.evaluationdescription.dao.TCCDescriptionDAO;
+import com.Lph.admin.evaluationitem.dao.TCCEvaluationitemDAO;
+import com.Lph.admin.evaluationitem.model.TCCEvaluationitemExample;
 import com.Lph.admin.organdrole.dao.OrganizationDAO;
 import com.Lph.admin.organdrole.dao.PersonDAO;
 import com.Lph.admin.organdrole.model.*;
@@ -28,6 +31,10 @@ public class SubscriptServiceImpl implements SubscriptService {
     private TCCClientsatisfyDAO tccClientsatisfyDAO;
     @Autowired
     private PersonDAO personDAO;
+    @Autowired
+    private TCCEvaluationitemDAO tccEvaluationitemDAO;
+    @Autowired
+    private TCCDescriptionDAO tccDescriptionDAO;
 
     /**
      * 选择调查人员功能， 展示岗位树
@@ -163,5 +170,25 @@ public class SubscriptServiceImpl implements SubscriptService {
             criteria.andOrgidEqualTo(orgId);
         }
         return personDAO.selectByExample(example);
+    }
+
+    /**
+     * 将evaluateItemBickid转换为evaluateItem
+     * @param bickid
+     * @return
+     */
+    @Override
+    public String changeEvaluateItemBickid(String bickid) {
+        return tccEvaluationitemDAO.selectByPrimaryKey(bickid.substring(1,bickid.length()-1)).getItemName();
+    }
+
+    /**
+     * 将evaluateTargetBickid转换为evaluateTarget
+     * @param bickid
+     * @return
+     */
+    @Override
+    public String changeEvaluateTargetBickid(String bickid) {
+        return tccDescriptionDAO.selectByPrimaryKey(bickid.substring(1,bickid.length()-1)).getItemName();
     }
 }

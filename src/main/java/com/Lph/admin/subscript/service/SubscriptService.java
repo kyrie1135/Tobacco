@@ -66,4 +66,18 @@ public interface SubscriptService {
      * @return
      */
     public List<Person> getPersByOrgId(String orgId);
+
+    /**
+     * 将evaluateItemBickid转换为evaluateItem
+     * @param bickid
+     * @return
+     */
+    public String changeEvaluateItemBickid(String bickid);
+
+    /**
+     * 将evaluateTargetBickid转换为evaluateTarget
+     * @param bickid
+     * @return
+     */
+    public String changeEvaluateTargetBickid(String bickid);
 }

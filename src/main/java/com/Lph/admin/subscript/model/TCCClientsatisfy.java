@@ -16,12 +16,14 @@ public class TCCClientsatisfy implements Serializable {
     @NotBlank(message = "指标归类不能为空")
     private String targetSort;
 
+    //弃用：当修改评测项目后， 此处评测项目名称未修改
     @NotBlank(message = "评测项目不能为空")
     private String evaluateItem;
 
     @NotBlank(message = "评测项目bickid不能为空")
     private String evaluateItemBickid;
 
+    //弃用：当修改评测指标后， 此处评测指标名称未修改
     @NotBlank(message = "评测指标不能为空")
     private String evaluateTarget;
 
