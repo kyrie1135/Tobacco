@@ -39,9 +39,20 @@ public class ClientsatisfysurveyController {
         return clientsatisfysurveyService.getList(dateFrom, dateTo);
     }
 
+    /**
+     * 点击录入时， 生成表单
+     * @param subscriptBickid
+     * @return
+     */
     @RequestMapping("/toInputResult")
     @ResponseBody
     public TCCSaitDescription toInputResult(@RequestParam("subscriptBickid") String subscriptBickid){
         return clientsatisfysurveyService.toInputResult(subscriptBickid);
+    }
+
+    @RequestMapping(value = "/saveinputresult", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveInputResult(@RequestBody TCCSaitDescription target){
+        return clientsatisfysurveyService.saveInputResult(target);
     }
 }

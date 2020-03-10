@@ -1,8 +1,7 @@
 package com.Lph.project.resultinput.input.service.impl;
 
+import com.Lph.admin.Utils.IdUtil;
 import com.Lph.admin.evaluationdescription.dao.TCCDescriptionDAO;
-import com.Lph.admin.evaluationdescription.model.TCCDescription;
-import com.Lph.admin.evaluationdescription.model.TCCDescriptionExample;
 import com.Lph.admin.satisfysurveytarget.dao.TCCSatisfysurveytargetDAO;
 import com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget;
 import com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytargetExample;
@@ -10,6 +9,7 @@ import com.Lph.admin.subscript.dao.TCCClientsatisfyDAO;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.model.TCCClientsatisfyExample;
 import com.Lph.project.resultinput.input.dao.TCCClientsatisfysurveyDAO;
+import com.Lph.project.resultinput.input.dao.TCCSaitDescriptionDAO;
 import com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey;
 import com.Lph.project.resultinput.input.model.TCCClientsatisfysurveyExample;
 import com.Lph.project.resultinput.input.model.TCCSaitDescription;
@@ -35,6 +35,8 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
     private TCCDescriptionDAO tccDescriptionDAO;
     @Autowired
     private TCCSatisfysurveytargetDAO tccSatisfysurveytargetDAO;
+    @Autowired
+    private TCCSaitDescriptionDAO tccSaitDescriptionDAO;
 
     /**
      * 获取抽样得来的用户，为录入人员提供录入连接
@@ -70,6 +72,11 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
         return list;
     }
 
+    /**
+     * 点击录入时， 生成表单
+     * @param subscriptBickid
+     * @return
+     */
     @Override
     public TCCSaitDescription toInputResult(String subscriptBickid) {
         TCCSaitDescription target = new TCCSaitDescription();
@@ -91,6 +98,28 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
             tempStanders.add(t.getEvaluateStandard());
         }
         target.setDes(tempStanders);
+        List<String> tempDesBickids = new ArrayList<>();
+        for (TCCSatisfysurveytarget t : list1){
+            tempDesBickids.add(t.getBickid());
+        }
+        target.setDesBickids(tempDesBickids);
         return target;
+    }
+
+    /**
+     * 点击录入-》确定， 保存满意度录入信息
+     * @param target
+     * @return
+     */
+    @Override
+    public String saveInputResult(TCCSaitDescription target) {
+        target.setBickid(IdUtil.nextId());
+        tccSaitDescriptionDAO.insert(target);
+        TCCClientsatisfysurveyExample example = new TCCClientsatisfysurveyExample();
+        example.createCriteria().andSubscriptBickidEqualTo(target.getSatisfysurveytargetBickid()).andClientCodeEqualTo(target.getClientCode());
+        TCCClientsatisfysurvey tccClientsatisfysurvey = tccClientsatisfysurveyDAO.selectByExample(example).get(0);
+        tccClientsatisfysurvey.setIsOver(1);
+        tccClientsatisfysurveyDAO.updateByPrimaryKey(tccClientsatisfysurvey);
+        return "200";
     }
 }

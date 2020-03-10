@@ -22,4 +22,11 @@ public interface ClientsatisfysurveyService {
      * @return
      */
     public TCCSaitDescription toInputResult(String subscriptBickid);
+
+    /**
+     * 点击录入-》确定， 保存满意度录入信息
+     * @param target
+     * @return
+     */
+    public String saveInputResult(TCCSaitDescription target);
 }

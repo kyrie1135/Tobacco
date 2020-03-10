@@ -23,6 +23,16 @@ public class TCCSaitDescription implements Serializable {
 
     private List<String> zhibiaoNames;
 
+    private List<String> desBickids;
+
+    public List<String> getDesBickids() {
+        return desBickids;
+    }
+
+    public void setDesBickids(List<String> desBickids) {
+        this.desBickids = desBickids;
+    }
+
     public List<String> getZhibiaoNames() {
         return zhibiaoNames;
     }

@@ -1,8 +1,31 @@
+
+var tempSatisfysurveytargetBickid = "";
+var tempClientCode = "";
+
 $(function () {
     initTable();
 
     $("#searchDateFrom, #searchDateTo").change(function () {
         $('#list').bootstrapTable('refresh',{url: '/project/inputlist/'+($("#searchDateFrom").val() == "" ? null : $("#searchDateFrom").val()) + '/' + ($("#searchDateTo").val() == "" ? null : $("#searchDateTo").val())});
+    });
+
+    $("#btn_empRole_ok").click(function () {
+        $.ajax({
+            url: '/project/saveinputresult',
+            type: 'POST',
+            data: JSON.stringify({
+               "satisfysurveytargetBickid" : tempSatisfysurveytargetBickid,
+                "subscriptBickid" : $("[name = 'pingfen']").val(),
+                "clientCode" : tempClientCode
+            }),
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success: function (result) {
+                $('#luru').modal('hide');
+                $('#list').bootstrapTable('refresh',{url: '/project/inputlist/'+($("#searchDateFrom").val() == "" ? null : $("#searchDateFrom").val()) + '/' + ($("#searchDateTo").val() == "" ? null : $("#searchDateTo").val())});
+            }
+        });
+
     });
 });
 
@@ -103,8 +126,10 @@ window.operateEvents={
                     $("#luruMain").append("<select class=\"form-control col-sm-12\" name=\"pingfen\"></select>");
                 }
                 for (var j = 0; j< result.des.length; j++){
-                    $("[name = 'pingfen']").append("<option value=\""+result.des[j]+"\">"+result.des[j]+"</option>");
+                    $("[name = 'pingfen']").append("<option value=\""+result.desBickids[j]+"\">"+result.des[j]+"</option>");
                 }
+                tempSatisfysurveytargetBickid = row.subscriptBickid;
+                tempClientCode = row.clientCode;
             }
         });
 
