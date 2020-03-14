@@ -50,9 +50,51 @@ public class ClientsatisfysurveyController {
         return clientsatisfysurveyService.toInputResult(subscriptBickid);
     }
 
+    /**
+     * 点击录入-》确定， 保存满意度录入信息
+     * @param target
+     * @return
+     */
     @RequestMapping(value = "/saveinputresult", method = RequestMethod.POST)
     @ResponseBody
     public String saveInputResult(@RequestBody TCCSaitDescription target){
         return clientsatisfysurveyService.saveInputResult(target);
+    }
+
+    /**
+     * 点击已录入时， 生成表单
+     * @param satisfysurveytargetBickid
+     * @param clientCode
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getinputresult", method = RequestMethod.GET)
+    public String getInputResult(@RequestParam("satisfysurveytargetBickid") String satisfysurveytargetBickid,@RequestParam("clientCode") String clientCode){
+        TCCSaitDescription target = new TCCSaitDescription();
+        target.setSatisfysurveytargetBickid(satisfysurveytargetBickid.substring(1, satisfysurveytargetBickid.length()-1));
+        target.setClientCode(clientCode.substring(1, clientCode.length()-1));
+        return clientsatisfysurveyService.getInputResult(target);
+    }
+
+    /**
+     * 点击已录入-》确定， 保存满意度录入信息
+     * @param target
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/editinputresult", method = RequestMethod.PUT)
+    public String editInputResult(@RequestBody TCCSaitDescription target){
+        return clientsatisfysurveyService.editInputResult(target);
+    }
+
+    //***********************************************************************************************
+
+    /**
+     * 跳转到满意度调查单打印界面
+     * @return
+     */
+    @RequestMapping("/toinputprinting")
+    public String toInputPrinting(){
+        return "/project/resultinput/input/inputprinting.html";
     }
 }

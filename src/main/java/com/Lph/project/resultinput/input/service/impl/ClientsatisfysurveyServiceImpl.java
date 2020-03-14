@@ -13,6 +13,7 @@ import com.Lph.project.resultinput.input.dao.TCCSaitDescriptionDAO;
 import com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey;
 import com.Lph.project.resultinput.input.model.TCCClientsatisfysurveyExample;
 import com.Lph.project.resultinput.input.model.TCCSaitDescription;
+import com.Lph.project.resultinput.input.model.TCCSaitDescriptionExample;
 import com.Lph.project.resultinput.input.service.ClientsatisfysurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -122,4 +123,30 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
         tccClientsatisfysurveyDAO.updateByPrimaryKey(tccClientsatisfysurvey);
         return "200";
     }
+
+    /**
+     * 点击已录入时， 生成表单
+     * @param target
+     * @return
+     */
+    @Override
+    public String getInputResult(TCCSaitDescription target) {
+        TCCSaitDescriptionExample example = new TCCSaitDescriptionExample();
+        example.createCriteria().andSatisfysurveytargetBickidEqualTo(target.getSatisfysurveytargetBickid()).andClientCodeEqualTo(target.getClientCode());
+        TCCSaitDescription tccSaitDescription = tccSaitDescriptionDAO.selectByExample(example).get(0);
+        return tccSatisfysurveytargetDAO.selectByPrimaryKey(tccSaitDescription.getSubscriptBickid()).getBickid();
+    }
+
+    /**
+     * 点击已录入-》确定， 保存满意度录入信息
+     * @param target
+     * @return
+     */
+    @Override
+    public String editInputResult(TCCSaitDescription target) {
+        tccSaitDescriptionDAO.updateByPrimaryKeySelective(target);
+        return "200";
+    }
+
+
 }

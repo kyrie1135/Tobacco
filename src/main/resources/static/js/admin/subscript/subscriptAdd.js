@@ -2,7 +2,7 @@
 var tempOrg = "";
 
 $(function () {
-    $("#empRoleBtnAdd").click(function () {
+    $("#empRoleBtnAdd, #empRoleBtnEdit").click(function () {
         initTargetSortTree();
         initPerTable();
         $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyroleid/0'});
@@ -11,6 +11,8 @@ $(function () {
     $("#btn_empRole_ok").click(function () {
         $("#empRoleAdd").val($('#perlist').bootstrapTable('getSelections')[0].name);
         $("#targetSortAdd").val(tempOrg);
+        $("#empRoleEdit").val($('#perlist').bootstrapTable('getSelections')[0].name);
+        $("#targetSortEdit").val(tempOrg);
         $('#myModal').modal('hide');
     });
 })
@@ -30,12 +32,13 @@ function initTargetSortTree() {
                 loadingIcon:"fa fa-hourglass",//懒加载过程中显示的沙漏字符图标
                 lazyLoad:loadNode,
                 onNodeSelected:function (event,node) {
-                    if (node.parentId == undefined){
-                        $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyorgid/'+node.id});
-                        tempOrg = node.id;
+                    if (node.parentid == "0000"){
+                        // $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyorgid/'+node.id});
+                        // tempOrg = node.id;
+                        alert("请选择岗位。");
                     }else {
                         $('#perlist').bootstrapTable('refresh',{url:'/admin/getpersbyroleid/'+node.id});
-                        tempOrg = node.parentId;
+                        tempOrg = node.id;
                     }
                 },
                 onNodeUnselected:function () {

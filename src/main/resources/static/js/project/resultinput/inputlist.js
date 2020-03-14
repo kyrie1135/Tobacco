@@ -136,7 +136,42 @@ window.operateEvents={
         $('#luru').modal('show');
     },
     'click #yiluruA': function (e, value, row) {
+        $.ajax({
+            url: '/project/toInputResult',
+            type: 'GET',
+            data: {
+                subscriptBickid : JSON.stringify(row.subscriptBickid)
+            },
+            success: function (result) {
+                $("#luruMain").empty();
+                $("[name = 'pingfen']").empty();
+                for (var i = 0; i<result.zhibiaoNames.length; i++){
+                    $("#luruMain").append("<label class=\"col-sm-12\" name=\"biaozhun\">"+result.zhibiaoNames[i]+"</label>");
+                    $("#luruMain").append("<select class=\"form-control col-sm-12\" name=\"pingfen\"></select>");
+                }
+                for (var j = 0; j< result.des.length; j++){
+                    $("[name = 'pingfen']").append("<option value=\""+result.desBickids[j]+"\">"+result.des[j]+"</option>");
+                }
+                $.ajax({
+                    url: '/project/editinputresult',
+                    type: 'PUT',
+                    data: {
+                        bickid : JSON.stringify(row.bickid),
+                        satisfysurveytargetBickid : JSON.stringify(row.subscriptBickid),
+                        clientCode : JSON.stringify(row.clientCode)
+                    },
+                    contentType:"application/json;charset=UTF-8",
+                    dataType:"json",
+                    success: function (result) {
+                        $("[name = 'pingfen']").val(result);
+                    }
+                });
+                tempSatisfysurveytargetBickid = row.subscriptBickid;
+                tempClientCode = row.clientCode;
+            }
+        });
 
+        $('#luru').modal('show');
     }
 };
 
