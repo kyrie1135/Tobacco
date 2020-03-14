@@ -114,8 +114,19 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
      */
     @Override
     public String saveInputResult(TCCSaitDescription target) {
-        target.setBickid(IdUtil.nextId());
-        tccSaitDescriptionDAO.insert(target);
+        TCCSaitDescriptionExample e = new TCCSaitDescriptionExample();
+        e.createCriteria().andSatisfysurveytargetBickidEqualTo(target.getSatisfysurveytargetBickid())
+                .andClientCodeEqualTo(target.getClientCode());
+        List<TCCSaitDescription> tccSaitDescriptions = tccSaitDescriptionDAO.selectByExample(e);
+        if (tccSaitDescriptions.size() == 0){
+            target.setBickid(IdUtil.nextId());
+            tccSaitDescriptionDAO.insert(target);
+        }else {
+            target.setBickid(tccSaitDescriptions.get(0).getBickid());
+            tccSaitDescriptionDAO.updateByPrimaryKeySelective(target);
+        }
+
+        //将满意度调查录入表中的状态改为已录入
         TCCClientsatisfysurveyExample example = new TCCClientsatisfysurveyExample();
         example.createCriteria().andSubscriptBickidEqualTo(target.getSatisfysurveytargetBickid()).andClientCodeEqualTo(target.getClientCode());
         TCCClientsatisfysurvey tccClientsatisfysurvey = tccClientsatisfysurveyDAO.selectByExample(example).get(0);
@@ -136,17 +147,5 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
         TCCSaitDescription tccSaitDescription = tccSaitDescriptionDAO.selectByExample(example).get(0);
         return tccSatisfysurveytargetDAO.selectByPrimaryKey(tccSaitDescription.getSubscriptBickid()).getBickid();
     }
-
-    /**
-     * 点击已录入-》确定， 保存满意度录入信息
-     * @param target
-     * @return
-     */
-    @Override
-    public String editInputResult(TCCSaitDescription target) {
-        tccSaitDescriptionDAO.updateByPrimaryKeySelective(target);
-        return "200";
-    }
-
 
 }

@@ -153,8 +153,8 @@ window.operateEvents={
                     $("[name = 'pingfen']").append("<option value=\""+result.desBickids[j]+"\">"+result.des[j]+"</option>");
                 }
                 $.ajax({
-                    url: '/project/editinputresult',
-                    type: 'PUT',
+                    url: '/project/getinputresult',
+                    type: 'GET',
                     data: {
                         bickid : JSON.stringify(row.bickid),
                         satisfysurveytargetBickid : JSON.stringify(row.subscriptBickid),

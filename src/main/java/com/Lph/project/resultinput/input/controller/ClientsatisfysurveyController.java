@@ -76,17 +76,6 @@ public class ClientsatisfysurveyController {
         return clientsatisfysurveyService.getInputResult(target);
     }
 
-    /**
-     * 点击已录入-》确定， 保存满意度录入信息
-     * @param target
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/editinputresult", method = RequestMethod.PUT)
-    public String editInputResult(@RequestBody TCCSaitDescription target){
-        return clientsatisfysurveyService.editInputResult(target);
-    }
-
     //***********************************************************************************************
 
     /**

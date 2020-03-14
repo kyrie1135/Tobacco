@@ -37,10 +37,4 @@ public interface ClientsatisfysurveyService {
      */
     public String getInputResult(TCCSaitDescription target);
 
-    /**
-     * 点击已录入-》确定， 保存满意度录入信息
-     * @param target
-     * @return
-     */
-    public String editInputResult(TCCSaitDescription target);
 }
