@@ -3,6 +3,7 @@ package com.Lph.admin.subscript.controller;
 import com.Lph.admin.Utils.Node;
 import com.Lph.admin.organdrole.model.Organization;
 import com.Lph.admin.organdrole.model.Person;
+import com.Lph.admin.organdrole.model.Role;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.service.SubscriptService;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,16 @@ public class SubscriptController {
     @ResponseBody
     public List<Organization> getOrganizations(){
         return subscriptService.getOrganizations();
+    }
+
+    /**
+     * 为评测指标维护上层， 根据岗位查询填充内容， 返回所有角色
+     * @return
+     */
+    @RequestMapping(value = "/role/{roleId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Role> getRoles(@PathVariable("roleId") String roleId){
+        return subscriptService.getRoles(roleId);
     }
 
     /**
@@ -115,10 +126,10 @@ public class SubscriptController {
     /**
      * 根据评测项目和所属项目筛选
      */
-    @RequestMapping(value = "/subscriptBy/{itemBickid}/{orgId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/subscriptBy/{itemBickid}/{roleId}", method = RequestMethod.GET)
     @ResponseBody
-    public List<TCCClientsatisfy> getSubscriptionsBy(@PathVariable("itemBickid") String itemBickid, @PathVariable("orgId") String orgId){
-        return subscriptService.getSubscriptionsBy(itemBickid, orgId);
+    public List<TCCClientsatisfy> getSubscriptionsBy(@PathVariable("itemBickid") String itemBickid, @PathVariable("roleId") String roleId){
+        return subscriptService.getSubscriptionsBy(itemBickid, roleId);
     }
 
     /**

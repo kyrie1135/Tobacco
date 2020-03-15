@@ -19,13 +19,20 @@
 
             <div class="panel-body">
                 <button id="mainBtn" type="button" class="btn btn-primary" style="float: right">导出word</button>
-                <div class="input-group col-sm-3" style="float: right; margin-right: 10px">
-                    <!-- 岗位 -->
-                    <span class="input-group-addon">岗位</span>
-                    <input type="date" class="form-control" id="searchDateFrom" placeholder="岗位">
+                <div class="input-group col-sm-5" style="float: right; margin-right: 10px">
+                    <!-- 所属部门 -->
+                    <span class="input-group-addon">所属岗位</span>
+                    <select class="form-control" id="belongOrg">
+                        <option value="">-</option>
+                    </select>
+                    <!-- 所属岗位 -->
+                    <span class="input-group-addon">-</span>
+                    <select class="form-control" id="belongRole">
+                        <option value="">-</option>
+                    </select>
                 </div>
                 <br>
-                <div class="modal-body col-sm-12" id="luruMain">
+                <div class="modal-body col-sm-12" id="luruMain" style="border: 1px dotted black; margin-top: 10px; overflow-x: hidden; overflow-y: scroll">
 
                 </div>
             </div>

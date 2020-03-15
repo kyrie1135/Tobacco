@@ -3,6 +3,7 @@ package com.Lph.admin.subscript.service;
 import com.Lph.admin.Utils.Node;
 import com.Lph.admin.organdrole.model.Organization;
 import com.Lph.admin.organdrole.model.Person;
+import com.Lph.admin.organdrole.model.Role;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 
 import java.util.List;
@@ -19,6 +20,12 @@ public interface SubscriptService {
      * 为评测指标维护上层，根据岗位查询填充内容，返回所有岗位
      */
     public List<Organization> getOrganizations();
+
+    /**
+     * 为评测指标维护上层， 根据岗位查询填充内容， 返回所有角色
+     * @return
+     */
+    public List<Role> getRoles(String roleId);
 
     /**
      * 选择调查人员功能， 展示角色树

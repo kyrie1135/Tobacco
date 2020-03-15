@@ -13,6 +13,7 @@ import com.Lph.admin.subscript.dao.TCCClientsatisfyDAO;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.model.TCCClientsatisfyExample;
 import com.Lph.admin.subscript.service.SubscriptService;
+import com.sun.tools.corba.se.idl.constExpr.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +63,20 @@ public class SubscriptServiceImpl implements SubscriptService {
     public List<Organization> getOrganizations() {
         OrganizationExample example = new OrganizationExample();
         return organizationDAO.selectByExample(example);
+    }
+
+    /**
+     * 为评测指标维护上层， 根据岗位查询填充内容， 返回所有角色
+     * @return
+     */
+    @Override
+    public List<Role> getRoles(String roleId) {
+        if (roleId.equals("null")){
+            return null;
+        }
+        RoleExample example = new RoleExample();
+        example.createCriteria().andOrgidEqualTo(roleId);
+        return roleDAO.selectByExample(example);
     }
 
     /**
@@ -128,15 +143,21 @@ public class SubscriptServiceImpl implements SubscriptService {
         return "200";
     }
 
+    /**
+     * 根据筛选条件返回复合的指标
+     * @param itemBickid
+     * @param roleId
+     * @return
+     */
     @Override
-    public List<TCCClientsatisfy> getSubscriptionsBy(String itemBickid, String orgId) {
+    public List<TCCClientsatisfy> getSubscriptionsBy(String itemBickid, String roleId) {
         TCCClientsatisfyExample example = new TCCClientsatisfyExample();
         TCCClientsatisfyExample.Criteria criteria = example.createCriteria();
         if (!itemBickid.equals("null")){
             criteria.andEvaluateItemBickidEqualTo(itemBickid);
         }
-        if (!orgId.equals("null")){
-            criteria.andTargetSortEqualTo(orgId);
+        if (!roleId.equals("null")){
+            criteria.andTargetSortEqualTo(roleId);
         }
         criteria.andDeletedEqualTo(0);
         return tccClientsatisfyDAO.selectByExample(example);

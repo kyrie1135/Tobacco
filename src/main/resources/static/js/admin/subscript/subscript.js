@@ -22,7 +22,7 @@ $(function () {
         }
     });
 
-    //所属岗位
+    //所属部门
     $.ajax({
         url: '/admin/org',
         type: 'GET',
@@ -36,17 +36,40 @@ $(function () {
         }
     });
 
+    //当筛选条件所属部门改变时， 为所属岗位填充内容
+    $("#belongOrg").change(function () {
+        orgId = $("#belongOrg").val();
+        if (orgId == ""){
+            orgId = null;
+            $("#belongRole").empty();
+        }
+        $.ajax({
+            url: '/admin/role/'+orgId,
+            type: 'GET',
+            data: 0,
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success: function (result) {
+                for (var i = 0; i<result.length ; i++){
+                    $("#belongRole").append("<option value = '"+ result[i].id +"'>"+ result[i].name +"</option>");
+                }
+            }
+        });
+    });
+
     //当筛选条件改变时
-    $("#belongItem, #belongOrg").change(function () {
+    $("#belongItem, #belongRole").change(function () {
         itemBickid = $("#belongItem").val();
         if (itemBickid == ""){
             itemBickid = null;
         }
-        orgId = $("#belongOrg").val();
-        if (orgId == ""){
-            orgId = null;
+        roleId = $("#belongRole").val();
+        if (roleId == ""){
+            roleId = null;
         }
-        $('#list').bootstrapTable('refresh',{url:'/admin/subscriptBy/'+itemBickid+'/'+orgId+''});
+
+
+        $('#list').bootstrapTable('refresh',{url:'/admin/subscriptBy/'+itemBickid+'/'+roleId+''});
     });
 
     //为添加弹窗填充评测指标
