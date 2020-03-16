@@ -148,4 +148,49 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
         return tccSatisfysurveytargetDAO.selectByPrimaryKey(tccSaitDescription.getSubscriptBickid()).getBickid();
     }
 
+    /**
+     * 满意度综合查询根据筛选条件返回
+     * @param dateFrom
+     * @param dateTo
+     * @param target
+     * @return
+     * @throws ParseException
+     */
+    @Override
+    public List<TCCClientsatisfysurvey> getComprehensiveList(String dateFrom, String dateTo, TCCClientsatisfysurvey target) throws ParseException {
+        TCCClientsatisfysurveyExample example = new TCCClientsatisfysurveyExample();
+        TCCClientsatisfysurveyExample.Criteria criteria = example.createCriteria();
+
+        if (!target.getGeter().equals("null")){
+            criteria.andGeterEqualTo(target.getGeter());
+        }
+        if (!target.getDeptName().equals("null")){
+            criteria.andDeptNameEqualTo(target.getDeptName());
+        }
+        if (!target.getClientName().equals("null")){
+            criteria.andClientNameEqualTo(target.getClientName());
+        }
+        if (!dateFrom.equals("null")){
+            Date dateF = new SimpleDateFormat("yyyy-MM-dd").parse(dateFrom);
+            criteria.andGetDateGreaterThanOrEqualTo(dateF);
+        }
+        if (!dateTo.equals("null")){
+            Date dateT = new SimpleDateFormat("yyyy-MM-dd").parse(dateTo);
+            criteria.andGetDateLessThanOrEqualTo(dateT);
+        }
+        example.setOrderByClause("`INPUT_DATE` DESC, `IS_OVER` ASC");
+        List<TCCClientsatisfysurvey> list = tccClientsatisfysurveyDAO.selectByExample(example);
+        for (TCCClientsatisfysurvey t : list){
+            Calendar c = Calendar.getInstance();
+            c.setTime(t.getGetDate());
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            t.setGetDate(c.getTime());
+
+            c.setTime(t.getInputDate());
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            t.setInputDate(c.getTime());
+        }
+        return list;
+    }
+
 }

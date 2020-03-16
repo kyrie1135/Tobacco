@@ -86,4 +86,25 @@ public class ClientsatisfysurveyController {
     public String toInputPrinting(){
         return "/project/resultinput/input/inputprinting.html";
     }
+
+    //***********************************************************************************************
+
+    /**
+     * 跳转到满意度综合查询界面
+     * @return
+     */
+    @RequestMapping("/tocomprehensivelist")
+    public String toComprehensiveList(){
+        return "/project/resultinput/input/comprehensivelist.html";
+    }
+
+    @RequestMapping(value = "/comprehensivelist/{dateFrom}/{dateTo}/{clientName}/{geter}/{belongOrg}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TCCClientsatisfysurvey> getComprehensiveList(@PathVariable("dateFrom") String dateFrom, @PathVariable("dateTo") String dateTo, @PathVariable("clientName") String clientName, @PathVariable("geter") String geter, @PathVariable("belongOrg") String belongOrg) throws ParseException {
+        TCCClientsatisfysurvey target = new TCCClientsatisfysurvey();
+        target.setClientName(clientName);
+        target.setGeter(geter);
+        target.setDeptName(belongOrg);
+        return clientsatisfysurveyService.getComprehensiveList(dateFrom, dateTo, target);
+    }
 }

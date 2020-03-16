@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>满意度调查录入</title>
+
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/treeview.css">
+</head>
+<body>
+<div class="container">
+    <form class="form-horizontal" id="formAdd" action="#" method="post">
+
+        <div class="divBorder">
+            <h4 class="panel panel-heading h4font">
+                满意度综合查询
+            </h4>
+
+            <div class="panel-body">
+                <div class="input-group col-sm-12">
+                    <!-- 调查时间 -->
+                    <span class="input-group-addon">调查时间</span>
+                    <input type="date" class="form-control" id="searchDateFrom" placeholder="抽样日期">
+                    <!-- 调查时间 -->
+                    <span class="input-group-addon">到</span>
+                    <input type="date" class="form-control" id="searchDateTo" placeholder="抽样日期">
+                    <!-- 客户名称 -->
+                    <span class="input-group-addon">客户名称</span>
+                    <input type="text" class="form-control" id="clientsName" placeholder="用户名称">
+                </div><br>
+                <div class="input-group col-sm-12">
+                    <!-- 调查员 -->
+                    <span class="input-group-addon">调查员</span>
+                    <select class="form-control" id="belongRole">
+                        <option value="">-</option>
+                    </select>
+                    <!-- 调查员 -->
+                    <span class="input-group-addon">-</span>
+                    <select class="form-control" id="Per">
+                        <option value="">-</option>
+                    </select>
+                    <!-- 所属部门 -->
+                    <span class="input-group-addon">所属部门</span>
+                    <select class="form-control" id="belongOrg">
+                        <option value="">-</option>
+                    </select>
+                </div><br>
+                <table id="list" class="table" data-click-to-select="true" style="table-layout: fixed;"></table>
+            </div>
+        </div>
+        <br>
+    </form>
+</div>
+
+<script src="../static/bootstrap/js/jquery-3.3.1.js"></script>
+<script src="../static/bootstrap/js/bootstrap-table.js"></script>
+<script src="../static/bootstrap/js/bootstrap.js"></script>
+<script src="../static/js/include/publicMethod.js"></script>
+<script src="../static/bootstrap/js/treeview.js"></script>
+
+<script src="../static/js/project/resultinput/comprehensivelist.js"></script>
+
+</body>
+</html>

@@ -80,6 +80,16 @@ public class SubscriptServiceImpl implements SubscriptService {
     }
 
     /**
+     * 返回所有角色
+     * @return
+     */
+    @Override
+    public List<Role> getAllRoles() {
+        RoleExample example = new RoleExample();
+        return roleDAO.selectByExample(example);
+    }
+
+    /**
      * 选择调查人员功能， 展示角色树
      * @param id
      * @return
@@ -156,6 +166,17 @@ public class SubscriptServiceImpl implements SubscriptService {
         if (!itemBickid.equals("null")){
             criteria.andEvaluateItemBickidEqualTo(itemBickid);
         }
+        if (!roleId.equals("null")){
+            criteria.andTargetSortEqualTo(roleId);
+        }
+        criteria.andDeletedEqualTo(0);
+        return tccClientsatisfyDAO.selectByExample(example);
+    }
+
+    @Override
+    public List<TCCClientsatisfy> getSubscriptionByRoleId(String roleId) {
+        TCCClientsatisfyExample example = new TCCClientsatisfyExample();
+        TCCClientsatisfyExample.Criteria criteria = example.createCriteria();
         if (!roleId.equals("null")){
             criteria.andTargetSortEqualTo(roleId);
         }

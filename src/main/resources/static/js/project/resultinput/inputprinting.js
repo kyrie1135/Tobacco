@@ -35,8 +35,41 @@ $("#belongOrg").change(function () {
 
 //当筛选条件岗位改变时， 将div中显示的指标更改为此岗位的指标
 $("#belongRole").change(function () {
-
+    belongRole = $("#belongRole").val();
+    if (belongRole == ""){
+        belongRole = null;
+    }
+    $.ajax({
+        url: '/admin/subscriptByRoleId/'+belongRole,
+        type: 'GET',
+        data: 0,
+        contentType:"application/json;charset=UTF-8",
+        dataType:"json",
+        success: function (result) {
+            $("#luruMain").empty();
+            $("[name = 'targets']").empty();
+            for (var i = 0; i<result.length ; i++){
+                $("#luruMain").append("<label class='col-sm-12 control-label'><h3 style='float: left;'>"+ result[i].evaluateTarget +"</h3></label>");
+                $("#luruMain").append("<div name=\"targets\" class=\"col-sm-12\"></div>");
+            }
+            for (var i = 0; i<targets.length; i++){
+                $("[name = 'targets']").append("<label class=\"radio-inline\">（ ）"+ targets[i] +"</label>");
+                $("[name = 'targets']").append("<br>");
+            }
+        }
+    });
 });
+
+function exportWord(){
+    if ($("#luruMain > label").length == 0){
+        alert("此岗位没有制定指标， 无需打印");
+    }else {
+        $("#luruMain").wordExport("满意度调查单");
+    }
+}
+
+//用于存放满意、不满意。。。
+var targets = new Array();
 
 $(function () {
 
@@ -45,13 +78,13 @@ $(function () {
     $("#luruMain").height(ifm.height - 165);
 
     //将选项取出存到一个list中
-    var targets = new Array();
     $.ajax({
         url: '/admin/standard',
         type: 'GET',
         data: 0,
         contentType:"application/json;charset=UTF-8",
         dataType:"json",
+        async: false,
         success: function (result) {
             for (var i = 0; i<result.length ; i++){
                 targets.push(result[i].evaluateStandard);
@@ -67,12 +100,14 @@ $(function () {
         contentType:"application/json;charset=UTF-8",
         dataType:"json",
         success: function (result) {
+            $("#luruMain").empty();
+            $("[name = 'targets']").empty();
             for (var i = 0; i<result.length ; i++){
                 $("#luruMain").append("<label class='col-sm-12 control-label'><h3 style='float: left;'>"+ result[i].evaluateTarget +"</h3></label>");
                 $("#luruMain").append("<div name=\"targets\" class=\"col-sm-12\"></div>");
             }
             for (var i = 0; i<targets.length; i++){
-                $("[name = 'targets']").append("<label class=\"radio-inline\"><input type=\"radio\">"+ targets[i] +"</label>");
+                $("[name = 'targets']").append("<label class=\"radio-inline\">（ ）"+ targets[i] +"</label>");
                 $("[name = 'targets']").append("<br>");
             }
         }

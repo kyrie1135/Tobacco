@@ -68,6 +68,16 @@ public class SubscriptController {
     }
 
     /**
+     * 返回所有角色
+     * @return
+     */
+    @RequestMapping(value = "/allroles", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Role> getAllRoles(){
+        return subscriptService.getAllRoles();
+    }
+
+    /**
      * 选择调查人员功能， 展示角色树
      * @param id
      * @return
@@ -130,6 +140,16 @@ public class SubscriptController {
     @ResponseBody
     public List<TCCClientsatisfy> getSubscriptionsBy(@PathVariable("itemBickid") String itemBickid, @PathVariable("roleId") String roleId){
         return subscriptService.getSubscriptionsBy(itemBickid, roleId);
+    }
+
+    /**
+     * 根据所属岗位筛选
+     * @return
+     */
+    @RequestMapping(value = "/subscriptByRoleId/{roleId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TCCClientsatisfy> getSubscriptionsByRoleId(@PathVariable("roleId") String roleId){
+        return subscriptService.getSubscriptionByRoleId(roleId);
     }
 
     /**

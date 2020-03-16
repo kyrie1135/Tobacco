@@ -28,6 +28,12 @@ public interface SubscriptService {
     public List<Role> getRoles(String roleId);
 
     /**
+     * 返回所有角色
+     * @return
+     */
+    public List<Role> getAllRoles();
+
+    /**
      * 选择调查人员功能， 展示角色树
      * @param id
      * @return
@@ -58,7 +64,14 @@ public interface SubscriptService {
     /**
      * 根据评测项目和所属项目筛选
      */
-    public List<TCCClientsatisfy> getSubscriptionsBy(String itemBickid, String orgId);
+    public List<TCCClientsatisfy> getSubscriptionsBy(String itemBickid, String roleId);
+
+    /**
+     * 根据所属岗位筛选
+     * @param roleId
+     * @return
+     */
+    public List<TCCClientsatisfy> getSubscriptionByRoleId(String roleId);
 
     /**
      * 选择调查人员
