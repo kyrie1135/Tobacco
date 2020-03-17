@@ -10,20 +10,14 @@ import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.model.TCCClientsatisfyExample;
 import com.Lph.project.resultinput.input.dao.TCCClientsatisfysurveyDAO;
 import com.Lph.project.resultinput.input.dao.TCCSaitDescriptionDAO;
-import com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey;
-import com.Lph.project.resultinput.input.model.TCCClientsatisfysurveyExample;
-import com.Lph.project.resultinput.input.model.TCCSaitDescription;
-import com.Lph.project.resultinput.input.model.TCCSaitDescriptionExample;
+import com.Lph.project.resultinput.input.model.*;
 import com.Lph.project.resultinput.input.service.ClientsatisfysurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyService {
@@ -189,6 +183,42 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
             c.setTime(t.getInputDate());
             c.add(Calendar.DAY_OF_MONTH, 1);
             t.setInputDate(c.getTime());
+        }
+        return list;
+    }
+
+    /**
+     * 为满意度非类查询填充table
+     * @return
+     */
+    @Override
+    public List<ClassificationSearch> getClassificationSearchs(String perName) {
+        List<ClassificationSearch> list = new ArrayList<>();
+
+        //获取当前所有的评测指标名称
+        TCCClientsatisfyExample example = new TCCClientsatisfyExample();
+        if (!perName.equals("null")){
+            example.createCriteria().andEmpRoleEqualTo(perName);
+        }
+        List<TCCClientsatisfy> l =  tccClientsatisfyDAO.selectByExample(example);
+
+        //获取当前所有的评分标准
+        TCCSatisfysurveytargetExample e = new TCCSatisfysurveytargetExample();
+        List<TCCSatisfysurveytarget> tccSatisfysurveytargets = tccSatisfysurveytargetDAO.selectByExample(e);
+
+        //将两者交叉组合
+        for (TCCClientsatisfy i : l){
+            for (TCCSatisfysurveytarget t : tccSatisfysurveytargets){
+                ClassificationSearch target = new ClassificationSearch();
+                target.setIndexName(i.getEvaluateTarget());
+                target.setSatisfaction(t.getEvaluateStandard());
+                TCCSaitDescriptionExample example1 = new TCCSaitDescriptionExample();
+                example1.createCriteria().andSatisfysurveytargetBickidEqualTo(i.getBickid()).andSubscriptBickidEqualTo(t.getBickid());
+                long l1 = tccSaitDescriptionDAO.countByExample(example1);
+                target.setTimes(l1);
+                target.setScore(l1 * t.getEvaluateTarget());
+                list.add(target);
+            }
         }
         return list;
     }

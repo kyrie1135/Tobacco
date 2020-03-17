@@ -1,5 +1,6 @@
 package com.Lph.project.resultinput.input.service;
 
+import com.Lph.project.resultinput.input.model.ClassificationSearch;
 import com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey;
 import com.Lph.project.resultinput.input.model.TCCSaitDescription;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,4 +49,10 @@ public interface ClientsatisfysurveyService {
      * @throws ParseException
      */
     public List<TCCClientsatisfysurvey> getComprehensiveList(@RequestParam("") String dateFrom, @RequestParam("") String dateTo, @RequestBody TCCClientsatisfysurvey target) throws ParseException;
+
+    /**
+     * 为满意度非类查询填充table
+     * @return
+     */
+    public List<ClassificationSearch> getClassificationSearchs(String perName);
 }

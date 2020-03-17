@@ -1,5 +1,6 @@
 package com.Lph.project.resultinput.input.controller;
 
+import com.Lph.project.resultinput.input.model.ClassificationSearch;
 import com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey;
 import com.Lph.project.resultinput.input.model.TCCSaitDescription;
 import com.Lph.project.resultinput.input.service.ClientsatisfysurveyService;
@@ -107,4 +108,28 @@ public class ClientsatisfysurveyController {
         target.setDeptName(belongOrg);
         return clientsatisfysurveyService.getComprehensiveList(dateFrom, dateTo, target);
     }
+
+    //***********************************************************************************************
+    //满意度非类查询
+
+    /**
+     * 跳转到满意度分类查询界面
+     * @return
+     */
+    @RequestMapping("/toclassification")
+    public String toClassification(){
+        return "/project/resultinput/input/classificatioinputlist.html";
+    }
+
+    /**
+     * 为满意度非类查询填充table
+     * @return
+     */
+    @RequestMapping(value = "/classificationsearch/{perName}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ClassificationSearch> getClassificationSearchs(@PathVariable("perName") String perName) {
+        return clientsatisfysurveyService.getClassificationSearchs(perName);
+    }
+
+
 }
