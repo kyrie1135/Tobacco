@@ -106,6 +106,9 @@
     from t_c_c_clientsatisfy
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </select>
+  <select id="selectAllBigCorps" resultType="String">
+    select distinct BIG_CORP_CODE from t_b_c_client
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_c_c_clientsatisfy
     where BICKID = #{bickid,jdbcType=VARCHAR}

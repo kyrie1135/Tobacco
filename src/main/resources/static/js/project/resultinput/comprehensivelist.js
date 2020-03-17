@@ -14,10 +14,10 @@ $(function () {
             }
         }
     });
-    $("#Per").append("<option>-</option>");
+    $("#Per").append("<option value=''>-</option>");
     $("#belongRole").change(function () {
         $("#Per").empty();
-        $("#Per").append("<option>-</option>");
+        $("#Per").append("<option value=''>-</option>");
         $.ajax({
             url: '/admin/getpersbyroleid/'+$("#belongRole").val(),
             type: 'GET',
@@ -34,14 +34,14 @@ $(function () {
 
     //填充所属部门
     $.ajax({
-        url: '/admin/org',
+        url: '/admin/allcorps',
         type: 'GET',
         data: 0,
         contentType:"application/json;charset=UTF-8",
         dataType:"json",
         success: function (result) {
             for (var i = 0; i<result.length; i++){
-                $("#belongOrg").append("<option value=\""+result[i].id+"\">"+result[i].name+"</option>");
+                $("#belongOrg").append("<option value=\""+result[i]+"\">"+result[i]+"</option>");
             }
         }
     });

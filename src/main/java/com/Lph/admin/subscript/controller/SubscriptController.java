@@ -89,6 +89,16 @@ public class SubscriptController {
     }
 
     /**
+     * 获取所有部门
+     * @return
+     */
+    @RequestMapping(value = "/allcorps", method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> getAllCorps(){
+        return subscriptService.getBigCorps();
+    }
+
+    /**
      * 获取所有评测指标
      * @return
      */

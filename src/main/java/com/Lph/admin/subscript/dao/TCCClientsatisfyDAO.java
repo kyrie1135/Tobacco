@@ -32,4 +32,6 @@ public interface TCCClientsatisfyDAO {
     int updateByPrimaryKeySelective(TCCClientsatisfy record);
 
     int updateByPrimaryKey(TCCClientsatisfy record);
+
+    List<String> selectAllBigCorps();
 }

@@ -4,7 +4,6 @@ import com.Lph.admin.Utils.IdUtil;
 import com.Lph.admin.Utils.Node;
 import com.Lph.admin.evaluationdescription.dao.TCCDescriptionDAO;
 import com.Lph.admin.evaluationitem.dao.TCCEvaluationitemDAO;
-import com.Lph.admin.evaluationitem.model.TCCEvaluationitemExample;
 import com.Lph.admin.organdrole.dao.OrganizationDAO;
 import com.Lph.admin.organdrole.dao.PersonDAO;
 import com.Lph.admin.organdrole.model.*;
@@ -13,7 +12,7 @@ import com.Lph.admin.subscript.dao.TCCClientsatisfyDAO;
 import com.Lph.admin.subscript.model.TCCClientsatisfy;
 import com.Lph.admin.subscript.model.TCCClientsatisfyExample;
 import com.Lph.admin.subscript.service.SubscriptService;
-import com.sun.tools.corba.se.idl.constExpr.Or;
+import com.Lph.project.resultinput.input.model.TCCClientsatisfysurveyExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -106,6 +105,16 @@ public class SubscriptServiceImpl implements SubscriptService {
             nodes.add(new Node(role.getId(), role.getOrgid(), role.getName()));
         }
         return nodes;
+    }
+
+    /**
+     * 为满意度综合调查筛选栏中填充所属部门
+     * @return
+     */
+    @Override
+    public List<String> getBigCorps() {
+        List<String> list = tccClientsatisfyDAO.selectAllBigCorps();
+        return list;
     }
 
     /**

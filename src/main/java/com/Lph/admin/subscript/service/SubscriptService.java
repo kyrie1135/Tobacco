@@ -41,6 +41,12 @@ public interface SubscriptService {
     public List<Node> getRoleTree(String id);
 
     /**
+     * 为满意度综合调查筛选栏中填充所属部门
+     * @return
+     */
+    public List<String> getBigCorps();
+
+    /**
      * 获取所有评测指标
      * @return
      */
