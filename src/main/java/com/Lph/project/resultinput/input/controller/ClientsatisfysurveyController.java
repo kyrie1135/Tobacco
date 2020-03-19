@@ -143,5 +143,12 @@ public class ClientsatisfysurveyController {
         return "/project/resultinput/input/summarylist.html";
     }
 
-
+    /**
+     * 跳转到饼图显示界面
+     * @return
+     */
+    @RequestMapping("/toechartlist")
+    public String toEchartList(){
+        return "/project/resultinput/input/echartlist.html";
+    }
 }
