@@ -77,4 +77,16 @@ public class SatisfysurveytargetController {
         }
         return satisfysurveytargetService.editStandard(target);
     }
+
+    /**
+     * 根据评测指标bickid和评测标准bickid返回数量
+     * @param subscriptBickid
+     * @param targetBickid
+     * @return
+     */
+    @RequestMapping(value = "/gettargetnum",method = RequestMethod.GET)
+    @ResponseBody
+    public Integer editStandard(@RequestParam("subscriptBickid") String subscriptBickid, @RequestParam("targetBickid") String targetBickid){
+        return satisfysurveytargetService.getTargetNum(subscriptBickid, targetBickid);
+    }
 }

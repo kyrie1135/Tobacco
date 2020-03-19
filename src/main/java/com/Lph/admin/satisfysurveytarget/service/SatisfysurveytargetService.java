@@ -28,4 +28,12 @@ public interface SatisfysurveytargetService {
      * 删除评分标准
      */
     public String editStandard(TCCSatisfysurveytarget target);
+
+    /**
+     * 根据评测指标bickid和评测标准bickid返回数量
+     * @param subscriptBickid
+     * @param targetBickid
+     * @return
+     */
+    public Integer getTargetNum(String subscriptBickid, String targetBickid);
 }

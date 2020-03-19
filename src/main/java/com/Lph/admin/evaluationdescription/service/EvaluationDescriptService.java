@@ -1,6 +1,7 @@
 package com.Lph.admin.evaluationdescription.service;
 
 import com.Lph.admin.evaluationdescription.model.TCCDescription;
+import com.Lph.project.resultinput.input.model.TCCSaitDescription;
 
 import java.util.List;
 
@@ -32,4 +33,17 @@ public interface EvaluationDescriptService {
      * 删除评测指标描述
      */
     public String delDescriptions(String id);
+
+    /**
+     * 根据bickid获得评测指标
+     * @return bickid
+     */
+    public TCCDescription getDescriptionByBickid(String bickid);
+
+    /**
+     * 根据SatisfysurveyBickid获得汇总数量
+     * @param bickid
+     * @return
+     */
+    public List<TCCSaitDescription> getDescriptionNumByBickid(String bickid);
 }

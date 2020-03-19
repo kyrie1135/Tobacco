@@ -5,6 +5,9 @@ import com.Lph.admin.evaluationdescription.dao.TCCDescriptionDAO;
 import com.Lph.admin.evaluationdescription.model.TCCDescription;
 import com.Lph.admin.evaluationdescription.model.TCCDescriptionExample;
 import com.Lph.admin.evaluationdescription.service.EvaluationDescriptService;
+import com.Lph.project.resultinput.input.dao.TCCSaitDescriptionDAO;
+import com.Lph.project.resultinput.input.model.TCCSaitDescription;
+import com.Lph.project.resultinput.input.model.TCCSaitDescriptionExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,8 @@ public class EvaluationDescriptServiceImpl implements EvaluationDescriptService 
 
     @Autowired
     private TCCDescriptionDAO tccDescriptionDAO;
+    @Autowired
+    private TCCSaitDescriptionDAO tccSaitDescriptionDAO;
 
     /**
      * 获取所有评测指标描述
@@ -71,5 +76,26 @@ public class EvaluationDescriptServiceImpl implements EvaluationDescriptService 
             return "200";
         }
         return "0";
+    }
+
+    /**
+     * 根据bickid获得评测指标
+     * @return bickid
+     */
+    @Override
+    public TCCDescription getDescriptionByBickid(String bickid) {
+        return tccDescriptionDAO.selectByPrimaryKey(bickid);
+    }
+
+    /**
+     * 根据SatisfysurveyBickid获得汇总数量
+     * @param bickid
+     * @return
+     */
+    @Override
+    public List<TCCSaitDescription> getDescriptionNumByBickid(String bickid) {
+        TCCSaitDescriptionExample example = new TCCSaitDescriptionExample();
+        example.createCriteria().andSatisfysurveytargetBickidEqualTo(bickid);
+        return tccSaitDescriptionDAO.selectByExample(example);
     }
 }

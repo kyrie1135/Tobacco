@@ -131,5 +131,17 @@ public class ClientsatisfysurveyController {
         return clientsatisfysurveyService.getClassificationSearchs(perName);
     }
 
+    //***********************************************************************************************
+    //满意度汇总查询
+
+    /**
+     * 跳转到满意度汇总查询界面
+     * @return
+     */
+    @RequestMapping("/tosummarylist")
+    public String toSummaryList(){
+        return "/project/resultinput/input/summarylist.html";
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.Lph.admin.evaluationdescription.controller;
 
 import com.Lph.admin.evaluationdescription.model.TCCDescription;
 import com.Lph.admin.evaluationdescription.service.EvaluationDescriptService;
+import com.Lph.project.resultinput.input.model.TCCSaitDescription;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.ServerEndpoint;
 import java.util.List;
 
 @RequestMapping("/admin")
@@ -80,5 +82,25 @@ public class EvaluationDescriptionController {
     @ResponseBody
     public String delDescriptions(@RequestBody TCCDescription target){
         return evaluationDescriptService.delDescriptions(target.getBickid());
+    }
+
+    /**
+     * 根据bickid或得指标描述
+     */
+    @RequestMapping(value = "/getdescriptionbybickid", method = RequestMethod.GET)
+    @ResponseBody
+    public TCCDescription getDescriptionByBickid(@RequestParam("bickid") String bickid){
+        return evaluationDescriptService.getDescriptionByBickid(bickid);
+    }
+
+    /**
+     * 根据SatisfysurveyBickid获得汇总数量
+     * @param bickid
+     * @return
+     */
+    @RequestMapping(value = "/getdescriptionnumbybickid", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TCCSaitDescription> getDescriptionNumByBickid(@RequestParam("bickid") String bickid){
+        return evaluationDescriptService.getDescriptionNumByBickid(bickid);
     }
 }

@@ -5,6 +5,9 @@ import com.Lph.admin.satisfysurveytarget.dao.TCCSatisfysurveytargetDAO;
 import com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget;
 import com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytargetExample;
 import com.Lph.admin.satisfysurveytarget.service.SatisfysurveytargetService;
+import com.Lph.project.resultinput.input.dao.TCCSaitDescriptionDAO;
+import com.Lph.project.resultinput.input.model.TCCSaitDescription;
+import com.Lph.project.resultinput.input.model.TCCSaitDescriptionExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,8 @@ public class SatisfysurveytargetServiceimpl implements SatisfysurveytargetServic
 
     @Autowired
     private TCCSatisfysurveytargetDAO tccSatisfysurveytargetDAO;
+    @Autowired
+    private TCCSaitDescriptionDAO tccSaitDescriptionDAO;
 
     /**
      * 获得指标维护table
@@ -57,5 +62,18 @@ public class SatisfysurveytargetServiceimpl implements SatisfysurveytargetServic
     public String editStandard(TCCSatisfysurveytarget target) {
         tccSatisfysurveytargetDAO.updateByPrimaryKeySelective(target);
         return "200";
+    }
+
+    /**
+     * 根据评测指标bickid和评测标准bickid返回数量
+     * @param subscriptBickid
+     * @param targetBickid
+     * @return
+     */
+    @Override
+    public Integer getTargetNum(String subscriptBickid, String targetBickid) {
+        TCCSaitDescriptionExample example = new TCCSaitDescriptionExample();
+        example.createCriteria().andSatisfysurveytargetBickidEqualTo(subscriptBickid).andSubscriptBickidEqualTo(targetBickid);
+        return tccSaitDescriptionDAO.selectByExample(example).size();
     }
 }
