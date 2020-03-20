@@ -31,6 +31,7 @@ public class AppAndModServiceImpl implements AppAndModService {
     @Override
     public List<Application> getMenuApp() {
         ApplicationExample example = new ApplicationExample();
+        example.setOrderByClause("`app_num` ASC");
         return applicationDAO.selectByExample(example);
     }
 

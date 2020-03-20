@@ -158,9 +158,6 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
         if (!target.getGeter().equals("null")){
             criteria.andGeterEqualTo(target.getGeter());
         }
-        if (!target.getDeptName().equals("null")){
-            criteria.andDeptNameEqualTo(target.getDeptName());
-        }
         if (!target.getClientName().equals("null")){
             criteria.andClientNameEqualTo(target.getClientName());
         }

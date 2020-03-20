@@ -24,7 +24,7 @@ $(function () {
     });
     //抽样日期填充当前日期
     var now = new Date();
-    var time = now.getFullYear() + "-" +((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
+    var time = now.getFullYear() + "/" +((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"/"+(now.getDate()<10?"0":"")+now.getDate();
     $("#getDate").val(time);
 
     //为客户经理select填充options
@@ -99,6 +99,7 @@ function initTable() {
         search: false,
         pagination: true,
         pageSize: 8,
+        locale: 'zh-CN',
         paginationLoop: false,
         columns:[
             {
@@ -137,5 +138,5 @@ function setDateMaxToToday() {
     //得到当前日子（多少号）
     var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();
     //设置input标签的max属性
-    $("#diaochaDate, #luruDate").attr("min",year+"-"+month+"-"+date);
+    $("#diaochaDate, #luruDate").attr("min",year+"/"+month+"/"+date);
 }

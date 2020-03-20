@@ -19,14 +19,12 @@
 
             <div class="panel-body">
                 <div class="input-group col-sm-12">
-                    <!--&lt;!&ndash; 调查时间 &ndash;&gt;-->
-                    <!--<span class="input-group-addon">调查时间</span>-->
-                    <!--<input type="date" class="form-control" id="searchDateFrom" placeholder="抽样日期">-->
-                    <!--&lt;!&ndash; 调查时间 &ndash;&gt;-->
-                    <!--<span class="input-group-addon">到</span>-->
-                    <!--<input type="date" class="form-control" id="searchDateTo" placeholder="抽样日期">-->
                     <!-- 调查员 -->
                     <span class="input-group-addon">调查员</span>
+                    <select class="form-control" id="belongOrg">
+                        <option value="">-</option>
+                    </select>
+                    <span class="input-group-addon">-</span>
                     <select class="form-control" id="belongRole">
                         <option value="">-</option>
                     </select>
@@ -48,6 +46,7 @@
 <script src="../static/bootstrap/js/bootstrap.js"></script>
 <script src="../static/js/include/publicMethod.js"></script>
 <script src="../static/bootstrap/js/treeview.js"></script>
+<script src="../static/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
 
 <script src="../static/js/project/resultinput/classificationinputlist.js"></script>
 

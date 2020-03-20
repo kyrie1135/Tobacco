@@ -99,13 +99,12 @@ public class ClientsatisfysurveyController {
         return "/project/resultinput/input/comprehensivelist.html";
     }
 
-    @RequestMapping(value = "/comprehensivelist/{dateFrom}/{dateTo}/{clientName}/{geter}/{belongOrg}", method = RequestMethod.GET)
+    @RequestMapping(value = "/comprehensivelist/{dateFrom}/{dateTo}/{clientName}/{geter}", method = RequestMethod.GET)
     @ResponseBody
-    public List<TCCClientsatisfysurvey> getComprehensiveList(@PathVariable("dateFrom") String dateFrom, @PathVariable("dateTo") String dateTo, @PathVariable("clientName") String clientName, @PathVariable("geter") String geter, @PathVariable("belongOrg") String belongOrg) throws ParseException {
+    public List<TCCClientsatisfysurvey> getComprehensiveList(@PathVariable("dateFrom") String dateFrom, @PathVariable("dateTo") String dateTo, @PathVariable("clientName") String clientName, @PathVariable("geter") String geter) throws ParseException {
         TCCClientsatisfysurvey target = new TCCClientsatisfysurvey();
         target.setClientName(clientName);
         target.setGeter(geter);
-        target.setDeptName(belongOrg);
         return clientsatisfysurveyService.getComprehensiveList(dateFrom, dateTo, target);
     }
 

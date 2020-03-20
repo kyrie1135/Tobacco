@@ -1,4 +1,9 @@
 $(function () {
+    //点击首页响应
+    $("#indexForm").click(function () {
+        $("#mainIframe").attr('src', '/project/toechartlist');
+    });
+
     //iframe高度设置
     var topMenu = window.document.getElementById('topMenu'); //顶层菜单
     var ifm = document.getElementById("mainIframe"); //iframe
@@ -51,7 +56,7 @@ function getMenuMod() {
         dataType: "json",
         success: function (result) {
             for (var i = 0; i< result.length; i++){
-                $("#" + result[i].moduleAppid + "").append("<li><a href=\"javascript:void(0)\" onclick=\"getModuleUrl(this)\" class=\"myLeftMenu\" data="+result[i].moduleUrl+">" + result[i].moduleName + "</a></li>");
+                $("#" + result[i].moduleAppid + "").append("<li><a href=\"javascript:void(0)\" style='margin-left: 35px' onclick=\"getModuleUrl(this)\" class=\"myLeftMenu\" data="+result[i].moduleUrl+">" + result[i].moduleName + "</a></li>");
             }
         }
     });

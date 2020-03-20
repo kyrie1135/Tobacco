@@ -136,6 +136,7 @@ function initTable() {
         search: false,
         pagination: true,
         pageSize: 8,
+        locale: 'zh-CN',
         paginationLoop: false,
         columns:[
             {
@@ -153,12 +154,12 @@ function initTable() {
             }, {
                 field:'itemName',
                 title:'评测标准',
-                align:'center',
+                align:'left',
                 width:150
             }, {
                 field:'description',
                 title:'项目标准描述',
-                align:'center',
+                align:'left',
                 width:150
             }
         ]

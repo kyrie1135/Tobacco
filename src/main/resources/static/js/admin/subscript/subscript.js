@@ -283,6 +283,7 @@ function initTable() {
         singleSelect:true,
         pagination: true,
         pageSize: 8,
+        locale: 'zh-CN',
         paginationLoop: false,
         columns:[
             {
@@ -314,7 +315,7 @@ function initTable() {
             },{
                 field:'evaluateTargetBickid',
                 title:'评测指标',
-                align:'center',
+                align:'left',
                 formatter: function(value, row, index){
                     return changeEvaluateTargetBickid(value)
                 },

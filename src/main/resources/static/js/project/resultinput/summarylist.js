@@ -13,6 +13,7 @@ function initTable() {
         search: false,
         pagination: true,
         pageSize: 8,
+        locale: 'zh-CN',
         paginationLoop: false,
         columns:[
             {
@@ -30,7 +31,7 @@ function initTable() {
             },{
                 field:'evaluateTargetBickid',
                 title:'调查项目',
-                align:'center',
+                align:'left',
                 formatter: function(row, value, index){
                     return getEvaluateTarget(value);
                 },
@@ -98,7 +99,7 @@ function getEvaluateTargetNum(value) {
 //返回详情
 function getDetails() {
     return[
-        '<a type="submit" id="xiangqing" style="color: blue; cursor: pointer">..详情..</a>',
+        '<span class="glyphicon glyphicon-search"><a type="submit" id="xiangqing" style="color: blue; cursor: pointer"> 详情</a>',
     ].join('');
 }
 
@@ -120,16 +121,6 @@ window.operateEvents={
             }
         });
         $('#myModel').modal('show');
-        // $.ajax({
-        //     url: '/project/',
-        //     type: 'GET',
-        //     data: {
-        //         subscriptBickid : JSON.stringify(row.subscriptBickid)
-        //     },
-        //     success: function (result) {
-        //
-        //     }
-        // });
     }
 }
 

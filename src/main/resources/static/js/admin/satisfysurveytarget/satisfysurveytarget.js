@@ -105,6 +105,7 @@ function initTable() {
         singleSelect:true,
         pagination: true,
         pageSize: 8,
+        locale: 'zh-CN',
         paginationLoop: false,
         columns:[
             {

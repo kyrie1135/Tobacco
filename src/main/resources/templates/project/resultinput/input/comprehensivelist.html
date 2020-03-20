@@ -30,6 +30,11 @@
                     <input type="text" class="form-control" id="clientsName" placeholder="用户名称">
                 </div><br>
                 <div class="input-group col-sm-12">
+                    <!-- 所属部门 -->
+                    <span class="input-group-addon">所属部门</span>
+                    <select class="form-control" id="belongOrg">
+                        <option value="">-</option>
+                    </select>
                     <!-- 调查员 -->
                     <span class="input-group-addon">调查员</span>
                     <select class="form-control" id="belongRole">
@@ -40,11 +45,7 @@
                     <select class="form-control" id="Per">
                         <option value="">-</option>
                     </select>
-                    <!-- 所属部门 -->
-                    <span class="input-group-addon">所属部门</span>
-                    <select class="form-control" id="belongOrg">
-                        <option value="">-</option>
-                    </select>
+
                 </div><br>
                 <table id="list" class="table" data-click-to-select="true" style="table-layout: fixed;"></table>
             </div>
@@ -58,6 +59,7 @@
 <script src="../static/bootstrap/js/bootstrap.js"></script>
 <script src="../static/js/include/publicMethod.js"></script>
 <script src="../static/bootstrap/js/treeview.js"></script>
+<script src="../static/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
 
 <script src="../static/js/project/resultinput/comprehensivelist.js"></script>
 

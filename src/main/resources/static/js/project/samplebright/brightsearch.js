@@ -17,6 +17,7 @@ function initTable() {
         search: false,
         pagination: true,
         pageSize: 8,
+        locale: 'zh-CN',
         paginationLoop: false,
         columns:[
             {
@@ -65,5 +66,6 @@ function initTable() {
 }
 
 function changeDateFormat(target) {
-    return target.substring(0, 10);
+    temp = target.substring(0, 10);
+    return temp.replace(/-/g, '/');
 }

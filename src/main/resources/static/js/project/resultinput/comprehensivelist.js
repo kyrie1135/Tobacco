@@ -1,25 +1,46 @@
 $(function () {
     initTable();
 
-    //填充调查员 1.填充所有角色 2.填充所属此角色的人员
+    //填充调查员 1.填充所有组织 2.填充所属此组织的角色 3.填充所属角色的人员
     $.ajax({
-        url: '/admin/allroles',
+        url: '/admin/org',
         type: 'GET',
         data: 0,
         contentType:"application/json;charset=UTF-8",
         dataType:"json",
         success: function (result) {
+            // $("#belongOrg").append("<option value=''>-</option>");
             for (var i = 0; i<result.length; i++){
-                $("#belongRole").append("<option value=\""+result[i].id+"\">"+result[i].name+"</option>");
+                $("#belongOrg").append("<option value=\""+result[i].id+"\">"+result[i].name+"</option>");
             }
         }
     });
-    $("#Per").append("<option value=''>-</option>");
+
+    $("#belongOrg").change(function () {
+        $("#belongRole").empty();
+        $("#belongRole").append("<option value=''>-</option>");
+        $("#belongRole").trigger('change');
+        $.ajax({
+            url: '/admin/role/'+ ($("#belongOrg").val() == "" ? null : $("#belongOrg").val()),
+            type: 'GET',
+            data: 0,
+            contentType:"application/json;charset=UTF-8",
+            dataType:"json",
+            success: function (result) {
+                $("#Per").append("<option value=''>-</option>");
+                for (var i = 0; i<result.length; i++){
+                    $("#belongRole").append("<option value=\""+result[i].id+"\">"+result[i].name+"</option>");
+                }
+            }
+        });
+    });
+
     $("#belongRole").change(function () {
         $("#Per").empty();
         $("#Per").append("<option value=''>-</option>");
+        $("#Per").trigger('change');
         $.ajax({
-            url: '/admin/getpersbyroleid/'+$("#belongRole").val(),
+            url: '/admin/getpersbyroleid/'+($("#belongRole").val() == "" ? null : $("#belongRole").val()),
             type: 'GET',
             data: 0,
             contentType:"application/json;charset=UTF-8",
@@ -33,22 +54,22 @@ $(function () {
     });
 
     //填充所属部门
-    $.ajax({
-        url: '/admin/allcorps',
-        type: 'GET',
-        data: 0,
-        contentType:"application/json;charset=UTF-8",
-        dataType:"json",
-        success: function (result) {
-            for (var i = 0; i<result.length; i++){
-                $("#belongOrg").append("<option value=\""+result[i]+"\">"+result[i]+"</option>");
-            }
-        }
-    });
+    // $.ajax({
+    //     url: '/admin/allcorps',
+    //     type: 'GET',
+    //     data: 0,
+    //     contentType:"application/json;charset=UTF-8",
+    //     dataType:"json",
+    //     success: function (result) {
+    //         for (var i = 0; i<result.length; i++){
+    //             $("#belongOrg").append("<option value=\""+result[i]+"\">"+result[i]+"</option>");
+    //         }
+    //     }
+    // });
 
     //当筛选条件改变时， 刷新table
-    $("#searchDateFrom, #searchDateTo, #clientsName, #Per, #belongOrg").change(function () {
-        $('#list').bootstrapTable('refresh', {url: '/project/comprehensivelist/'+($("#searchDateFrom").val() == "" ? null : $("#searchDateFrom").val()) + '/' + ($("#searchDateTo").val() == "" ? null : $("#searchDateTo").val()) + '/' +($("#clientsName").val() == "" ? null : $("#clientsName").val()) + '/' +($("#Per").val() == "" ? null : $("#Per").val()) + '/' +($("#belongOrg").val() == "" ? null : $("#belongOrg").val())});
+    $("#searchDateFrom, #searchDateTo, #clientsName, #Per").change(function () {
+        $('#list').bootstrapTable('refresh', {url: '/project/comprehensivelist/'+($("#searchDateFrom").val() == "" ? null : $("#searchDateFrom").val()) + '/' + ($("#searchDateTo").val() == "" ? null : $("#searchDateTo").val()) + '/' +($("#clientsName").val() == "" ? null : $("#clientsName").val()) + '/' +($("#Per").val() == "" ? null : $("#Per").val())});
     });
 
 });
@@ -56,7 +77,7 @@ $(function () {
 //初始化table
 function initTable() {
     $("#list").bootstrapTable({
-        url: '/project/comprehensivelist/'+($("#searchDateFrom").val() == "" ? null : $("#searchDateFrom").val()) + '/' + ($("#searchDateTo").val() == "" ? null : $("#searchDateTo").val()) + '/' +($("#clientsName").val() == "" ? null : $("#clientsName").val()) + '/' +($("#Per").val() == "" ? null : $("#Per").val()) + '/' +($("#belongOrg").val() == "" ? null : $("#belongOrg").val()),
+        url: '/project/comprehensivelist/'+($("#searchDateFrom").val() == "" ? null : $("#searchDateFrom").val()) + '/' + ($("#searchDateTo").val() == "" ? null : $("#searchDateTo").val()) + '/' +($("#clientsName").val() == "" ? null : $("#clientsName").val()) + '/' +($("#Per").val() == "" ? null : $("#Per").val()),
         type:"GET",
         data: 0,
         uniqueId:"bickid",
@@ -64,6 +85,7 @@ function initTable() {
         search: false,
         pagination: true,
         pageSize: 8,
+        locale: 'zh-CN',
         paginationLoop: false,
         columns:[
             {
@@ -123,15 +145,16 @@ function initTable() {
 function operateClass(value, row) {
     if (value == 0){
         return[
-            '<a style="color: red;">..未录入..</a>',
+            '<span class="glyphicon glyphicon-pencil"><a style="color: red;"> 未录入</a>',
         ].join('');
     }else if (value == 1){
         return[
-            '<a style="color: green;">..已录入..</a>',
+            '<span class="glyphicon glyphicon-ok"><a style="color: green;"> 已录入</a>',
         ].join('');
     }
 }
 
 function changeDateFormat(target) {
-    return target.substring(0, 10);
+    temp = target.substring(0, 10);
+    return temp.replace(/-/g, '/');
 }

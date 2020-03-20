@@ -40,6 +40,7 @@ function initTable() {
         search: false,
         pagination: true,
         pageSize: 8,
+        locale: 'zh-CN',
         paginationLoop: false,
         columns:[
             {
@@ -101,11 +102,11 @@ function initTable() {
 function operateClass(value, row) {
     if (value == 0){
         return[
-            '<a type="submit" id="luruA" style="color: red; cursor: pointer">..录入..</a>',
+            '<span class="glyphicon glyphicon-pencil"><a type="submit" id="luruA" style="color: red; cursor: pointer"> 录入</a>',
         ].join('');
     }else if (value == 1){
         return[
-            '<a type="submit" id="yiluruA" style="color: green; cursor: pointer">..已录入..</a>',
+            '<span class="glyphicon glyphicon-ok"><a type="submit" id="yiluruA" style="color: green; cursor: pointer"> 已录入</a>',
         ].join('');
     }
 }
@@ -176,5 +177,6 @@ window.operateEvents={
 };
 
 function changeDateFormat(target) {
-    return target.substring(0, 10);
+    temp = target.substring(0, 10);
+    return temp.replace(/-/g, '/');
 }
