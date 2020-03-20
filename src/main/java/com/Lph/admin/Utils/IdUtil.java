@@ -17,4 +17,12 @@ public class IdUtil {
         String str = millis + String.format("%03d", end3);
         return str;
     }
+
+    public static void main(String[] args) {
+        for (int i = 0; i< 5; i++){
+            System.out.println(nextId());
+        }
+
+
+    }
 }

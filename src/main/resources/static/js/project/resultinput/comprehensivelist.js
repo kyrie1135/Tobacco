@@ -123,7 +123,7 @@ function initTable() {
 function operateClass(value, row) {
     if (value == 0){
         return[
-            '<a style="color: red;">..录入..</a>',
+            '<a style="color: red;">..未录入..</a>',
         ].join('');
     }else if (value == 1){
         return[

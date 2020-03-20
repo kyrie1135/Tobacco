@@ -14,6 +14,9 @@ $.ajax({
 
 //当筛选条件所属部门改变时， 为所属岗位填充内容
 $("#belongOrg").change(function () {
+    $("#belongRole").empty();
+    $("#belongRole").append("<option value=''>-</option>");
+    $("#belongRole").trigger('change');
     orgId = $("#belongOrg").val();
     if (orgId == ""){
         orgId = null;

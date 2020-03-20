@@ -121,11 +121,11 @@ public class BrightServiceImpl implements BrightService {
      */
     @Override
     public String saveSearchClients(String list, String date, String diaochaDate, String luruDate, String luruPer) throws ParseException {
-        TCCSampleBright target = new TCCSampleBright();
         List<TCCSampleBright> clients = new ArrayList<>();
         JSONArray paradms = JSON.parseArray(list);
         TBCClientExample example = new TBCClientExample();
         for (int i = 0; i< paradms.size();i++) {
+            TCCSampleBright target = new TCCSampleBright();
             JSONObject paramjson = (JSONObject) paradms.get(i);
             example.clear();
             example.createCriteria().andFacilityNumEqualTo(paramjson.getString("facilityNum"));
@@ -158,15 +158,15 @@ public class BrightServiceImpl implements BrightService {
     }
 
     public void buildResultInputList(List<TCCSampleBright> list){
-        TCCClientsatisfysurvey target = new TCCClientsatisfysurvey();
         List<TCCClientsatisfy> zhibiaoList = new ArrayList<>();
         TCCClientsatisfyExample example = new TCCClientsatisfyExample();
-        TBCClientExample clientExample = new TBCClientExample();
-        TBCClientExample.Criteria criteria = clientExample.createCriteria();
         zhibiaoList = tccClientsatisfyDAO.selectByExample(example);
 
         for (TCCSampleBright t : list){
             for (TCCClientsatisfy tc : zhibiaoList){
+                TCCClientsatisfysurvey target = new TCCClientsatisfysurvey();
+                TBCClientExample clientExample = new TBCClientExample();
+                TBCClientExample.Criteria criteria = clientExample.createCriteria();
                 target.setBickid(IdUtil.nextId());
                 target.setSubscriptBickid(tc.getBickid());
 
