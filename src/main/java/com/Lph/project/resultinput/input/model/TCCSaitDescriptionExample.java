@@ -403,6 +403,76 @@ public class TCCSaitDescriptionExample {
             addCriterion("CLIENT_CODE not between", value1, value2, "clientCode");
             return (Criteria) this;
         }
+
+        public Criteria andMonthIsNull() {
+            addCriterion("`MONTH` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthIsNotNull() {
+            addCriterion("`MONTH` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthEqualTo(String value) {
+            addCriterion("`MONTH` =", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthNotEqualTo(String value) {
+            addCriterion("`MONTH` <>", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthGreaterThan(String value) {
+            addCriterion("`MONTH` >", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthGreaterThanOrEqualTo(String value) {
+            addCriterion("`MONTH` >=", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthLessThan(String value) {
+            addCriterion("`MONTH` <", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthLessThanOrEqualTo(String value) {
+            addCriterion("`MONTH` <=", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthLike(String value) {
+            addCriterion("`MONTH` like", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthNotLike(String value) {
+            addCriterion("`MONTH` not like", value, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthIn(List<String> values) {
+            addCriterion("`MONTH` in", values, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthNotIn(List<String> values) {
+            addCriterion("`MONTH` not in", values, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthBetween(String value1, String value2) {
+            addCriterion("`MONTH` between", value1, value2, "month");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthNotBetween(String value1, String value2) {
+            addCriterion("`MONTH` not between", value1, value2, "month");
+            return (Criteria) this;
+        }
     }
 
     /**

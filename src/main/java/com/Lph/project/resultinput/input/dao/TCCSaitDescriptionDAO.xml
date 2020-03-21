@@ -6,6 +6,7 @@
     <result column="SATISFYSURVEYTARGET_BICKID" jdbcType="VARCHAR" property="satisfysurveytargetBickid" />
     <result column="SUBSCRIPT_BICKID" jdbcType="VARCHAR" property="subscriptBickid" />
     <result column="CLIENT_CODE" jdbcType="VARCHAR" property="clientCode" />
+    <result column="MONTH" jdbcType="VARCHAR" property="month" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    BICKID, SATISFYSURVEYTARGET_BICKID, SUBSCRIPT_BICKID, CLIENT_CODE
+    BICKID, SATISFYSURVEYTARGET_BICKID, SUBSCRIPT_BICKID, CLIENT_CODE, `MONTH`
   </sql>
   <select id="selectByExample" parameterType="com.Lph.project.resultinput.input.model.TCCSaitDescriptionExample" resultMap="BaseResultMap">
     select
@@ -108,9 +109,9 @@
   </delete>
   <insert id="insert" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.resultinput.input.model.TCCSaitDescription" useGeneratedKeys="true">
     insert into t_c_c_sait_description (BICKID, SATISFYSURVEYTARGET_BICKID, SUBSCRIPT_BICKID,
-      CLIENT_CODE)
+      CLIENT_CODE, `MONTH`)
     values (#{bickid,jdbcType=VARCHAR}, #{satisfysurveytargetBickid,jdbcType=VARCHAR}, #{subscriptBickid,jdbcType=VARCHAR},
-      #{clientCode,jdbcType=VARCHAR})
+      #{clientCode,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="BICKID" keyProperty="bickid" parameterType="com.Lph.project.resultinput.input.model.TCCSaitDescription" useGeneratedKeys="true">
     insert into t_c_c_sait_description
@@ -124,6 +125,9 @@
       <if test="clientCode != null">
         CLIENT_CODE,
       </if>
+      <if test="month != null">
+        `MONTH`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="satisfysurveytargetBickid != null">
@@ -134,6 +138,9 @@
       </if>
       <if test="clientCode != null">
         #{clientCode,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -158,6 +165,9 @@
       <if test="record.clientCode != null">
         CLIENT_CODE = #{record.clientCode,jdbcType=VARCHAR},
       </if>
+      <if test="record.month != null">
+        `MONTH` = #{record.month,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -168,7 +178,8 @@
     set BICKID = #{record.bickid,jdbcType=VARCHAR},
       SATISFYSURVEYTARGET_BICKID = #{record.satisfysurveytargetBickid,jdbcType=VARCHAR},
       SUBSCRIPT_BICKID = #{record.subscriptBickid,jdbcType=VARCHAR},
-      CLIENT_CODE = #{record.clientCode,jdbcType=VARCHAR}
+      CLIENT_CODE = #{record.clientCode,jdbcType=VARCHAR},
+      `MONTH` = #{record.month,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -185,6 +196,9 @@
       <if test="clientCode != null">
         CLIENT_CODE = #{clientCode,jdbcType=VARCHAR},
       </if>
+      <if test="month != null">
+        `MONTH` = #{month,jdbcType=VARCHAR},
+      </if>
     </set>
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </update>
@@ -192,7 +206,22 @@
     update t_c_c_sait_description
     set SATISFYSURVEYTARGET_BICKID = #{satisfysurveytargetBickid,jdbcType=VARCHAR},
       SUBSCRIPT_BICKID = #{subscriptBickid,jdbcType=VARCHAR},
-      CLIENT_CODE = #{clientCode,jdbcType=VARCHAR}
+      CLIENT_CODE = #{clientCode,jdbcType=VARCHAR},
+      `MONTH` = #{month,jdbcType=VARCHAR}
     where BICKID = #{bickid,jdbcType=VARCHAR}
   </update>
+  <select id="selectMonthDistinct" resultType="String">
+    select distinct MONTH from t_c_c_sait_description
+  </select>
+
+  <select id="selectTargetMonthDistinct" resultMap="BaseResultMap">
+    SELECT DISTINCT
+	SATISFYSURVEYTARGET_BICKID,
+    MONTH
+    FROM
+	t_c_c_sait_description
+    GROUP BY
+	SATISFYSURVEYTARGET_BICKID,
+    MONTH
+  </select>
 </mapper>

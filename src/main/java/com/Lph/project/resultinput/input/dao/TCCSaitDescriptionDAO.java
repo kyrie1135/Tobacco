@@ -32,4 +32,8 @@ public interface TCCSaitDescriptionDAO {
     int updateByPrimaryKeySelective(TCCSaitDescription record);
 
     int updateByPrimaryKey(TCCSaitDescription record);
+
+    List<String> selectMonthDistinct();
+
+    List<TCCSaitDescription> selectTargetMonthDistinct();
 }

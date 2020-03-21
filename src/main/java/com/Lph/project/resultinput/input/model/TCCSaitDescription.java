@@ -1,8 +1,5 @@
 package com.Lph.project.resultinput.input.model;
 
-import com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget;
-import com.Lph.admin.subscript.model.TCCClientsatisfy;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,6 +16,8 @@ public class TCCSaitDescription implements Serializable {
 
     private String clientCode;
 
+    private String month;
+
     private List<String> des;
 
     private List<String> zhibiaoNames;
@@ -33,20 +32,20 @@ public class TCCSaitDescription implements Serializable {
         this.desBickids = desBickids;
     }
 
-    public List<String> getZhibiaoNames() {
-        return zhibiaoNames;
-    }
-
-    public void setZhibiaoNames(List<String> zhibiaoNames) {
-        this.zhibiaoNames = zhibiaoNames;
-    }
-
     public List<String> getDes() {
         return des;
     }
 
     public void setDes(List<String> des) {
         this.des = des;
+    }
+
+    public List<String> getZhibiaoNames() {
+        return zhibiaoNames;
+    }
+
+    public void setZhibiaoNames(List<String> zhibiaoNames) {
+        this.zhibiaoNames = zhibiaoNames;
     }
 
     private static final long serialVersionUID = 1L;
@@ -81,5 +80,13 @@ public class TCCSaitDescription implements Serializable {
 
     public void setClientCode(String clientCode) {
         this.clientCode = clientCode;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
     }
 }

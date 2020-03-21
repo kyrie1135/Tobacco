@@ -69,16 +69,32 @@ $(function () {
 
     //折线图
     var myChartTwo = echarts.init(document.getElementById('main_two'));
+    var yearAndMonth = [];
+    var score = [];
+    $.ajax({
+        url: '/project/monthscore',
+        type: 'GET',
+        data: 0,
+        async: false,
+        contentType:"application/json;charset=UTF-8",
+        dataType:"json",
+        success: function (result) {
+            for (var i = 0; i<result.length ; i++){
+                yearAndMonth.push(result[i].yearAndMonth);
+                score.push(result[i].score);
+            }
+        }
+    });
     option_two = {
         xAxis: {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: yearAndMonth
         },
         yAxis: {
             type: 'value'
         },
         series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: score,
             type: 'line'
         }]
     };
@@ -86,10 +102,52 @@ $(function () {
 
     //分指标折线图
     var myChartThree = echarts.init(document.getElementById('main_three'));
+    var zhibiao = [];
+    var ser = [];
+    $.ajax({
+        url: '/project/targetmonthscore',
+        type: 'GET',
+        data: 0,
+        async: false,
+        contentType:"application/json;charset=UTF-8",
+        dataType:"json",
+        success: function (result) {
+            //填充指标名称（去重）
+            var flag = true;
+            for (var i = 0; i<result.length ; i++){
+                for (var j = 0; j<zhibiao.length; j++){
+                    if (zhibiao[j] == result[i].zhibiao){
+                        flag = false;
+                    }
+                }
+                if (flag == true){
+                    zhibiao.push(result[i].zhibiao);
+                }
+            }
+
+            //填充各个指标每个月的分数
+            for (var i = 0; i<zhibiao.length; i++){
+                var s = {
+                    name: zhibiao[i],
+                    type: 'line',
+                    stack: '总分',
+                    areaStyle: {},
+                    data: []
+                }
+
+                for(var j = 0; j<result.length; j++){
+                    if (result[j].zhibiao == zhibiao[i]){
+                        s.data.push(result[j].score);
+                    }
+                }
+
+                ser.push(s);
+            }
+
+
+        }
+    });
     option_three = {
-        title: {
-            text: '堆叠区域图'
-        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -100,7 +158,7 @@ $(function () {
             }
         },
         legend: {
-            data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+            data: zhibiao
         },
         toolbox: {
             feature: {
@@ -117,7 +175,7 @@ $(function () {
             {
                 type: 'category',
                 boundaryGap: false,
-                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                data: yearAndMonth
             }
         ],
         yAxis: [
@@ -125,49 +183,7 @@ $(function () {
                 type: 'value'
             }
         ],
-        series: [
-            {
-                name: '邮件营销',
-                type: 'line',
-                stack: '总量',
-                areaStyle: {},
-                data: [120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-                name: '联盟广告',
-                type: 'line',
-                stack: '总量',
-                areaStyle: {},
-                data: [220, 182, 191, 234, 290, 330, 310]
-            },
-            {
-                name: '视频广告',
-                type: 'line',
-                stack: '总量',
-                areaStyle: {},
-                data: [150, 232, 201, 154, 190, 330, 410]
-            },
-            {
-                name: '直接访问',
-                type: 'line',
-                stack: '总量',
-                areaStyle: {},
-                data: [320, 332, 301, 334, 390, 330, 320]
-            },
-            {
-                name: '搜索引擎',
-                type: 'line',
-                stack: '总量',
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-                },
-                areaStyle: {},
-                data: [820, 932, 901, 934, 1290, 1330, 1320]
-            }
-        ]
+        series: ser
     };
     myChartThree.setOption(option_three);
 

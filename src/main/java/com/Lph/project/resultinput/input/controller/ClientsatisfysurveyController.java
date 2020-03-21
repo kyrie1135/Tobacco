@@ -1,8 +1,6 @@
 package com.Lph.project.resultinput.input.controller;
 
-import com.Lph.project.resultinput.input.model.ClassificationSearch;
-import com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey;
-import com.Lph.project.resultinput.input.model.TCCSaitDescription;
+import com.Lph.project.resultinput.input.model.*;
 import com.Lph.project.resultinput.input.service.ClientsatisfysurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -149,5 +147,35 @@ public class ClientsatisfysurveyController {
     @RequestMapping("/toechartlist")
     public String toEchartList(){
         return "/project/resultinput/input/echartlist.html";
+    }
+
+
+    /**
+     * 跳转到月度总分查询
+     * @return
+     */
+    @RequestMapping("/tomonthscore")
+    public String toMonthScore(){
+        return "/project/resultinput/input/monthscore.html";
+    }
+
+    /**
+     * 月度满意度总分查询
+     * @return
+     */
+    @RequestMapping(value = "/monthscore", method = RequestMethod.GET)
+    @ResponseBody
+    public List<MonthScore> getAllMonths(){
+        return clientsatisfysurveyService.getMonthScore();
+    }
+
+    /**
+     * 月度满意度分指标总分查询
+     * @return
+     */
+    @RequestMapping(value = "/targetmonthscore", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TargetMonthScore> getAllTargetMonths(){
+        return clientsatisfysurveyService.getTargetMonthScore();
     }
 }

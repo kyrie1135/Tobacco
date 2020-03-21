@@ -12,6 +12,7 @@ import com.Lph.project.resultinput.input.dao.TCCClientsatisfysurveyDAO;
 import com.Lph.project.resultinput.input.dao.TCCSaitDescriptionDAO;
 import com.Lph.project.resultinput.input.model.*;
 import com.Lph.project.resultinput.input.service.ClientsatisfysurveyService;
+import com.Lph.project.samplebright.bright.dao.TCCSampleBrightDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,8 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
     private TCCSatisfysurveytargetDAO tccSatisfysurveytargetDAO;
     @Autowired
     private TCCSaitDescriptionDAO tccSaitDescriptionDAO;
+    @Autowired
+    private TCCSampleBrightDAO tccSampleBrightDAO;
 
     /**
      * 获取抽样得来的用户，为录入人员提供录入连接
@@ -216,6 +219,61 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
                 target.setScore(l1 * t.getEvaluateTarget());
                 list.add(target);
             }
+        }
+        return list;
+    }
+
+    /**
+     * 返回每一年每个月的满意度总分
+     * @return
+     */
+    @Override
+    public List<MonthScore> getMonthScore() {
+        List<MonthScore> list = new ArrayList<>();
+        List<String> months = tccSaitDescriptionDAO.selectMonthDistinct();
+        for (String s : months){
+            MonthScore m = new MonthScore();
+            TCCSaitDescriptionExample e = new TCCSaitDescriptionExample();
+            e.createCriteria().andMonthEqualTo(s);
+            List<TCCSaitDescription> tccSaitDescriptions = tccSaitDescriptionDAO.selectByExample(e);
+            m.setYearAndMonth(s);
+            m.setNum(tccSaitDescriptions.size());
+            Double score = 0.0;
+            for (TCCSaitDescription t : tccSaitDescriptions){
+                double evaluateTarget = tccSatisfysurveytargetDAO.selectByPrimaryKey(t.getSubscriptBickid()).getEvaluateTarget();
+                double proportion = tccClientsatisfyDAO.selectByPrimaryKey(t.getSatisfysurveytargetBickid()).getProportion().doubleValue();
+                score += evaluateTarget * proportion * 0.1;
+            }
+            m.setScore(score);
+            list.add(m);
+        }
+        return list;
+    }
+
+    /**
+     * 返回每个指标每个月的总得分（不考虑指标权重）
+     * @return
+     */
+    @Override
+    public List<TargetMonthScore> getTargetMonthScore() {
+        List<TargetMonthScore> list = new ArrayList<>();
+        List<TCCSaitDescription> tccSaitDescriptions = tccSaitDescriptionDAO.selectTargetMonthDistinct();
+        for (TCCSaitDescription t : tccSaitDescriptions){
+            TargetMonthScore targetMonthScore = new TargetMonthScore();
+            targetMonthScore.setZhibiao(tccClientsatisfyDAO.selectByPrimaryKey(t.getSatisfysurveytargetBickid()).getEvaluateTarget());
+            targetMonthScore.setYearAndMonth(t.getMonth());
+            TCCSaitDescriptionExample e = new TCCSaitDescriptionExample();
+            e.createCriteria().andMonthEqualTo(t.getMonth()).andSatisfysurveytargetBickidEqualTo(t.getSatisfysurveytargetBickid());
+            List<TCCSaitDescription> tc = tccSaitDescriptionDAO.selectByExample(e);
+            targetMonthScore.setNum(tc.size());
+
+            Double score = 0.0;
+            for (TCCSaitDescription ta : tc){
+                double evaluateTarget = tccSatisfysurveytargetDAO.selectByPrimaryKey(ta.getSubscriptBickid()).getEvaluateTarget();
+                score += evaluateTarget;
+            }
+            targetMonthScore.setScore(score);
+            list.add(targetMonthScore);
         }
         return list;
     }

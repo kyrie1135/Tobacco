@@ -1,8 +1,6 @@
 package com.Lph.project.resultinput.input.service;
 
-import com.Lph.project.resultinput.input.model.ClassificationSearch;
-import com.Lph.project.resultinput.input.model.TCCClientsatisfysurvey;
-import com.Lph.project.resultinput.input.model.TCCSaitDescription;
+import com.Lph.project.resultinput.input.model.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -55,4 +53,16 @@ public interface ClientsatisfysurveyService {
      * @return
      */
     public List<ClassificationSearch> getClassificationSearchs(String perName);
+
+    /**
+     * 返回每一年每个月的满意度总分
+     * @return
+     */
+    public List<MonthScore> getMonthScore();
+
+    /**
+     * 返回每个指标每个月的总得分（不考虑指标权重）
+     * @return
+     */
+    public List<TargetMonthScore> getTargetMonthScore();
 }

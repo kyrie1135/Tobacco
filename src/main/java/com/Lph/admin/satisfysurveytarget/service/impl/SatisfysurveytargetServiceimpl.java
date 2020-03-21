@@ -6,7 +6,6 @@ import com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytarget;
 import com.Lph.admin.satisfysurveytarget.model.TCCSatisfysurveytargetExample;
 import com.Lph.admin.satisfysurveytarget.service.SatisfysurveytargetService;
 import com.Lph.project.resultinput.input.dao.TCCSaitDescriptionDAO;
-import com.Lph.project.resultinput.input.model.TCCSaitDescription;
 import com.Lph.project.resultinput.input.model.TCCSaitDescriptionExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

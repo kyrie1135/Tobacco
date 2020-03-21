@@ -16,7 +16,8 @@ $(function () {
             data: JSON.stringify({
                "satisfysurveytargetBickid" : tempSatisfysurveytargetBickid,
                 "subscriptBickid" : $("[name = 'pingfen']").val(),
-                "clientCode" : tempClientCode
+                "clientCode" : tempClientCode,
+                "month" : tempDate
             }),
             contentType:"application/json;charset=UTF-8",
             dataType:"json",
@@ -110,7 +111,7 @@ function operateClass(value, row) {
         ].join('');
     }
 }
-
+var tempDate = "";
 window.operateEvents={
     'click #luruA': function (e, value, row) {
         $.ajax({
@@ -133,7 +134,7 @@ window.operateEvents={
                 tempClientCode = row.clientCode;
             }
         });
-
+        tempDate = (row.getDate).substring(0,7);
         $('#luru').modal('show');
     },
     'click #yiluruA': function (e, value, row) {
