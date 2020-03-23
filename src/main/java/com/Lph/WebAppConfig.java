@@ -1,23 +1,19 @@
 package com.Lph;
 
+import com.Lph.admin.login.controller.UserLoginInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer {
 
-//    //修改springboot中默认的静态文件路径
-//    //从/resources/static改变到/webapp/根目录
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry){
-//        registry.addResourceHandler("/**").
-//                addResourceLocations("/");
-//        WebMvcConfigurer.super.addResourceHandlers(registry);
-//    }
     //配置Ajax跨域访问
     @Override
     public void addCorsMappings(CorsRegistry registry){
@@ -36,4 +32,5 @@ public class WebAppConfig implements WebMvcConfigurer {
                 .maxAge(4800);
 
     }
+
 }

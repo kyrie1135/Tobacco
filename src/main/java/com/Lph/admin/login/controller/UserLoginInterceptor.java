@@ -23,25 +23,6 @@ public class UserLoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        boolean flag = false;
-//        String url = request.getServletPath();  //获取请求的URL
-//        //不拦截IGNORE_URL中的请求
-//        for (String s : IGNORE_URL){
-//            if (url.contains(s)){
-//                flag = true;
-//                break;
-//            }
-//        }
-//        //如果不在INGNORE_URL中， 判断session中是否有登陆信息
-//        if (!flag){
-//            UserLogin userLogin = (UserLogin) request.getSession().getAttribute("USER_SESSION");
-//            if (userLogin == null){
-//                //跳转到登陆页面
-//            }else {
-//                //账号密码正确， 为账户填充拥有的权限
-//
-//            }
-//        }
         return false;
     }
 
