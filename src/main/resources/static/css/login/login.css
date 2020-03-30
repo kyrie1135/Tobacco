@@ -63,7 +63,7 @@ body, html {
     background-size: 4.5% !important;
 }
 
-input[type=button] {
+input[type=submit] {
     background: #fdb515;
     color: #ffffff;
     text-align: center;

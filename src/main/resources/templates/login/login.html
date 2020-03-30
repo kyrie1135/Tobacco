@@ -10,28 +10,23 @@
 <body>
  <div id="mainBody">
      <h1>会员登陆</h1>
-    <div id="content">
+<!--    <div id="content">-->
 <!--        左侧-->
         <div id="content-left">
             <div class="pay_form">
                 <h2>用户登陆</h2>
-                <form>
-                    <input class="userName" type="text" placeholder="用户名">
-                    <input class="password" type="password" placeholder="密码">
-                    <input type="button" value="登陆">
+                <form action="/login/login" method="post">
+                    <input name="userId" class="userName" type="text" placeholder="用户名">
+                    <input name="userPassword" class="password" type="password" placeholder="密码">
+                    <input id="loginBtn" type="submit" value="登陆">
                 </form>
             </div>
             <a href="#" class="a-forgetPassword">忘记密码</a>
         </div>
-<!--        右侧-->
-        <div id="content-right">
-            <h3>
-                欢迎光临
-                <span>输入您的个人资料，并与我们一起开始旅程</span>
-            </h3>
-            <input type="button" value="注册">
-        </div>
-    </div>
+<!--    </div>-->
  </div>
+ <script src="../static/bootstrap/js/jquery-3.3.1.js"></script>
+ <script src="../static/js/include/publicMethod.js"></script>
+ <script src="../static/js/login/login.js"></script>
 </body>
 </html>

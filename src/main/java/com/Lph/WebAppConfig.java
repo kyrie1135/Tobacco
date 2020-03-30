@@ -33,4 +33,18 @@ public class WebAppConfig implements WebMvcConfigurer {
 
     }
 
+    //提前创建LoginInterceptor对象,以便可以在过滤器中注入其他对象
+    @Bean
+    public HandlerInterceptor getLoginInterceptor(){
+        return new UserLoginInterceptor();
+    }
+    //配置拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+        //注册自定义拦截器，添加拦截路径和排除拦截路径
+        registry.addInterceptor(getLoginInterceptor()).
+                addPathPatterns("/**").
+                excludePathPatterns("/","/login","/static/**").
+                excludePathPatterns("/js/**","/css/**","/img/**","/bootstrap/**","/fonts/**");
+    }
 }
