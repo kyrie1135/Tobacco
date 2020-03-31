@@ -30,9 +30,16 @@ function initTable() {
             }, {
                 field:'score',
                 title:'总得分',
+                formatter: function(value, row, index){
+                    return changeFormat(value)
+                },
                 align:'center',
                 width:150
             }
         ]
     });
+}
+
+function changeFormat(value) {
+    return value.toFixed(2);
 }
