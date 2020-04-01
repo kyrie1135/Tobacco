@@ -117,35 +117,35 @@
                         <!-- 用户账号信息菜单按键 -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="../../static/img/1.png" class="user-image" alt="User Image">
-                            <span class="hidden-xs">我是用户名</span>
+                            <span class="hidden-xs" id="userName1">我是用户名</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- 用户头像-->
                             <li class="user-header">
                                 <img src="../../static/img/1.png" class="img-circle" alt="User Image">
-                                <p>我是用户名</p>
+                                <p id="userName2">我是用户名</p>
                             </li>
                             <!-- 菜单主体 -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">功能一</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">功能二</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">功能三</a>
-                                    </div>
-                                </div>
-                            </li>
+<!--                            <li class="user-body">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-xs-4 text-center">-->
+<!--                                        <a href="#">功能一</a>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-xs-4 text-center">-->
+<!--                                        <a href="#">功能二</a>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-xs-4 text-center">-->
+<!--                                        <a href="#">功能三</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </li>-->
                             <!-- 菜单页脚 -->
                             <li class="user-footer">
                                 <div class="pull-left">
                                     <a href="#" class="btn btn-default btn-flat">发送信息</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">登出</a>
+                                    <a href="/login/gologin" class="btn btn-default btn-flat">登出</a>
                                 </div>
                             </li>
                         </ul>
@@ -163,14 +163,14 @@
                     <img src="../../static/img/1.png" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>我是用户名</p>
+                    <p id="userName3">我是用户名</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
 
             <!-- 选择菜单 -->
             <ul id="menu" class="sidebar-menu" data-widget="tree">
-                <li class="header">Content</li>
+                <li class="header"></li>
             <!-- 首页 -->
                 <li id="indexForm" class="treeview"><a href=#><i class="fa fa-link"></i><span>首 页</span></a></li>
             </ul>

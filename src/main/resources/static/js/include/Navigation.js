@@ -17,14 +17,26 @@ $(function () {
     });
 
     $('.myLeftMenu').click(function (e) {
-
         var url = $(this).attr('data');
-        //  console.log(url);
         $('#container').load(url);
     });
 
     //获取App
     getMenuMApp();
+
+
+    $.ajax({
+        type: "GET",
+        url: '/login/getUserName',
+        data: 0,
+        async: false,
+        dataType:"text",
+        success: function (result) {
+            $("#userName1").html(result);
+            $("#userName2").html(result);
+            $("#userName3").html(result);
+        }
+    });
 });
 
 function getMenuMApp() {
