@@ -146,7 +146,7 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
     }
 
     /**
-     * 满意度综合查询根据筛选条件返回
+     * 满意度汇总、综合查询根据筛选条件返回
      * @param dateFrom
      * @param dateTo
      * @param target
@@ -188,7 +188,7 @@ public class ClientsatisfysurveyServiceImpl implements ClientsatisfysurveyServic
     }
 
     /**
-     * 为满意度非类查询填充table
+     * 为满意度分类查询填充table
      * @return
      */
     @Override

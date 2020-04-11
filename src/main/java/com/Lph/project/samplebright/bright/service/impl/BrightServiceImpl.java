@@ -134,26 +134,8 @@ public class BrightServiceImpl implements BrightService {
             target.setLuruPer(luruPer.substring(1, luruPer.length()-1));
             target.setClientCode(paramjson.getString("facilityNum"));
             target.setClientName(paramjson.getString("clientName"));
-
-//            Date tempDate = new SimpleDateFormat("yyyy/MM/dd").parse(date.substring(1, date.length()-1));
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(tempDate);
-//            c.add(Calendar.DAY_OF_MONTH, 1);
-//            target.setSampleData(c.getTime());
             target.setSampleData(new SimpleDateFormat("yyyy/MM/dd").parse(date.substring(1, date.length()-1)));
-
-//            tempDate = new SimpleDateFormat("yyyy-MM-dd").parse(diaochaDate.substring(1, diaochaDate.length()-1));
-//            Calendar c1 = Calendar.getInstance();
-//            c1.setTime(tempDate);
-//            c1.add(Calendar.DAY_OF_MONTH, 1);
-//            target.setDiaochaData(c1.getTime());
             target.setDiaochaData(new SimpleDateFormat("yyyy-MM-dd").parse(diaochaDate.substring(1, diaochaDate.length()-1)));
-
-//            Calendar c2 = Calendar.getInstance();
-//            tempDate = new SimpleDateFormat("yyyy-MM-dd").parse(luruDate.substring(1, luruDate.length()-1));
-//            c2.setTime(tempDate);
-//            c2.add(Calendar.DAY_OF_MONTH, 1);
-//            target.setLuruData(c2.getTime());
             target.setLuruData(new SimpleDateFormat("yyyy-MM-dd").parse(luruDate.substring(1, luruDate.length()-1)));
 
             target.setDeleted(0);
